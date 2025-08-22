@@ -1,3 +1,3 @@
-resources/js/components/ui/*
-resources/js/ziggy.js
-resources/views/mail/*
+resources/components/ui/*
+resources/ziggy.js
+resources/blades/mail/*
