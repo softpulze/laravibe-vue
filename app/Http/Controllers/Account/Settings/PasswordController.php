@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Settings;
+namespace App\Http\Controllers\Account\Settings;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -17,7 +17,7 @@ class PasswordController extends Controller
      */
     public function edit(): Response
     {
-        return Inertia::render('settings/Password');
+        return Inertia::render('account/settings/Password');
     }
 
     /**
