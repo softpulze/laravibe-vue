@@ -1,17 +1,16 @@
 import './css/app.css';
 
+import { initializeTheme } from '@/composables/useAppearance';
 import { createInertiaApp } from '@inertiajs/vue3';
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import { ZiggyVue } from 'ziggy-js';
-import { initializeTheme } from './composables/useAppearance';
+import { resolveView } from './lib/helpers';
 
 const appName = import.meta.env.VITE_APP_NAME || 'LaraVibe-Vue';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
-    resolve: (name) => resolvePageComponent(`./views/${name}.vue`, import.meta.glob<DefineComponent>('./views/**/*.vue')),
+    resolve: (name) => resolveView(name),
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
