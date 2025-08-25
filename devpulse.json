@@ -1,0 +1,98 @@
+{
+    "scripts": [
+        {
+            "name": "queue",
+            "command": "php artisan queue:listen --tries=1 --timeout=0 --queue=default",
+            "color": "#c4b5fd"
+        },
+        {
+            "name": "logs",
+            "command": "php artisan pail -v --timeout=0",
+            "color": "#fb7185"
+        },
+        {
+            "name": "vite",
+            "command": "npm run dev",
+            "color": "#fdba74"
+        },
+        {
+            "name": "dev",
+            "command": "devpulse run vite,queue,logs --concurrently"
+        },
+        {
+            "name": "pest",
+            "description": "Test PHP code with Pest",
+            "command": "./vendor/bin/pest --coverage --compact"
+        },
+        {
+            "name": "test",
+            "description": "Test everything possible with Pest",
+            "command": "devpulse run pest"
+        },
+        {
+            "name": "pint:check",
+            "description": "Check format of PHP code with Pint",
+            "command": "./vendor/bin/pint --test"
+        },
+        {
+            "name": "pint",
+            "description": "Format PHP code with Pint",
+            "command": "./vendor/bin/pint"
+        },
+        {
+            "name": "prettier:check",
+            "description": "Check format of JS code with Prettier",
+            "command": "npm run format:check"
+        },
+        {
+            "name": "prettier",
+            "description": "Format JS code with Prettier",
+            "command": "npm run format"
+        },
+        {
+            "name": "format:check",
+            "description": "Check format of PHP and JS code with Pint and Prettier",
+            "command": "devpulse run pint:check,prettier:check"
+        },
+        {
+            "name": "format",
+            "description": "Format PHP and JS code with Pint and Prettier",
+            "command": "devpulse run pint,prettier"
+        },
+        {
+            "name": "eslint",
+            "description": "Format JS code with eslint",
+            "command": "npm run lint"
+        },
+        {
+            "name": "lint",
+            "description": "Refactor code with EsLint",
+            "command": "devpulse run eslint"
+        },
+        {
+            "name": "build",
+            "description": "Build application for Production",
+            "command": "npm run build"
+        },
+        {
+            "name": "build:ssr",
+            "description": "Build application for Production with SSR",
+            "command": "npm run build:ssr"
+        },
+        {
+            "name": "update:composer",
+            "description": "Update composer dependencies",
+            "command": "composer update"
+        },
+        {
+            "name": "update:npm",
+            "description": "Update npm dependencies",
+            "command": "npm update"
+        },
+        {
+            "name": "update",
+            "description": "Update dependencies",
+            "command": "devpulse run update:composer,update:npm"
+        }
+    ]
+}

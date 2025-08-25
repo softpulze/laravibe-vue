@@ -1,6 +1,8 @@
 <?php
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+declare(strict_types=1);
+
+uses(Illuminate\Foundation\Testing\RefreshDatabase::class);
 
 test('registration screen can be rendered', function () {
     $response = $this->get('/register');
@@ -17,5 +19,5 @@ test('new users can register', function () {
     ]);
 
     $this->assertAuthenticated();
-    $response->assertRedirect(route('dashboard', absolute: false));
+    $response->assertRedirect(route('account.index', absolute: false));
 });

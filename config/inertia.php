@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
 
     /*
@@ -36,7 +38,7 @@ return [
         'ensure_pages_exist' => true,
 
         'page_paths' => [
-            resource_path('js/pages'),
+            resource_path('views'),
         ],
 
         'page_extensions' => [
