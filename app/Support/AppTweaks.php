@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Support;
 
-use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Date;
@@ -43,7 +42,7 @@ final class AppTweaks
     public static function date(): void
     {
         // CarbonImmutable as default
-        Date::use(CarbonImmutable::class);
+        Date::use(Carbon::class);
     }
 
     public static function vite(): void
