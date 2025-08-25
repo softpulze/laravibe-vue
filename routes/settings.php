@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\Account\Settings\PasswordController;
 use App\Http\Controllers\Account\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;
