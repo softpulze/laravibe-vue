@@ -11,7 +11,7 @@ test('profile page is displayed', function () {
 
     $response = $this
         ->actingAs($user)
-        ->get('/account/settings/profile');
+        ->get('/settings/profile');
 
     $response->assertOk();
 });
@@ -21,14 +21,14 @@ test('profile information can be updated', function () {
 
     $response = $this
         ->actingAs($user)
-        ->patch('/account/settings/profile', [
+        ->patch('/settings/profile', [
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
 
     $response
         ->assertSessionHasNoErrors()
-        ->assertRedirect('/account/settings/profile');
+        ->assertRedirect('/settings/profile');
 
     $user->refresh();
 
@@ -42,14 +42,14 @@ test('email verification status is unchanged when the email address is unchanged
 
     $response = $this
         ->actingAs($user)
-        ->patch('/account/settings/profile', [
+        ->patch('/settings/profile', [
             'name' => 'Test User',
             'email' => $user->email,
         ]);
 
     $response
         ->assertSessionHasNoErrors()
-        ->assertRedirect('/account/settings/profile');
+        ->assertRedirect('/settings/profile');
 
     expect($user->refresh()->email_verified_at)->not->toBeNull();
 });
@@ -59,7 +59,7 @@ test('user can delete their account', function () {
 
     $response = $this
         ->actingAs($user)
-        ->delete('/account/settings/profile', [
+        ->delete('/settings/profile', [
             'password' => 'password',
         ]);
 
@@ -76,14 +76,14 @@ test('correct password must be provided to delete account', function () {
 
     $response = $this
         ->actingAs($user)
-        ->from('/account/settings/profile')
-        ->delete('/account/settings/profile', [
+        ->from('/settings/profile')
+        ->delete('/settings/profile', [
             'password' => 'wrong-password',
         ]);
 
     $response
         ->assertSessionHasErrors('password')
-        ->assertRedirect('/account/settings/profile');
+        ->assertRedirect('/settings/profile');
 
     expect($user->fresh())->not->toBeNull();
 });
