@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Layout from '@/layouts/core/auth/CardLayout.vue';
+import Layout from '@/layouts/auth/CardLayout.vue';
 
 defineProps<{
     title?: string;
