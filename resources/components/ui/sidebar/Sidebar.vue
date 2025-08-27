@@ -6,6 +6,7 @@ import SheetDescription from '@/components/ui/sheet/SheetDescription.vue'
 import SheetHeader from '@/components/ui/sheet/SheetHeader.vue'
 import SheetTitle from '@/components/ui/sheet/SheetTitle.vue'
 import { SIDEBAR_WIDTH_MOBILE, useSidebar } from './utils'
+import { computed, ref } from 'vue'
 
 defineOptions({
   inheritAttrs: false,
@@ -18,6 +19,15 @@ const props = withDefaults(defineProps<SidebarProps>(), {
 })
 
 const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+
+// Hover-to-expand: when collapsed and collapsible="icon", expand while hovered.
+const isHovering = ref(false)
+const effectiveState = computed(() => {
+  if (props.collapsible !== 'icon') {
+    return state.value
+  }
+  return state.value === 'expanded' || isHovering.value ? 'expanded' : 'collapsed'
+})
 </script>
 
 <template>
@@ -55,10 +65,12 @@ const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
     v-else
     class="group peer text-sidebar-foreground hidden md:block"
     data-slot="sidebar"
-    :data-state="state"
-    :data-collapsible="state === 'collapsed' ? collapsible : ''"
+    :data-state="effectiveState"
+    :data-collapsible="effectiveState === 'collapsed' ? collapsible : ''"
     :data-variant="variant"
     :data-side="side"
+    @mouseenter="isHovering = true"
+    @mouseleave="isHovering = false"
   >
     <!-- This is what handles the sidebar gap on desktop  -->
     <div
