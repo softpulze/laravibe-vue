@@ -1,6 +1,13 @@
 import type { LucideIcon } from 'lucide-vue-next';
 import type { Config } from 'ziggy-js';
 
+// Utility Types
+export type Nullable<T> = T | null;
+export type Optional<T> = T | undefined;
+export type Callable<T = void, U extends any[] = []> = (...args: U) => T;
+export type VoidCallable<U extends any[] = []> = Callable<void, U>;
+
+// Application Specific Types
 export interface Auth {
     user: User;
 }
