@@ -21,7 +21,7 @@ export interface NavItem {
     title: string;
     href: string;
     icon?: LucideIcon;
-    isActive?: boolean;
+    isActive?: boolean | Callable<boolean>;
 }
 
 export type AppPageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
