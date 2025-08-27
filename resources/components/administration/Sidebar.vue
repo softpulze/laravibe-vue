@@ -1,17 +1,28 @@
 <script setup lang="ts">
+import Logo from '@/components/Logo.vue';
+import LogoIcon from '@/components/LogoIcon.vue';
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+    useSidebar,
+} from '@/components/ui/sidebar';
+import { cn } from '@/lib/utils';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
-import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: '/dashboard',
+        href: '/administration/dashboard',
         icon: LayoutGrid,
     },
 ];
@@ -19,15 +30,17 @@ const mainNavItems: NavItem[] = [
 const footerNavItems: NavItem[] = [
     {
         title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
+        href: 'https://github.com/oneassistpro/laravibe-vue',
         icon: Folder,
     },
     {
         title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
+        href: 'https://github.com/oneassistpro/laravibe-vue',
         icon: BookOpen,
     },
 ];
+
+const { open } = useSidebar();
 </script>
 
 <template>
@@ -35,9 +48,14 @@ const footerNavItems: NavItem[] = [
         <SidebarHeader>
             <SidebarMenu>
                 <SidebarMenuItem>
-                    <SidebarMenuButton size="lg" as-child>
-                        <Link :href="route('dashboard.index')">
-                            <AppLogo />
+                    <SidebarMenuButton
+                        size="lg"
+                        as-child
+                        :class="cn('items-center justify-center [&>svg]:w-auto', open ? '[&>svg]:h-7' : '[&>svg]:h-5')"
+                    >
+                        <Link :href="route('administration.dashboard')">
+                            <Logo v-if="open" />
+                            <LogoIcon v-else />
                         </Link>
                     </SidebarMenuButton>
                 </SidebarMenuItem>
