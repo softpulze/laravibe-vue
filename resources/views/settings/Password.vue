@@ -30,7 +30,7 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
 
             <Form
                 method="put"
-                :action="route('account.password.update')"
+                :action="route('password.update')"
                 :options="{
                     preserveScroll: true,
                 }"
