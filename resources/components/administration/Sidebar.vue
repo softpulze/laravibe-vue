@@ -30,7 +30,7 @@ const mainNavItems: NavItem[] = [
 const footerNavItems: NavItem[] = [
     {
         title: 'Github Repo',
-        href: 'https://github.com/oneassistpro/laravibe-vue',
+        href: 'https://github.com/softpulselab/laravibe-vue',
         icon: FolderGit,
     },
 ];
