@@ -17,7 +17,7 @@ import {
 import { cn } from '@/lib/utils';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { FolderGit, LayoutGrid } from 'lucide-vue-next';
 
 const mainNavItems: NavItem[] = [
     {
@@ -31,12 +31,7 @@ const footerNavItems: NavItem[] = [
     {
         title: 'Github Repo',
         href: 'https://github.com/oneassistpro/laravibe-vue',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://github.com/oneassistpro/laravibe-vue',
-        icon: BookOpen,
+        icon: FolderGit,
     },
 ];
 
