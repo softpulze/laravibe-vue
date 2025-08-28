@@ -25,7 +25,7 @@ withDefaults(defineProps<Props>(), {
     breadcrumbs: () => [],
 });
 
-const { authUser } = useAuth();
+const { isAuthenticated, authUser } = useAuth();
 
 const effectiveItem = computedWithControl(
     () => usePage().url,
@@ -47,7 +47,7 @@ const secondaryNavItems: NavItem[] = [];
 </script>
 
 <template>
-    <div>
+    <div class="z-50">
         <div class="border-b border-sidebar-border/80">
             <div class="mx-auto flex h-16 items-center px-4 md:max-w-7xl">
                 <!-- Mobile Menu -->
@@ -88,6 +88,15 @@ const secondaryNavItems: NavItem[] = [];
                                         <component :is="item.icon || ExternalLinkIcon" class="h-5 w-5" />
                                         <span>{{ item.title }}</span>
                                     </a>
+
+                                    <div class="grid grid-cols-2 gap-2 lg:hidden" v-if="!isAuthenticated">
+                                        <Button variant="outline" size="sm" class="h-9" asChild>
+                                            <Link :href="route('login')"> Log In </Link>
+                                        </Button>
+                                        <Button size="sm" class="h-9" asChild>
+                                            <Link :href="route('register')"> Sign Up </Link>
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
                         </SheetContent>
@@ -145,7 +154,7 @@ const secondaryNavItems: NavItem[] = [];
                         </div>
                     </div>
 
-                    <DropdownMenu v-if="authUser">
+                    <DropdownMenu v-if="isAuthenticated">
                         <DropdownMenuTrigger :as-child="true">
                             <Button
                                 variant="ghost"
@@ -165,12 +174,14 @@ const secondaryNavItems: NavItem[] = [];
                         </DropdownMenuContent>
                     </DropdownMenu>
                     <template v-else>
-                        <Link href="/login">
-                            <Button variant="outline" size="sm" class="h-9"> Log in </Button>
-                        </Link>
-                        <Link href="/register">
-                            <Button size="sm" class="h-9"> Sign up </Button>
-                        </Link>
+                        <div class="hidden grid-cols-2 lg:inline-grid">
+                            <Link :href="route('login')">
+                                <Button size="sm" class="h-9"> Log In </Button>
+                            </Link>
+                            <Link :href="route('register')">
+                                <Button variant="outline" size="sm" class="h-9"> Sign Up </Button>
+                            </Link>
+                        </div>
                     </template>
                 </div>
             </div>
