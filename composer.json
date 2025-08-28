@@ -1,17 +1,15 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "oneassistpro/laravibe-vue",
+    "name": "softpulselab/laravibe-vue",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
     "keywords": [
         "laravel",
-        "framework",
         "php",
         "inertia",
         "vue",
-        "vite",
-        "ssr",
-        "laravibe-vue"
+        "starter-kit",
+        "laravibe"
     ],
     "license": "MIT",
     "require": {
