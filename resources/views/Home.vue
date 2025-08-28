@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import Hero from '@/components/guest/Hero.vue';
 import { Head } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <Head title="Welcome">
-        <link rel="preconnect" href="https://rsms.me/" />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-    </Head>
+    <Head title="Home" />
 
-    Home Page Content
+    <div>
+        <Hero />
+    </div>
 </template>
