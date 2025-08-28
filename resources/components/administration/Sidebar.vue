@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import Logo from '@/components/Logo.vue';
 import LogoIcon from '@/components/LogoIcon.vue';
-import NavFooter from '@/components/NavFooter.vue';
-import NavMain from '@/components/NavMain.vue';
-import NavUser from '@/components/NavUser.vue';
 import {
     Sidebar,
     SidebarContent,
@@ -18,6 +15,9 @@ import { cn } from '@/lib/utils';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { FolderGit, LayoutGrid } from 'lucide-vue-next';
+import NavFooter from './NavFooter.vue';
+import NavMain from './NavMain.vue';
+import NavUser from './NavUser.vue';
 
 const mainNavItems: NavItem[] = [
     {
