@@ -1,0 +1,35 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
+
+class {{ class }} implements Arrayable, Jsonable
+{
+    /**
+     * Create a new class instance.
+     */
+    public function __construct(
+        // properties...
+    ) {
+        // ...
+    }
+
+    /**
+     * Get the instance as an array.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(): array
+    {
+        return [
+            // ...
+        ];
+    }
+
+    public function toJson($options = 0): string // @pest-ignore-type
+    {
+        return (string) json_encode($this->toArray(), $options);
+    }
+}
