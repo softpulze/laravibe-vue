@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Support;
 
-use Carbon\CarbonImmutable;
+use Carbon\CarbonImmutable as BaseCarbonImmutable;
 use Carbon\CarbonInterface;
 
-final class Carbon extends CarbonImmutable implements CarbonInterface
+final class CarbonImmutable extends BaseCarbonImmutable implements CarbonInterface
 {
     public function toStringDate(): string
     {

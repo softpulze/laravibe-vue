@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 
-final class AppTweaks
+final class LaraTweaks
 {
     public static function default(): void
     {
@@ -42,7 +42,7 @@ final class AppTweaks
     public static function date(): void
     {
         // CarbonImmutable as default
-        Date::use(Carbon::class);
+        Date::use(CarbonImmutable::class);
     }
 
     public static function vite(): void
