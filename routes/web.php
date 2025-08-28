@@ -7,19 +7,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', fn () => inertia('Home'))->name('home');
 
 Route::middleware(['auth', 'verified'])
-    ->prefix('/dashboard')->as('dashboard.')
+    ->prefix('/administration')->as('administration.')
     ->group(function () {
-        Route::get('/', fn () => inertia('dashboard/Index'))->name('index');
+        Route::redirect('/', 'administration/dashboard');
+        Route::get('/dashboard', fn () => inertia('administration/Dashboard'))->name('dashboard');
     });
 
-Route::middleware('auth')
-    ->prefix('/account')->as('account.')
+Route::middleware(['auth', 'verified'])
     ->group(function () {
-        Route::middleware('verified')->group(function () {
-            Route::get('/', fn () => inertia('account/Index'))->name('index');
-        });
-
-        require __DIR__ . '/settings.php';
+        Route::redirect('/dashboard', '/settings/profile')->name('dashboard');
     });
 
+require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
