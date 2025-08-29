@@ -1,5 +1,6 @@
 import type { LucideIcon } from 'lucide-vue-next';
 import type { Config } from 'ziggy-js';
+import { PageMeta } from '@/types/data';
 
 // Utility Types
 export type Nullable<T> = T | null;
@@ -30,6 +31,7 @@ export type AppPageProps<T extends Record<string, unknown> = Record<string, unkn
     auth: Auth;
     ziggy: Config & { location: string };
     sidebarOpen: boolean;
+    meta?: PageMeta;
 };
 
 export interface User {
