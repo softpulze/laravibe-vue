@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import InputError from '@/components/InputError.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
-import { Form, Head } from '@inertiajs/vue3';
+import { Form } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 import HeadingSmall from '@/components/HeadingSmall.vue';
@@ -22,8 +22,6 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
 </script>
 
 <template>
-    <Head title="Password settings" />
-
     <SettingsLayout>
         <div class="space-y-6">
             <HeadingSmall title="Update password" description="Ensure your account is using a long, random password to stay secure" />

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Form, Head, Link, usePage } from '@inertiajs/vue3';
+import { Form, Link, usePage } from '@inertiajs/vue3';
 
 import HeadingSmall from '@/components/HeadingSmall.vue';
 import InputError from '@/components/InputError.vue';
@@ -29,8 +29,6 @@ const user = page.props.auth.user as User;
 </script>
 
 <template>
-    <Head title="Profile settings" />
-
     <SettingsLayout>
         <div class="flex flex-col space-y-6">
             <HeadingSmall title="Profile information" description="Update your name and email address" />

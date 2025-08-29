@@ -4,7 +4,7 @@ import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Form, Head } from '@inertiajs/vue3';
+import { Form } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
 
 defineProps<{
@@ -13,8 +13,6 @@ defineProps<{
 </script>
 
 <template>
-    <Head title="Forgot password" />
-
     <div v-if="status" class="mb-4 text-center text-sm font-medium text-green-600">
         {{ status }}
     </div>
