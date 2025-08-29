@@ -174,13 +174,13 @@ const secondaryNavItems: NavItem[] = [];
                         </DropdownMenuContent>
                     </DropdownMenu>
                     <template v-else>
-                        <div class="hidden grid-cols-2 lg:inline-grid">
-                            <Link :href="route('login')">
-                                <Button size="sm" class="h-9"> Log In </Button>
-                            </Link>
-                            <Link :href="route('register')">
-                                <Button variant="outline" size="sm" class="h-9"> Sign Up </Button>
-                            </Link>
+                        <div class="hidden grid-cols-2 gap-2 lg:inline-grid">
+                            <Button size="sm" class="h-9" asChild>
+                                <Link :href="route('login')"> Log In </Link>
+                            </Button>
+                            <Button variant="outline" size="sm" class="h-9" asChild>
+                                <Link :href="route('register')"> Sign Up </Link>
+                            </Button>
                         </div>
                     </template>
                 </div>
