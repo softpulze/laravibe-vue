@@ -2,15 +2,17 @@
 
 declare(strict_types=1);
 
+use App\Data\PageMeta;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => inertia('Home'))->name('home');
+Route::get('/', fn () => inertia('Home', (new PageMeta(title: 'Home'))->toResponse()))->name('home');
 
 Route::middleware(['auth', 'verified'])
     ->prefix('/administration')->as('administration.')
     ->group(function () {
         Route::redirect('/', 'administration/dashboard');
-        Route::get('/dashboard', fn () => inertia('administration/Dashboard'))->name('dashboard');
+        Route::get('/dashboard', fn () => inertia('administration/Dashboard', (new PageMeta(title: 'Dashboard'))->toResponse()))
+            ->name('dashboard');
     });
 
 Route::middleware(['auth', 'verified'])

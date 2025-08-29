@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Data\PageMeta;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -19,5 +20,6 @@ Route::middleware('auth')->group(function () {
         ->middleware('throttle:6,1')
         ->name('password.update');
 
-    Route::get('/settings/appearance', fn () => inertia('settings/Appearance'))->name('appearance');
+    Route::get('/settings/appearance', fn () => inertia('settings/Appearance', (new PageMeta(title: 'Appearance settings'))->toResponse()))
+        ->name('appearance');
 });
