@@ -4,8 +4,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Link } from '@inertiajs/vue3';
 
 defineProps<{
-    title?: string;
-    description?: string;
+    heading?: string;
+    subheading?: string;
 }>();
 </script>
 
@@ -20,10 +20,10 @@ defineProps<{
 
             <div class="flex flex-col gap-6">
                 <Card class="rounded-xl">
-                    <CardHeader class="px-10 pt-8 pb-0 text-center">
-                        <CardTitle class="text-xl">{{ title }}</CardTitle>
-                        <CardDescription>
-                            {{ description }}
+                    <CardHeader v-if="heading || subheading" class="px-10 pt-8 pb-0 text-center">
+                        <CardTitle v-if="heading" class="text-xl">{{ heading }}</CardTitle>
+                        <CardDescription v-if="subheading">
+                            {{ subheading }}
                         </CardDescription>
                     </CardHeader>
                     <CardContent class="px-10 py-8">

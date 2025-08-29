@@ -3,8 +3,8 @@ import Logo from '@/components/Logo.vue';
 import { Link } from '@inertiajs/vue3';
 
 defineProps<{
-    title?: string;
-    description?: string;
+    heading?: string;
+    subheading?: string;
 }>();
 </script>
 
@@ -17,11 +17,11 @@ defineProps<{
                         <div class="mb-1 flex h-10 items-center justify-center rounded-md">
                             <Logo class="h-full" />
                         </div>
-                        <span class="sr-only">{{ title }}</span>
+                        <span v-if="heading" class="sr-only">{{ heading }}</span>
                     </Link>
-                    <div class="space-y-2 text-center">
-                        <h1 class="text-xl font-medium">{{ title }}</h1>
-                        <p class="text-center text-sm text-muted-foreground">{{ description }}</p>
+                    <div v-if="heading || subheading" class="space-y-2 text-center">
+                        <h1 v-if="heading" class="text-xl font-medium">{{ heading }}</h1>
+                        <p v-if="subheading" class="text-center text-sm text-muted-foreground">{{ subheading }}</p>
                     </div>
                 </div>
                 <slot />
