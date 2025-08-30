@@ -20,16 +20,14 @@ final class AuthenticatedSessionController extends Controller
      */
     public function create(Request $request): Response
     {
-        return inertia('auth/Login', [
+        return vue('auth/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => $request->session()->get('status'),
-
-            ...(new PageMeta(
-                heading: 'Log in to your account',
-                subheading: 'Enter your email and password below to log in',
-                title: 'Log in',
-            ))->toResponse(),
-        ]);
+        ], new PageMeta(
+            heading: 'Log in to your account',
+            subheading: 'Enter your email and password below to log in',
+            title: 'Log in',
+        ));
     }
 
     /**

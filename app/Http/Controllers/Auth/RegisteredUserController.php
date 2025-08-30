@@ -22,14 +22,11 @@ final class RegisteredUserController extends Controller
      */
     public function create(): Response
     {
-        return inertia('auth/Register',
-
-            (new PageMeta(
-                heading: 'Create an account',
-                subheading: 'Enter your details below to create your account',
-                title: 'Register'
-            ))->toResponse()
-        );
+        return vue('auth/Register', metaProps: new PageMeta(
+            heading: 'Create an account',
+            subheading: 'Enter your details below to create your account',
+            title: 'Register'
+        ));
     }
 
     /**

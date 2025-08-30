@@ -23,16 +23,14 @@ final class NewPasswordController extends Controller
      */
     public function create(Request $request): Response
     {
-        return inertia('auth/ResetPassword', [
+        return vue('auth/ResetPassword', [
             'email' => $request->email,
             'token' => $request->route('token'),
-
-            ...(new PageMeta(
-                heading: 'Reset password',
-                subheading: 'Please enter your new password below',
-                title: 'Reset password'
-            ))->toResponse(),
-        ]);
+        ], new PageMeta(
+            heading: 'Reset password',
+            subheading: 'Please enter your new password below',
+            title: 'Reset password'
+        ));
     }
 
     /**

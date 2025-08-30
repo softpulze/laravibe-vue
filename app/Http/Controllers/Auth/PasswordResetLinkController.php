@@ -18,15 +18,13 @@ final class PasswordResetLinkController extends Controller
      */
     public function create(Request $request): Response
     {
-        return inertia('auth/ForgotPassword', [
+        return vue('auth/ForgotPassword', [
             'status' => $request->session()->get('status'),
-
-            ...(new PageMeta(
-                heading: 'Forgot password',
-                subheading: 'Enter your email to receive a password reset link',
-                title: 'Forgot password'
-            ))->toResponse(),
-        ]);
+        ], new PageMeta(
+            heading: 'Forgot password',
+            subheading: 'Enter your email to receive a password reset link',
+            title: 'Forgot password'
+        ));
     }
 
     /**

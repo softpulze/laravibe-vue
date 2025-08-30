@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Settings;
 
+use App\Data\BreadCrumb;
 use App\Data\PageMeta;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\ProfileUpdateRequest;
@@ -20,12 +21,13 @@ final class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
-        return inertia('settings/Profile', [
+        return vue('settings/Profile', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => $request->session()->get('status'),
-
-            ...(new PageMeta(title: 'Profile settings'))->toResponse(),
-        ]);
+        ], new PageMeta(
+            title: 'Profile settings',
+            breadcrumbs: collect([new BreadCrumb('Home'), new BreadCrumb('Profile')])
+        ));
     }
 
     /**

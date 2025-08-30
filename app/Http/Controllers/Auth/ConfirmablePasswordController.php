@@ -19,14 +19,11 @@ final class ConfirmablePasswordController extends Controller
      */
     public function show(): Response
     {
-        return inertia('auth/ConfirmPassword',
-
-            (new PageMeta(
-                heading: 'Confirm your password',
-                subheading: 'This is a secure area of the application. Please confirm your password before continuing.',
-                title: 'Confirm password'
-            ))->toResponse()
-        );
+        return vue('auth/ConfirmPassword', metaProps: new PageMeta(
+            heading: 'Confirm your password',
+            subheading: 'This is a secure area of the application. Please confirm your password before continuing.',
+            title: 'Confirm password'
+        ));
     }
 
     /**

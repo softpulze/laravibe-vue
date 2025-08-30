@@ -19,7 +19,7 @@ final class PasswordController extends Controller
      */
     public function edit(): Response
     {
-        return inertia('settings/Password', (new PageMeta(title: 'Password settings'))->toResponse());
+        return vue('settings/Password', metaProps: new PageMeta(title: 'Password settings'));
     }
 
     /**

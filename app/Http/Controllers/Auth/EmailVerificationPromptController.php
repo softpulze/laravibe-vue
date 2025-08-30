@@ -19,14 +19,12 @@ final class EmailVerificationPromptController extends Controller
     {
         return $request->user()->hasVerifiedEmail()
                     ? redirect()->intended(route('dashboard', absolute: false))
-                    : inertia('auth/VerifyEmail', [
+                    : vue('auth/VerifyEmail', [
                         'status' => $request->session()->get('status'),
-
-                        ...(new PageMeta(
-                            heading: 'Verify email',
-                            subheading: 'Please verify your email address by clicking on the link we just emailed to you.',
-                            title: 'Email verification'
-                        ))->toResponse(),
-                    ]);
+                    ], new PageMeta(
+                        heading: 'Verify email',
+                        subheading: 'Please verify your email address by clicking on the link we just emailed to you.',
+                        title: 'Email verification'
+                    ));
     }
 }

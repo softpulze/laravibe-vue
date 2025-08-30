@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 use App\Data\PageMeta;
 use Illuminate\Support\Facades\Route;
+use Inertia\Response;
 
-Route::get('/', fn () => inertia('Home', (new PageMeta(title: 'Home'))->toResponse()))->name('home');
+Route::get('/', fn (): Response => vue('Home', metaProps: new PageMeta(title: 'Home')))->name('home');
 
 Route::middleware(['auth', 'verified'])
     ->prefix('/administration')->as('administration.')
     ->group(function () {
         Route::redirect('/', 'administration/dashboard');
-        Route::get('/dashboard', fn () => inertia('administration/Dashboard', (new PageMeta(title: 'Dashboard'))->toResponse()))
+        Route::get('/dashboard', fn (): Response => vue('administration/Dashboard', metaProps: new PageMeta(title: 'Dashboard')))
             ->name('dashboard');
     });
 
