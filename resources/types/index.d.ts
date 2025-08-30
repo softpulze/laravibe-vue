@@ -1,6 +1,7 @@
+import { PageMeta } from '@/types/data';
 import type { LucideIcon } from 'lucide-vue-next';
 import type { Config } from 'ziggy-js';
-import { PageMeta } from '@/types/data';
+import { User } from './models';
 
 // Utility Types
 export type Nullable<T> = T | null;
@@ -9,8 +10,14 @@ export type Callable<T = void, U extends any[] = []> = (...args: U) => T;
 export type VoidCallable<U extends any[] = []> = Callable<void, U>;
 
 // Application Specific Types
+export interface PHPEnum {
+    name: string;
+    value: int | string;
+    label: string;
+}
+
 export interface Auth {
-    user: User;
+    user: Nullable<User>;
 }
 
 export interface BreadcrumbItem {
@@ -33,15 +40,5 @@ export type AppPageProps<T extends Record<string, unknown> = Record<string, unkn
     sidebarOpen: boolean;
     meta?: PageMeta;
 };
-
-export interface User {
-    id: number;
-    name: string;
-    email: string;
-    avatar?: string;
-    email_verified_at: string | null;
-    created_at: string;
-    updated_at: string;
-}
 
 export type BreadcrumbItemType = BreadcrumbItem;
