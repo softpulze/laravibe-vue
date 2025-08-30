@@ -12,13 +12,14 @@ import { useAuth } from '@/composables/useAuth';
 import { getInitials } from '@/composables/useInitials';
 import { isCallable } from '@/lib/helpers';
 import { cn } from '@/lib/utils';
-import type { BreadcrumbItem, NavItem } from '@/types';
+import type { NavItem } from '@/types';
+import type { Breadcrumb } from '@/types/data';
 import { Link, usePage } from '@inertiajs/vue3';
 import { computedWithControl } from '@vueuse/core';
 import { ExternalLinkIcon, Menu } from 'lucide-vue-next';
 
 interface Props {
-    breadcrumbs?: BreadcrumbItem[];
+    breadcrumbs?: Breadcrumb[];
 }
 
 withDefaults(defineProps<Props>(), {

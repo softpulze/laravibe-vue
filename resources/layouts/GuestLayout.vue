@@ -19,9 +19,9 @@ const meta = usePageMeta();
 <template>
     <Head :title="meta.title" />
 
-    <Layout :breadcrumbs="breadcrumbs">
+    <Layout>
         <template #header>
-            <Header :breadcrumbs="breadcrumbs" />
+            <Header :breadcrumbs="meta.breadcrumbs" />
         </template>
 
         <slot />
