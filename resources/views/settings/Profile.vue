@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { Form, Link, usePage } from '@inertiajs/vue3';
+import { Form, Link } from '@inertiajs/vue3';
 
 import HeadingSmall from '@/components/HeadingSmall.vue';
 import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useAuth } from '@/composables/useAuth';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
-import { type BreadcrumbItem, type User } from '@/types';
+import { type BreadcrumbItem } from '@/types';
 import DeleteUser from './partial/DeleteUser.vue';
 
 interface Props {
@@ -24,8 +25,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
     },
 ];
 
-const page = usePage();
-const user = page.props.auth.user as User;
+const { authUser } = useAuth();
 </script>
 
 <template>
@@ -40,7 +40,7 @@ const user = page.props.auth.user as User;
                         id="name"
                         class="mt-1 block w-full"
                         name="name"
-                        :default-value="user.name"
+                        :default-value="authUser?.name"
                         required
                         autocomplete="name"
                         placeholder="Full name"
@@ -55,7 +55,7 @@ const user = page.props.auth.user as User;
                         type="email"
                         class="mt-1 block w-full"
                         name="email"
-                        :default-value="user.email"
+                        :default-value="authUser?.email"
                         required
                         autocomplete="username"
                         placeholder="Email address"
@@ -63,7 +63,7 @@ const user = page.props.auth.user as User;
                     <InputError class="mt-2" :message="errors.email" />
                 </div>
 
-                <div v-if="mustVerifyEmail && !user.email_verified_at">
+                <div v-if="mustVerifyEmail && !authUser?.email_verified_at">
                     <p class="-mt-4 text-sm text-muted-foreground">
                         Your email address is unverified.
                         <Link
