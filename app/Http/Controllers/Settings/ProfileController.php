@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Settings;
 
-use App\Data\BreadCrumb;
-use App\Data\PageMeta;
+use App\DTOs\BreadCrumb;
+use App\DTOs\PageMeta;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\ProfileUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;

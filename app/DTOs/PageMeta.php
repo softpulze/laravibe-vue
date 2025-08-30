@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Data;
+namespace App\DTOs;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
