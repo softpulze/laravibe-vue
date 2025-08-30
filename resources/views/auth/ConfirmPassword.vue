@@ -3,18 +3,16 @@ import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Form, Head } from '@inertiajs/vue3';
+import { Form } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
 </script>
 
 <template>
-    <Head title="Confirm password" />
-
     <Form method="post" :action="route('password.confirm')" reset-on-success v-slot="{ errors, processing }">
         <div class="space-y-6">
             <div class="grid gap-2">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" name="password" class="mt-1 block w-full" required autocomplete="current-password" autofocus />
+                <Input id="password" type="password" name="password" class="mt-1 block w-full" required autofocus />
 
                 <InputError :message="errors.password" />
             </div>

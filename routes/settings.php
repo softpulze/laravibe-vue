@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
+use App\Data\PageMeta;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Response;
 
 Route::middleware('auth')->group(function () {
     Route::redirect('/settings/', '/settings/profile');
@@ -19,5 +21,6 @@ Route::middleware('auth')->group(function () {
         ->middleware('throttle:6,1')
         ->name('password.update');
 
-    Route::get('/settings/appearance', fn () => inertia('settings/Appearance'))->name('appearance');
+    Route::get('/settings/appearance', fn (): Response => vue('settings/Appearance', metaProps: new PageMeta(title: 'Appearance settings')))
+        ->name('appearance');
 });

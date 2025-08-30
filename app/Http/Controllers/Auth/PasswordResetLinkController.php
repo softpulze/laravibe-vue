@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
+use App\Data\PageMeta;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
-use Inertia\Inertia;
 use Inertia\Response;
 
 final class PasswordResetLinkController extends Controller
@@ -18,9 +18,13 @@ final class PasswordResetLinkController extends Controller
      */
     public function create(Request $request): Response
     {
-        return Inertia::render('auth/ForgotPassword', [
+        return vue('auth/ForgotPassword', [
             'status' => $request->session()->get('status'),
-        ]);
+        ], new PageMeta(
+            heading: 'Forgot password',
+            subheading: 'Enter your email to receive a password reset link',
+            title: 'Forgot password'
+        ));
     }
 
     /**

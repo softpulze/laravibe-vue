@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import Header from '@/components/guest/Header.vue';
 import { HeaderLayout as Layout } from '@/components/layout';
+import { usePageMeta } from '@/composables/usePageMeta';
 import type { BreadcrumbItemType } from '@/types';
+import { Head } from '@inertiajs/vue3';
 
 interface Props {
     breadcrumbs?: BreadcrumbItemType[];
@@ -10,12 +12,16 @@ interface Props {
 withDefaults(defineProps<Props>(), {
     breadcrumbs: () => [],
 });
+
+const meta = usePageMeta();
 </script>
 
 <template>
-    <Layout :breadcrumbs="breadcrumbs">
+    <Head :title="meta.title" />
+
+    <Layout>
         <template #header>
-            <Header :breadcrumbs="breadcrumbs" />
+            <Header :breadcrumbs="meta.breadcrumbs" />
         </template>
 
         <slot />

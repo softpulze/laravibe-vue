@@ -2,6 +2,21 @@
 
 declare(strict_types=1);
 
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Http\RedirectResponse;
+use Inertia\Response;
+
+if (! function_exists('vue')) {
+    function vue(string $name, array $props = [], array|Arrayable $metaProps = []): RedirectResponse|Response
+    {
+        if ($metaProps instanceof Arrayable) {
+            $metaProps = $metaProps->toArray();
+        }
+
+        return inertia($name, [...$props, 'meta' => $metaProps]);
+    }
+}
+
 if (! function_exists('optionalProp')) {
     function optionalProp(callable $callback): Inertia\OptionalProp
     {

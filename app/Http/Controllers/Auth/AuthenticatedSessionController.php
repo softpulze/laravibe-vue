@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
+use App\Data\PageMeta;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 use Inertia\Response;
 
 final class AuthenticatedSessionController extends Controller
@@ -20,10 +20,14 @@ final class AuthenticatedSessionController extends Controller
      */
     public function create(Request $request): Response
     {
-        return Inertia::render('auth/Login', [
+        return vue('auth/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => $request->session()->get('status'),
-        ]);
+        ], new PageMeta(
+            heading: 'Log in to your account',
+            subheading: 'Enter your email and password below to log in',
+            title: 'Log in',
+        ));
     }
 
     /**

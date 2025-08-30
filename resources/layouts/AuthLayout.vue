@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import Layout from '@/layouts/auth/CardLayout.vue';
+import { AuthCardLayout as Layout } from '@/components/layout';
+import { usePageMeta } from '@/composables/usePageMeta';
+import { Head } from '@inertiajs/vue3';
 
-defineProps<{
-    title?: string;
-    description?: string;
-}>();
+const meta = usePageMeta();
 </script>
 
 <template>
-    <Layout :title="title" :description="description">
+    <Head :title="meta.title" />
+
+    <Layout :heading="meta.heading" :subheading="meta.subheading">
         <slot />
     </Layout>
 </template>
