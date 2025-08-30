@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Settings;
 
-use App\DTOs\BreadCrumb;
 use App\DTOs\PageMeta;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\ProfileUpdateRequest;
@@ -26,7 +25,6 @@ final class ProfileController extends Controller
             'status' => $request->session()->get('status'),
         ], new PageMeta(
             title: 'Profile settings',
-            breadcrumbs: collect([new BreadCrumb('Home'), new BreadCrumb('Profile')])
         ));
     }
 
