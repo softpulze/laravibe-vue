@@ -7,21 +7,21 @@ namespace App\Console\Commands;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
 
-final class MakeDataCommand extends GeneratorCommand
+final class MakeDTOCommand extends GeneratorCommand
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'make:data';
+    protected $name = 'make:dto';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new data class';
+    protected $description = 'Create a new DTO class';
 
     /**
      * The type of class being generated.
@@ -35,7 +35,7 @@ final class MakeDataCommand extends GeneratorCommand
      */
     protected function getStub(): string
     {
-        return $this->resolveStubPath('/stubs/data.stub');
+        return $this->resolveStubPath('/stubs/dto.stub');
     }
 
     /**
@@ -53,7 +53,7 @@ final class MakeDataCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace . '\\Data';
+        return $rootNamespace . '\\DTOs';
     }
 
     /**
@@ -62,7 +62,7 @@ final class MakeDataCommand extends GeneratorCommand
     protected function getOptions(): array
     {
         return [
-            ['force', 'f', InputOption::VALUE_NONE, 'Create the data class even if the class already exists'],
+            ['force', 'f', InputOption::VALUE_NONE, 'Create the DTO class even if the class already exists'],
         ];
     }
 }

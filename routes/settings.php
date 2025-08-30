@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Data\PageMeta;
+use App\DTOs\PageMeta;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Data\PageMeta;
+use App\DTOs\PageMeta;
 use Illuminate\Support\Facades\Route;
 use Inertia\Response;
 
