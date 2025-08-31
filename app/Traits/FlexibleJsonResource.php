@@ -25,7 +25,7 @@ trait FlexibleJsonResource
         $attributePresent = array_key_exists($key, $this->getAttributes());
 
         return $this->mergeWhen(! $optional || $attributePresent, fn () => [
-            $prefix . ($alias ?: $key) => $resolver ? $resolver($this->{$key}) : $this->{$key},
+            $prefix . ($alias !== null && $alias !== '' && $alias !== '0' ? $alias : $key) => $resolver instanceof \Closure ? $resolver($this->{$key}) : $this->{$key},
         ]);
     }
 

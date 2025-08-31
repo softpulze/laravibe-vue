@@ -43,10 +43,9 @@ final class MakeActionCommand extends GeneratorCommand
     /**
      * Resolve the fully-qualified path to the stub.
      *
-     * @param  string  $stub
      * @return string
      */
-    protected function resolveStubPath($stub)
+    private function resolveStubPath(string $stub)
     {
         return base_path($stub);
     }

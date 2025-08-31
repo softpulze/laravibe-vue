@@ -41,7 +41,7 @@ final class MakeDTOCommand extends GeneratorCommand
     /**
      * Resolve the fully-qualified path to the stub.
      */
-    protected function resolveStubPath(string $stub): string
+    private function resolveStubPath(string $stub): string
     {
         return base_path($stub);
     }
