@@ -20,6 +20,11 @@
             "command": "devpulse run vite,queue,logs --concurrently"
         },
         {
+            "name": "phpstan",
+            "description": "Analyze PHP code with PHPStan",
+            "command": "./vendor/bin/phpstan analyze --memory-limit=512M"
+        },
+        {
             "name": "pest",
             "description": "Test PHP code with Pest",
             "command": "./vendor/bin/pest --coverage --compact"
@@ -61,13 +66,23 @@
         },
         {
             "name": "eslint",
-            "description": "Format JS code with eslint",
+            "description": "List JS code with eslint",
             "command": "npm run lint"
+        },
+        {
+            "name": "rector",
+            "description": "Lint PHP code with rector",
+            "command": "./vendor/bin/rector"
         },
         {
             "name": "lint",
             "description": "Refactor code with EsLint",
-            "command": "devpulse run eslint"
+            "command": "devpulse run rector,eslint"
+        },
+        {
+            "name": "review",
+            "description": "Review code with all tools",
+            "command": "devpulse run lint,format,pest,phpstan"
         },
         {
             "name": "build",
