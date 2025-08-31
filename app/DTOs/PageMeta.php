@@ -8,10 +8,15 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Collection;
 
+/**
+ * @implements Arrayable<string, mixed>
+ */
 final readonly class PageMeta implements Arrayable, Jsonable
 {
     /**
      * Create a new class instance.
+     *
+     * @param  Collection<int, BreadCrumb>|null  $breadcrumbs
      */
     public function __construct(
         public ?string $heading = null,

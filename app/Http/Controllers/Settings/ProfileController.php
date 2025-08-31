@@ -21,7 +21,8 @@ final class ProfileController extends Controller
     public function edit(Request $request): Response
     {
         return vue('settings/Profile', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+            // @phpstan-ignore-next-line instanceof.alwaysTrue
+            'mustVerifyEmail' => authUser() instanceof MustVerifyEmail,
             'status' => $request->session()->get('status'),
         ], new PageMeta(
             title: 'Profile settings',
@@ -33,13 +34,14 @@ final class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $authUser = authUser();
+        $authUser->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($authUser->isDirty('email')) {
+            $authUser->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $authUser->save();
 
         return to_route('profile.edit');
     }
@@ -53,7 +55,7 @@ final class ProfileController extends Controller
             'password' => ['required', 'current_password'],
         ]);
 
-        $user = $request->user();
+        $user = authUser();
 
         Auth::logout();
 

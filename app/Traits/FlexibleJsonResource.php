@@ -24,8 +24,9 @@ trait FlexibleJsonResource
     ): MergeValue|MissingValue {
         $attributePresent = array_key_exists($key, $this->getAttributes());
 
+        /** @var MergeValue|MissingValue */
         return $this->mergeWhen(! $optional || $attributePresent, fn () => [
-            $prefix . ($alias !== null && $alias !== '' && $alias !== '0' ? $alias : $key) => $resolver instanceof \Closure ? $resolver($this->{$key}) : $this->{$key},
+            $prefix . ($alias !== null && $alias !== '' && $alias !== '0' ? $alias : $key) => $resolver instanceof Closure ? $resolver($this->{$key}) : $this->{$key},
         ]);
     }
 
@@ -40,6 +41,7 @@ trait FlexibleJsonResource
 
     protected function id(): MergeValue
     {
+        /** @var MergeValue */
         return $this->attribute('id');
     }
 

@@ -2,14 +2,27 @@
 
 declare(strict_types=1);
 
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Http\RedirectResponse;
-use Inertia\Response;
+if (! function_exists('authUser')) {
+    /**
+     * Get the authenticated user or throw an exception if not authenticated.
+     */
+    function authUser(): App\Models\User
+    {
+        $authUser = Illuminate\Support\Facades\Auth::user();
+        throw_if(is_null($authUser), Illuminate\Auth\AuthenticationException::class);
+
+        return $authUser;
+    }
+}
 
 if (! function_exists('vue')) {
-    function vue(string $name, array $props = [], array|Arrayable $metaProps = []): RedirectResponse|Response
+    /**
+     * @param  array<string, mixed>  $props
+     * @param  array<string, mixed>|Illuminate\Contracts\Support\Arrayable<string, mixed>  $metaProps
+     */
+    function vue(string $name, array $props = [], array|Illuminate\Contracts\Support\Arrayable $metaProps = []): Inertia\Response
     {
-        if ($metaProps instanceof Arrayable) {
+        if ($metaProps instanceof Illuminate\Contracts\Support\Arrayable) {
             $metaProps = $metaProps->toArray();
         }
 

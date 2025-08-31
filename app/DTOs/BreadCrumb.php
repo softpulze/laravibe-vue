@@ -7,6 +7,9 @@ namespace App\DTOs;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 
+/**
+ * @implements Arrayable<string, mixed>
+ */
 final readonly class BreadCrumb implements Arrayable, Jsonable
 {
     /**
