@@ -39,14 +39,6 @@ final class MakeDTOCommand extends GeneratorCommand
     }
 
     /**
-     * Resolve the fully-qualified path to the stub.
-     */
-    protected function resolveStubPath(string $stub): string
-    {
-        return base_path($stub);
-    }
-
-    /**
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
@@ -58,11 +50,21 @@ final class MakeDTOCommand extends GeneratorCommand
 
     /**
      * Get the console command arguments.
+     *
+     * @return array<array{string, string, int, string}>
      */
     protected function getOptions(): array
     {
         return [
             ['force', 'f', InputOption::VALUE_NONE, 'Create the DTO class even if the class already exists'],
         ];
+    }
+
+    /**
+     * Resolve the fully-qualified path to the stub.
+     */
+    private function resolveStubPath(string $stub): string
+    {
+        return base_path($stub);
     }
 }

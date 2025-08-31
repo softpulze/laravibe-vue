@@ -1,0 +1,20 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - vendor/nesbot/carbon/extension.neon
+
+parameters:
+
+    paths:
+        - app/
+
+    # Level 10 is the highest level
+    level: max
+
+    ignoreErrors:
+        -
+            identifier: trait.unused
+            paths:
+                - app/Traits/ArrayableEnum.php
+
+#    excludePaths:
+#        - ./*/*/FileToBeExcluded.php

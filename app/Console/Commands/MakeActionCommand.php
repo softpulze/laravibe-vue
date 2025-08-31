@@ -32,32 +32,18 @@ final class MakeActionCommand extends GeneratorCommand
 
     /**
      * Get the stub file for the generator.
-     *
-     * @return string
      */
-    protected function getStub()
+    protected function getStub(): string
     {
         return $this->resolveStubPath('/stubs/action.stub');
-    }
-
-    /**
-     * Resolve the fully-qualified path to the stub.
-     *
-     * @param  string  $stub
-     * @return string
-     */
-    protected function resolveStubPath($stub)
-    {
-        return base_path($stub);
     }
 
     /**
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return $rootNamespace . '\\Actions';
     }
@@ -65,12 +51,20 @@ final class MakeActionCommand extends GeneratorCommand
     /**
      * Get the console command arguments.
      *
-     * @return array
+     * @return array<array{string, string, int, string}>
      */
-    protected function getOptions()
+    protected function getOptions(): array
     {
         return [
             ['force', 'f', InputOption::VALUE_NONE, 'Create the action even if the action already exists'],
         ];
+    }
+
+    /**
+     * Resolve the fully-qualified path to the stub.
+     */
+    private function resolveStubPath(string $stub): string
+    {
+        return base_path($stub);
     }
 }
