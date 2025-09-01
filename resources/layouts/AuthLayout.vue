@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { FlashProvider } from '@/components/flash';
 import { AuthCardLayout as Layout } from '@/components/layout';
 import { usePageMeta } from '@/composables/usePageMeta';
 import { Head } from '@inertiajs/vue3';
@@ -11,5 +12,7 @@ const meta = usePageMeta();
 
     <Layout :heading="meta.heading" :subheading="meta.subheading">
         <slot />
+
+        <FlashProvider />
     </Layout>
 </template>

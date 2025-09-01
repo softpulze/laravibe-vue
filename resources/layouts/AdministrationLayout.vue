@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Header from '@/components/administration/Header.vue';
 import Sidebar from '@/components/administration/Sidebar.vue';
+import { FlashProvider } from '@/components/flash';
 import { SidebarLayout as Layout } from '@/components/layout';
 import { usePageMeta } from '@/composables/usePageMeta';
 import type { BreadcrumbItemType } from '@/types';
@@ -30,5 +31,7 @@ const meta = usePageMeta();
         </template>
 
         <slot />
+
+        <FlashProvider />
     </Layout>
 </template>
