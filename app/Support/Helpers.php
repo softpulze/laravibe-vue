@@ -50,3 +50,45 @@ if (! function_exists('alwaysProp')) {
         return Inertia\Inertia::always($callback);
     }
 }
+
+if (! function_exists('flashError')) {
+    function flashError(string $message, App\DTOs\FlashAction ...$actions): void
+    {
+        App\DTOs\Flash::error($message, ...$actions);
+    }
+}
+
+if (! function_exists('flashSuccess')) {
+    function flashSuccess(string $message, App\DTOs\FlashAction ...$actions): void
+    {
+        App\DTOs\Flash::success($message, ...$actions);
+    }
+}
+
+if (! function_exists('flashWarning')) {
+    function flashWarning(string $message, App\DTOs\FlashAction ...$actions): void
+    {
+        App\DTOs\Flash::warning($message, ...$actions);
+    }
+}
+
+if (! function_exists('flashInfo')) {
+    function flashInfo(string $message, App\DTOs\FlashAction ...$actions): void
+    {
+        App\DTOs\Flash::info($message, ...$actions);
+    }
+}
+
+if (! function_exists('flashActionCopy')) {
+    function flashActionCopy(string $payloadToCopy, ?string $label = null): App\DTOs\FlashAction
+    {
+        return App\DTOs\FlashAction::copy($payloadToCopy, $label);
+    }
+}
+
+if (! function_exists('flashActionRedirect')) {
+    function flashActionRedirect(string $redirectURL, ?string $label = null): App\DTOs\FlashAction
+    {
+        return App\DTOs\FlashAction::redirect($redirectURL, $label);
+    }
+}
