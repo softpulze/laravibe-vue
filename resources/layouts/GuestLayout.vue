@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { FlashProvider } from '@/components/flash';
 import Header from '@/components/guest/Header.vue';
 import { HeaderLayout as Layout } from '@/components/layout';
 import { usePageMeta } from '@/composables/usePageMeta';
@@ -25,5 +26,7 @@ const meta = usePageMeta();
         </template>
 
         <slot />
+
+        <FlashProvider />
     </Layout>
 </template>
