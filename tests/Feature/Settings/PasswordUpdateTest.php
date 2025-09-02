@@ -7,6 +7,15 @@ use Illuminate\Support\Facades\Hash;
 
 uses(Illuminate\Foundation\Testing\RefreshDatabase::class);
 
+test('password update page can be renderd', function () {
+    $user = User::factory()->create();
+    $this->actingAs($user);
+
+    $response = $this->get('/settings/password');
+
+    $response->assertStatus(200);
+});
+
 test('password can be updated', function () {
     $user = User::factory()->create();
 

@@ -3,8 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\User;
-
-uses(Illuminate\Foundation\Testing\RefreshDatabase::class);
+use Illuminate\Support\Facades\Date;
 
 test('login screen can be rendered', function () {
     $response = $this->get('/login');
@@ -42,4 +41,23 @@ test('users can logout', function () {
 
     $this->assertGuest();
     $response->assertRedirect('/');
+});
+
+test('user login is rate limited after multiple failed attempts', function () {
+    Date::setTestNow(now());
+    $user = User::factory()->create();
+
+    $uri = '/login';
+    $data = [
+        'email' => $user->email,
+        'password' => 'wrong-password',
+    ];
+
+    foreach (range(1, 5) as $attempt) {
+        $this->post($uri, $data)
+            ->assertInvalid('email');
+    }
+    $response = $this->post($uri, $data);
+
+    $response->assertInvalid(['email' => trans('auth.throttle', ['seconds' => 60])]);
 });
