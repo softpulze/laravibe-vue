@@ -15,6 +15,7 @@ if (! function_exists('authUser')) {
     }
 }
 
+// Inertia helpers start
 if (! function_exists('vue')) {
     /**
      * @param  array<string, mixed>  $props
@@ -50,7 +51,9 @@ if (! function_exists('alwaysProp')) {
         return Inertia\Inertia::always($callback);
     }
 }
+// Inertia helpers end
 
+// Flash helpers start
 if (! function_exists('flashError')) {
     function flashError(string $message, App\DTOs\FlashAction ...$actions): void
     {
@@ -92,3 +95,4 @@ if (! function_exists('flashActionRedirect')) {
         return App\DTOs\FlashAction::redirect($redirectURL, $label);
     }
 }
+// Flash helpers end
