@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace App\DTOs;
+namespace App\Toast\DTOs;
 
-use App\Enums\FlashActionType;
+use App\Enums\ToastActionType;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 
 /**
  * @implements Arrayable<string, mixed>
  */
-final readonly class FlashAction implements Arrayable, Jsonable
+final readonly class ToastActionPayload implements Arrayable, Jsonable
 {
     /**
      * Create a new class instance.
      */
     public function __construct(
-        public FlashActionType $type,
+        public ToastActionType $type,
         public string $payload,
         public ?string $label = null,
     ) {
@@ -26,12 +26,12 @@ final readonly class FlashAction implements Arrayable, Jsonable
 
     public static function copy(string $payloadToCopy, ?string $label = null): self
     {
-        return new self(FlashActionType::COPY, $payloadToCopy, $label);
+        return new self(ToastActionType::COPY, $payloadToCopy, $label);
     }
 
     public static function redirect(string $redirectURL, ?string $label = null): self
     {
-        return new self(FlashActionType::REDIRECT, $redirectURL, $label);
+        return new self(ToastActionType::REDIRECT, $redirectURL, $label);
     }
 
     /**

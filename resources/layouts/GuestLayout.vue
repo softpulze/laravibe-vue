@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { FlashProvider } from '@/components/flash';
 import Header from '@/components/guest/Header.vue';
 import { HeaderLayout as Layout } from '@/components/layout';
+import { ToastProvider } from '@/components/toast';
 import { usePageMeta } from '@/composables/usePageMeta';
 import type { BreadcrumbItemType } from '@/types';
 import { Head } from '@inertiajs/vue3';
@@ -27,6 +27,6 @@ const meta = usePageMeta();
 
         <slot />
 
-        <FlashProvider />
+        <ToastProvider />
     </Layout>
 </template>

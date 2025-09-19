@@ -1,6 +1,6 @@
 import './css/app.css';
 
-import { registerFlash } from '@/components/flash';
+import { registerToaster } from '@/components/toast';
 import { initializeTheme } from '@/composables/useAppearance';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { createApp, h } from 'vue';
@@ -18,7 +18,7 @@ createInertiaApp({
             .use(ZiggyVue)
             .mount(el);
 
-        registerFlash();
+        registerToaster();
     },
     progress: {
         color: '#4B5563',

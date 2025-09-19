@@ -2,16 +2,23 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "softpulselab/laravibe-vue",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Open-source Laravel + Vue 3 starter kit with Inertia, Vite, Tailwind CSS, Shadcn Vue, and reusable utilities—optimized for clean structure and fast development. Build your app, skip the boilerplate.",
     "keywords": [
         "laravel",
         "php",
         "inertia",
         "vue",
         "starter-kit",
-        "laravibe"
+        "laravibe",
+        "open-source"
     ],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Ashok Barua",
+            "email": "ashokbaruaakas@gmail.com"
+        }
+    ],
     "require": {
         "php": "^8.2",
         "inertiajs/inertia-laravel": "^2.0",
@@ -44,7 +51,8 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "app/Support/Helpers.php"
+            "app/Support/Helpers.php",
+            "app/Toast/Support/Helpers.php"
         ]
     },
     "scripts": {
