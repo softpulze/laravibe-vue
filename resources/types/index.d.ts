@@ -1,4 +1,4 @@
-import type { Flash } from '@/components/flash';
+import type { ToastPayload } from '@/components/toast';
 import type { PageMeta } from '@/types/data';
 import type { LucideIcon } from 'lucide-vue-next';
 import type { Config } from 'ziggy-js';
@@ -34,7 +34,7 @@ export type AppPageProps<T extends Record<string, unknown> = Record<string, unkn
     ziggy: Config & { location: string };
     sidebarOpen: boolean;
     meta?: PageMeta;
-    flash: Flash[];
+    toasts: ToastPayload[];
 };
 
 export type BreadcrumbItemType = BreadcrumbItem;

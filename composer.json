@@ -44,7 +44,8 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "app/Support/Helpers.php"
+            "app/Support/Helpers.php",
+            "app/Toast/Support/Helpers.php"
         ]
     },
     "scripts": {
