@@ -16,5 +16,5 @@ test('authenticated users can visit the dashboard', function () {
     $this->actingAs($user);
 
     $response = $this->get('/dashboard');
-    $response->assertRedirect('settings/profile');
+    $response->assertRedirect('account');
 });

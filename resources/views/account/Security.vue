@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import InputError from '@/components/InputError.vue';
-import SettingsLayout from '@/layouts/settings/Layout.vue';
+import SettingsLayout from '@/layouts/AccountLayout.vue';
 import { Form } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
@@ -20,7 +20,7 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
 
             <Form
                 method="put"
-                :action="route('password.update')"
+                :action="route('account.security.password')"
                 :options="{
                     preserveScroll: true,
                 }"

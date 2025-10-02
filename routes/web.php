@@ -18,8 +18,8 @@ Route::middleware(['auth', 'verified'])
 
 Route::middleware(['auth', 'verified'])
     ->group(function () {
-        Route::redirect('/dashboard', '/settings/profile')->name('dashboard');
+        Route::redirect('/dashboard', '/account')->name('dashboard');
     });
 
-require __DIR__ . '/settings.php';
+require __DIR__ . '/account.php';
 require __DIR__ . '/auth.php';

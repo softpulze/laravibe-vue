@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/composables/useAuth';
-import SettingsLayout from '@/layouts/settings/Layout.vue';
+import SettingsLayout from '@/layouts/AccountLayout.vue';
 import DeleteUser from './partial/DeleteUser.vue';
 
 interface Props {
@@ -25,7 +25,7 @@ const { authUser } = useAuth();
         <div class="flex flex-col space-y-6">
             <HeadingSmall title="Profile information" description="Update your name and email address" />
 
-            <Form method="patch" :action="route('profile.update')" class="space-y-6" v-slot="{ errors, processing, recentlySuccessful }">
+            <Form method="patch" :action="route('account.update')" class="space-y-6" v-slot="{ errors, processing, recentlySuccessful }">
                 <div class="grid gap-2">
                     <Label for="name">Name</Label>
                     <Input
