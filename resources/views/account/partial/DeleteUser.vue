@@ -2,84 +2,108 @@
 import { Form } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
-// Components
-import HeadingSmall from '@/components/HeadingSmall.vue';
 import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/components/ui/dialog';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Trash2, TriangleAlert } from 'lucide-vue-next';
 
-const passwordInput = ref<InstanceType<typeof Input> | null>(null);
+const confirmingUserDeletion = ref(false);
+const passwordInput = ref<HTMLInputElement | null>(null);
+
+const confirmUserDeletion = () => {
+    confirmingUserDeletion.value = true;
+    setTimeout(() => passwordInput.value?.focus(), 100);
+};
+
+const closeModal = () => {
+    confirmingUserDeletion.value = false;
+};
 </script>
 
 <template>
-    <div class="space-y-6">
-        <HeadingSmall title="Delete account" description="Delete your account and all of its resources" />
-        <div class="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10">
-            <div class="relative space-y-0.5 text-red-600 dark:text-red-100">
-                <p class="font-medium">Warning</p>
-                <p class="text-sm">Please proceed with caution, this cannot be undone.</p>
-            </div>
-            <Dialog>
-                <DialogTrigger as-child>
-                    <Button variant="destructive">Delete account</Button>
-                </DialogTrigger>
-                <DialogContent>
-                    <Form
-                        method="delete"
-                        :action="route('profile.destroy')"
-                        reset-on-success
-                        @error="() => passwordInput?.$el?.focus()"
-                        :options="{
-                            preserveScroll: true,
-                        }"
-                        class="space-y-6"
-                        v-slot="{ errors, processing, reset, clearErrors }"
-                    >
-                        <DialogHeader class="space-y-3">
-                            <DialogTitle>Are you sure you want to delete your account?</DialogTitle>
-                            <DialogDescription>
-                                Once your account is deleted, all of its resources and data will also be permanently deleted. Please enter your
-                                password to confirm you would like to permanently delete your account.
-                            </DialogDescription>
-                        </DialogHeader>
-
-                        <div class="grid gap-2">
-                            <Label for="password" class="sr-only">Password</Label>
-                            <Input id="password" type="password" name="password" ref="passwordInput" placeholder="Password" />
-                            <InputError :message="errors.password" />
+    <Card>
+        <CardHeader class="pb-4">
+            <CardTitle class="flex items-center gap-2 text-lg font-medium">
+                <Trash2 class="size-4 text-destructive" />
+                Delete Account
+            </CardTitle>
+            <CardDescription class="text-sm text-muted-foreground">
+                Permanently delete your account and all associated data. This action cannot be undone.
+            </CardDescription>
+        </CardHeader>
+        <CardContent>
+            <div class="space-y-4">
+                <!-- Warning Section -->
+                <div class="rounded-md border border-amber-200 bg-amber-50/50 p-3 dark:border-amber-700/50 dark:bg-amber-950/20">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <TriangleAlert class="size-4 text-amber-500" />
                         </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-amber-800 dark:text-amber-200">Warning: This action is irreversible</h3>
+                            <div class="mt-1 text-sm text-amber-700 dark:text-amber-300">
+                                <ul class="list-inside list-disc space-y-1">
+                                    <li>All your personal data will be permanently deleted</li>
+                                    <li>Your profile and content will be removed</li>
+                                    <li>You will lose access to all services immediately</li>
+                                    <li>This action cannot be undone</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                        <DialogFooter class="gap-2">
-                            <DialogClose as-child>
-                                <Button
-                                    variant="secondary"
-                                    @click="
-                                        () => {
-                                            clearErrors();
-                                            reset();
-                                        }
-                                    "
-                                >
-                                    Cancel
-                                </Button>
-                            </DialogClose>
+                <!-- Action Button -->
+                <div class="flex items-center justify-between border-t pt-4">
+                    <Dialog v-model:open="confirmingUserDeletion">
+                        <DialogTrigger as-child>
+                            <Button variant="destructive" @click="confirmUserDeletion" size="sm"> Delete Account </Button>
+                        </DialogTrigger>
+                        <DialogContent class="sm:max-w-md">
+                            <DialogHeader>
+                                <DialogTitle> Are you absolutely sure? </DialogTitle>
+                                <DialogDescription class="text-muted-foreground">
+                                    This will permanently delete your account and remove all your data from our servers. This action cannot be undone.
+                                </DialogDescription>
+                            </DialogHeader>
 
-                            <Button type="submit" variant="destructive" :disabled="processing"> Delete account </Button>
-                        </DialogFooter>
-                    </Form>
-                </DialogContent>
-            </Dialog>
-        </div>
-    </div>
+                            <Form
+                                method="delete"
+                                :action="route('account.destroy')"
+                                :options="{ preserveScroll: true }"
+                                @success="closeModal"
+                                v-slot="{ errors, processing }"
+                            >
+                                <div class="space-y-4">
+                                    <div class="space-y-2">
+                                        <Label for="password" class="text-sm font-medium"> Confirm your password to continue </Label>
+                                        <Input
+                                            id="password"
+                                            ref="passwordInput"
+                                            name="password"
+                                            type="password"
+                                            class="h-9"
+                                            placeholder="Enter your password"
+                                            autocomplete="current-password"
+                                        />
+                                        <InputError class="text-xs" :message="errors.password" />
+                                    </div>
+                                </div>
+
+                                <DialogFooter class="mt-6">
+                                    <Button type="button" variant="outline" @click="closeModal" class="mr-2"> Cancel </Button>
+                                    <Button type="submit" variant="destructive" :disabled="processing">
+                                        {{ processing ? 'Deleting...' : 'Delete Account' }}
+                                    </Button>
+                                </DialogFooter>
+                            </Form>
+                        </DialogContent>
+                    </Dialog>
+                </div>
+            </div>
+        </CardContent>
+    </Card>
 </template>
