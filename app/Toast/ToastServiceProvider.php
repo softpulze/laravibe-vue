@@ -13,6 +13,6 @@ final class ToastServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(Toast::class, fn () => new Toast());
+        $this->app->singleton(Toast::class, fn (): Toast => new Toast());
     }
 }
