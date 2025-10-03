@@ -31,7 +31,7 @@ withDefaults(defineProps<Props>(), {
     breadcrumbs: () => [],
 });
 
-const { isAuthenticated, authUser } = useAuth();
+const { authUser } = useAuth();
 
 const navigationItems = ref<NavItem[]>([
     {
@@ -77,7 +77,19 @@ const isItemActive = (item: NavItem): boolean => {
                                     </Link>
                                 </nav>
                                 <div class="flex flex-col space-y-4">
-                                    <div class="grid grid-cols-2 gap-2 lg:hidden" v-if="!isAuthenticated">
+                                    <a
+                                        v-for="item in secondaryNavItems"
+                                        :key="item.title"
+                                        :href="item.href"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="flex items-center space-x-2 text-sm font-medium"
+                                    >
+                                        <component :is="item.icon || ExternalLinkIcon" class="h-5 w-5" />
+                                        <span>{{ item.title }}</span>
+                                    </a>
+
+                                    <div class="grid grid-cols-2 gap-2 lg:hidden" v-if="!authUser">
                                         <Button variant="outline" size="sm" class="h-9" asChild>
                                             <Link :href="route('login')"> Log In </Link>
                                         </Button>
@@ -119,8 +131,32 @@ const isItemActive = (item: NavItem): boolean => {
 
                 <!-- Right Side Actions -->
                 <div class="ml-auto flex items-center space-x-2">
-                    <!-- User Menu -->
-                    <DropdownMenu v-if="isAuthenticated">
+                    <div class="relative flex items-center space-x-1">
+                        <div class="hidden space-x-1 lg:flex">
+                            <template v-for="item in secondaryNavItems" :key="item.title">
+                                <TooltipProvider :delay-duration="0">
+                                    <Tooltip>
+                                        <TooltipTrigger>
+                                            <Button variant="ghost" size="icon" as-child class="group h-9 w-9 cursor-pointer">
+                                                <a :href="item.href" target="_blank" rel="noopener noreferrer">
+                                                    <span class="sr-only">{{ item.title }}</span>
+                                                    <component
+                                                        :is="item.icon || ExternalLinkIcon"
+                                                        class="size-5 opacity-80 group-hover:opacity-100"
+                                                    />
+                                                </a>
+                                            </Button>
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            <p>{{ item.title }}</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </TooltipProvider>
+                            </template>
+                        </div>
+                    </div>
+
+                    <DropdownMenu v-if="authUser">
                         <DropdownMenuTrigger :as-child="true">
                             <Button
                                 variant="ghost"

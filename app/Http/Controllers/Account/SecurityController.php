@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Settings;
+namespace App\Http\Controllers\Account;
 
 use App\DTOs\PageMeta;
 use App\Http\Controllers\Controller;
@@ -12,20 +12,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Inertia\Response;
 
-final class PasswordController extends Controller
+final class SecurityController extends Controller
 {
-    /**
-     * Show the user's password settings page.
-     */
     public function edit(): Response
     {
-        return vue('settings/Password', metaProps: new PageMeta(title: 'Password settings'));
+        return vue('account/Security', metaProps: new PageMeta(title: 'Security'));
     }
 
-    /**
-     * Update the user's password.
-     */
-    public function update(Request $request): RedirectResponse
+    public function updatePassword(Request $request): RedirectResponse
     {
         /** @var array{current_password: string, password: string} $validated */
         $validated = $request->validate([
@@ -36,6 +30,8 @@ final class PasswordController extends Controller
         authUser()->update([
             'password' => Hash::make($validated['password']),
         ]);
+
+        toastSuccess('Password updated successfully.');
 
         return back();
     }

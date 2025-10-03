@@ -11,7 +11,7 @@ test('password update page can be renderd', function () {
     $user = User::factory()->create();
     $this->actingAs($user);
 
-    $response = $this->get('/settings/password');
+    $response = $this->get('/account/security');
 
     $response->assertStatus(200);
 });
@@ -21,8 +21,8 @@ test('password can be updated', function () {
 
     $response = $this
         ->actingAs($user)
-        ->from('/settings/password')
-        ->put('/settings/password', [
+        ->from('/account/security')
+        ->put('/account/security/password', [
             'current_password' => 'password',
             'password' => 'new-password',
             'password_confirmation' => 'new-password',
@@ -30,7 +30,7 @@ test('password can be updated', function () {
 
     $response
         ->assertSessionHasNoErrors()
-        ->assertRedirect('/settings/password');
+        ->assertRedirect('/account/security');
 
     expect(Hash::check('new-password', $user->refresh()->password))->toBeTrue();
 });
@@ -40,8 +40,8 @@ test('correct password must be provided to update password', function () {
 
     $response = $this
         ->actingAs($user)
-        ->from('/settings/password')
-        ->put('/settings/password', [
+        ->from('/account/security')
+        ->put('/account/security/password', [
             'current_password' => 'wrong-password',
             'password' => 'new-password',
             'password_confirmation' => 'new-password',
@@ -49,5 +49,5 @@ test('correct password must be provided to update password', function () {
 
     $response
         ->assertSessionHasErrors('current_password')
-        ->assertRedirect('/settings/password');
+        ->assertRedirect('/account/security');
 });

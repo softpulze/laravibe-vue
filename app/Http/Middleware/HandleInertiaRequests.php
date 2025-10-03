@@ -48,12 +48,9 @@ final class HandleInertiaRequests extends Middleware
             'name' => config('app.name'),
             'quote' => ['message' => mb_trim((string) $message), 'author' => mb_trim((string) $author)],
             'auth' => [
-                'user' => $request->user()?->toResource(),
+                ...($request->user() ? ['user' => $request->user()->toResource()] : []),
             ],
-            'ziggy' => [
-                ...(new Ziggy())->toArray(),
-                'location' => $request->url(),
-            ],
+            'ziggy' => [...(new Ziggy())->toArray(), 'location' => $request->url()],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'toasts' => alwaysProp(fn (): array => toast()->pull()),
         ];

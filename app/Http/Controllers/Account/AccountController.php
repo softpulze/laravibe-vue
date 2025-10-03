@@ -2,30 +2,27 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Settings;
+namespace App\Http\Controllers\Account;
 
 use App\DTOs\PageMeta;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Settings\ProfileUpdateRequest;
+use App\Http\Requests\Account\ProfileUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Response;
 
-final class ProfileController extends Controller
+final class AccountController extends Controller
 {
-    /**
-     * Show the user's profile settings page.
-     */
     public function edit(Request $request): Response
     {
-        return vue('settings/Profile', [
+        return vue('account/General', [
             // @phpstan-ignore-next-line instanceof.alwaysTrue
             'mustVerifyEmail' => authUser() instanceof MustVerifyEmail,
             'status' => $request->session()->get('status'),
         ], new PageMeta(
-            title: 'Profile settings',
+            title: 'Account',
         ));
     }
 
@@ -43,7 +40,9 @@ final class ProfileController extends Controller
 
         $authUser->save();
 
-        return to_route('profile.edit');
+        toastSuccess('Profile updated successfully.');
+
+        return to_route('account');
     }
 
     /**
@@ -63,6 +62,8 @@ final class ProfileController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        toastSuccess('Account deleted successfully.');
 
         return redirect('/');
     }
