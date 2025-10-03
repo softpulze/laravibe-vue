@@ -26,7 +26,7 @@ withDefaults(defineProps<Props>(), {
     breadcrumbs: () => [],
 });
 
-const { isAuthenticated, authUser } = useAuth();
+const { authUser } = useAuth();
 
 const effectiveItem = computedWithControl(
     () => usePage().url,
@@ -90,7 +90,7 @@ const secondaryNavItems: NavItem[] = [];
                                         <span>{{ item.title }}</span>
                                     </a>
 
-                                    <div class="grid grid-cols-2 gap-2 lg:hidden" v-if="!isAuthenticated">
+                                    <div class="grid grid-cols-2 gap-2 lg:hidden" v-if="!authUser">
                                         <Button variant="outline" size="sm" class="h-9" asChild>
                                             <Link :href="route('login')"> Log In </Link>
                                         </Button>
@@ -155,7 +155,7 @@ const secondaryNavItems: NavItem[] = [];
                         </div>
                     </div>
 
-                    <DropdownMenu v-if="isAuthenticated">
+                    <DropdownMenu v-if="authUser">
                         <DropdownMenuTrigger :as-child="true">
                             <Button
                                 variant="ghost"

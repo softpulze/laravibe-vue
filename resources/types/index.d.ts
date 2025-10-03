@@ -12,7 +12,7 @@ export type VoidCallable<U extends any[] = []> = Callable<void, U>;
 
 // Application Specific Types
 export interface Auth {
-    user: Nullable<User>;
+    user?: User;
 }
 
 export interface BreadcrumbItem {
