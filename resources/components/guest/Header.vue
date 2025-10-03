@@ -4,9 +4,14 @@ import Logo from '@/components/Logo.vue';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { NavigationMenu, NavigationMenuItem, NavigationMenuList, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
+import {
+    NavigationMenu,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    navigationMenuTriggerStyle,
+} from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import UserMenuContent from '@/components/UserMenuContent.vue';
 import { useAuth } from '@/composables/useAuth';
 import { getInitials } from '@/composables/useInitials';
@@ -14,9 +19,9 @@ import { isCallable } from '@/lib/helpers';
 import { cn } from '@/lib/utils';
 import type { NavItem } from '@/types';
 import type { Breadcrumb } from '@/types/data';
-import { Link, usePage } from '@inertiajs/vue3';
-import { computedWithControl } from '@vueuse/core';
-import { ExternalLinkIcon, Menu } from 'lucide-vue-next';
+import { Link } from '@inertiajs/vue3';
+import { Menu } from 'lucide-vue-next';
+import { ref } from 'vue';
 
 interface Props {
     breadcrumbs?: Breadcrumb[];
@@ -28,23 +33,17 @@ withDefaults(defineProps<Props>(), {
 
 const { authUser } = useAuth();
 
-const effectiveItem = computedWithControl(
-    () => usePage().url,
-    () => (item: NavItem) => {
-        const active = isCallable(item.isActive) ? item.isActive() : item.isActive;
-        return { active, activeClasses: active ? 'text-accent-foreground bg-accent' : '' };
-    },
-);
-
-const mainNavItems: NavItem[] = [
+const navigationItems = ref<NavItem[]>([
     {
         title: 'Home',
         href: route('home'),
         isActive: () => route().current('home'),
     },
-];
+]);
 
-const secondaryNavItems: NavItem[] = [];
+const isItemActive = (item: NavItem): boolean => {
+    return isCallable(item.isActive) ? item.isActive() : !!item.isActive;
+};
 </script>
 
 <template>
@@ -67,13 +66,13 @@ const secondaryNavItems: NavItem[] = [];
                             <div class="flex h-full flex-1 flex-col justify-between space-y-4 py-6">
                                 <nav class="-mx-3 space-y-1">
                                     <Link
-                                        v-for="item in mainNavItems"
+                                        v-for="item in navigationItems"
                                         :key="item.title"
                                         :href="item.href"
                                         class="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
-                                        :class="effectiveItem(item).activeClasses"
+                                        :class="isItemActive(item) ? 'bg-accent text-accent-foreground' : ''"
                                     >
-                                        <component :is="item.icon" class="h-5 w-5" />
+                                        <component v-if="item.icon" :is="item.icon" class="h-5 w-5" />
                                         {{ item.title }}
                                     </Link>
                                 </nav>
@@ -104,31 +103,33 @@ const secondaryNavItems: NavItem[] = [];
                     </Sheet>
                 </div>
 
+                <!-- Logo -->
                 <Link :href="route('home')" class="flex items-center gap-x-2">
                     <Logo className="h-7" />
                 </Link>
 
-                <!-- Desktop Menu -->
+                <!-- Desktop Navigation Menu -->
                 <div class="hidden h-full lg:flex lg:flex-1">
-                    <NavigationMenu class="ml-10 flex h-full items-stretch">
-                        <NavigationMenuList class="flex h-full items-stretch space-x-2">
-                            <NavigationMenuItem v-for="(item, index) in mainNavItems" :key="index" class="relative flex h-full items-center">
-                                <Link
-                                    :class="cn(navigationMenuTriggerStyle(), effectiveItem(item).activeClasses, 'h-9 cursor-pointer px-3')"
-                                    :href="item.href"
+                    <NavigationMenu class="ml-10">
+                        <NavigationMenuList>
+                            <NavigationMenuItem v-for="item in navigationItems" :key="item.title">
+                                <NavigationMenuLink
+                                    :class="
+                                        cn(navigationMenuTriggerStyle(), 'h-9 px-3', isItemActive(item) ? 'bg-accent text-accent-foreground' : '')
+                                    "
+                                    as-child
                                 >
-                                    <component v-if="item.icon" :is="item.icon" class="mr-2 h-4 w-4" />
-                                    {{ item.title }}
-                                </Link>
-                                <div
-                                    v-if="effectiveItem(item).active"
-                                    class="absolute bottom-0 left-1/2 h-0.5 w-[95%] -translate-x-1/2 translate-y-px rounded-full bg-black dark:bg-white"
-                                />
+                                    <Link :href="item.href">
+                                        <component v-if="item.icon" :is="item.icon" class="mr-2 h-4 w-4" />
+                                        {{ item.title }}
+                                    </Link>
+                                </NavigationMenuLink>
                             </NavigationMenuItem>
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
 
+                <!-- Right Side Actions -->
                 <div class="ml-auto flex items-center space-x-2">
                     <div class="relative flex items-center space-x-1">
                         <div class="hidden space-x-1 lg:flex">
@@ -174,6 +175,8 @@ const secondaryNavItems: NavItem[] = [];
                             <UserMenuContent :user="authUser" />
                         </DropdownMenuContent>
                     </DropdownMenu>
+
+                    <!-- Auth Buttons -->
                     <template v-else>
                         <div class="hidden grid-cols-2 gap-2 lg:inline-grid">
                             <Button size="sm" class="h-9" asChild>
@@ -188,6 +191,7 @@ const secondaryNavItems: NavItem[] = [];
             </div>
         </div>
 
+        <!-- Breadcrumbs -->
         <div v-if="breadcrumbs.length > 1" class="flex w-full border-b border-sidebar-border/70">
             <div class="mx-auto flex h-12 w-full items-center justify-start px-4 text-neutral-500 md:max-w-7xl">
                 <Breadcrumbs :breadcrumbs="breadcrumbs" />

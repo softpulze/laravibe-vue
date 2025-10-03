@@ -1,27 +1,34 @@
 <script setup lang="ts">
-import { cn } from '@/lib/utils'
-import { useEventListener, useMediaQuery, useVModel } from '@vueuse/core'
-import { TooltipProvider } from 'reka-ui'
-import { computed, type HTMLAttributes, type Ref, ref } from 'vue'
-import { provideSidebarContext, SIDEBAR_COOKIE_MAX_AGE, SIDEBAR_COOKIE_NAME, SIDEBAR_KEYBOARD_SHORTCUT, SIDEBAR_WIDTH, SIDEBAR_WIDTH_ICON } from './utils'
+import type { HTMLAttributes, Ref } from "vue"
+import { defaultDocument, useEventListener, useMediaQuery, useVModel } from "@vueuse/core"
+import { TooltipProvider } from "reka-ui"
+import { computed, ref } from "vue"
+import { cn } from "@/lib/utils"
+import { provideSidebarContext, SIDEBAR_COOKIE_MAX_AGE, SIDEBAR_COOKIE_NAME, SIDEBAR_KEYBOARD_SHORTCUT, SIDEBAR_WIDTH, SIDEBAR_WIDTH_ICON } from "./utils"
 
 const props = withDefaults(defineProps<{
   defaultOpen?: boolean
   open?: boolean
-  class?: HTMLAttributes['class']
+  class?: HTMLAttributes["class"]
 }>(), {
-  defaultOpen: true,
+  defaultOpen: !defaultDocument?.cookie.includes(`${SIDEBAR_COOKIE_NAME}=false`),
   open: undefined,
 })
 
 const emits = defineEmits<{
-  'update:open': [open: boolean]
+  "update:open": [open: boolean]
 }>()
 
-const isMobile = useMediaQuery('(max-width: 768px)')
+const isMobile = useMediaQuery("(max-width: 768px)")
 const openMobile = ref(false)
 
-const open = useVModel(props, 'open', emits, {
+// HoverToExpandWhenCollapsed: States
+const hovering = ref(false);
+const expandedByHovering = ref(false);
+const retainsStateOnHoveringOut = ref(false);
+// HoverToExpandWhenCollapsed: States
+
+const open = useVModel(props, "open", emits, {
   defaultValue: props.defaultOpen ?? false,
   passive: (props.open === undefined) as false,
 }) as Ref<boolean>
@@ -39,10 +46,16 @@ function setOpenMobile(value: boolean) {
 
 // Helper to toggle the sidebar.
 function toggleSidebar() {
+  // HoverToExpandWhenCollapsed: OnToggle
+  if (expandedByHovering.value) {
+    retainsStateOnHoveringOut.value = true;
+    return;
+  }
+  // HoverToExpandWhenCollapsed: OnToggle
   return isMobile.value ? setOpenMobile(!openMobile.value) : setOpen(!open.value)
 }
 
-useEventListener('keydown', (event: KeyboardEvent) => {
+useEventListener("keydown", (event: KeyboardEvent) => {
   if (event.key === SIDEBAR_KEYBOARD_SHORTCUT && (event.metaKey || event.ctrlKey)) {
     event.preventDefault()
     toggleSidebar()
@@ -51,7 +64,7 @@ useEventListener('keydown', (event: KeyboardEvent) => {
 
 // We add a state so that we can do data-state="expanded" or "collapsed".
 // This makes it easier to style the sidebar with Tailwind classes.
-const state = computed(() => open.value ? 'expanded' : 'collapsed')
+const state = computed(() => open.value ? "expanded" : "collapsed")
 
 provideSidebarContext({
   state,
@@ -61,6 +74,12 @@ provideSidebarContext({
   openMobile,
   setOpenMobile,
   toggleSidebar,
+
+  // HoverToExpandWhenCollapsed: Sidebar Context
+  hovering,
+  expandedByHovering,
+  retainsStateOnHoveringOut,
+  // HoverToExpandWhenCollapsed: Sidebar Context
 })
 </script>
 
