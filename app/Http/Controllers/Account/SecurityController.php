@@ -19,7 +19,7 @@ final class SecurityController extends Controller
         return vue('account/Security', metaProps: new PageMeta(title: 'Security'));
     }
 
-    public function updatePssword(Request $request): RedirectResponse
+    public function updatePassword(Request $request): RedirectResponse
     {
         /** @var array{current_password: string, password: string} $validated */
         $validated = $request->validate([
@@ -30,6 +30,8 @@ final class SecurityController extends Controller
         authUser()->update([
             'password' => Hash::make($validated['password']),
         ]);
+
+        toastSuccess('Password updated successfully.');
 
         return back();
     }

@@ -21,6 +21,8 @@ final class EmailVerificationNotificationController extends Controller
 
         authUser()->sendEmailVerificationNotification();
 
-        return back()->with('status', 'verification-link-sent');
+        toastSuccess('A new verification link has been sent to your email address.');
+
+        return back();
     }
 }

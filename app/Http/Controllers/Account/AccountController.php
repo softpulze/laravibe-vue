@@ -63,6 +63,8 @@ final class AccountController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
+        toastSuccess('Account deleted successfully.');
+
         return redirect('/');
     }
 }

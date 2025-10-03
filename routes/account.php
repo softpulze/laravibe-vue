@@ -14,7 +14,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/account', [AccountController::class, 'destroy'])->name('account.destroy');
 
     Route::get('/account/security', [SecurityController::class, 'edit'])->name('account.security');
-    Route::put('/account/security/password', [SecurityController::class, 'updatePssword'])
+    Route::put('/account/security/password', [SecurityController::class, 'updatePassword'])
         ->middleware('throttle:6,1')
         ->name('account.security.password');
 
