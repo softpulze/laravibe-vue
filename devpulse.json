@@ -108,6 +108,11 @@
             "name": "update",
             "description": "Update dependencies",
             "command": "devpulse run update:composer,update:npm"
+        },
+        {
+            "name": "logs:delete",
+            "command": "find storage/logs -name \"*.log\" -delete",
+            "description": "Clear all log files"
         }
     ]
 }
