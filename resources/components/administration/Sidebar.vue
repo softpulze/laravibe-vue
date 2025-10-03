@@ -9,6 +9,7 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarRail,
     useSidebar,
 } from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
@@ -65,6 +66,8 @@ const { open } = useSidebar();
             <NavFooter :items="footerNavItems" />
             <NavUser />
         </SidebarFooter>
+
+        <SidebarRail />
     </Sidebar>
     <slot />
 </template>
