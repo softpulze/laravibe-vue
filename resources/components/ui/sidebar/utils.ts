@@ -16,4 +16,10 @@ export const [useSidebar, provideSidebarContext] = createContext<{
   openMobile: Ref<boolean>
   setOpenMobile: (value: boolean) => void
   toggleSidebar: () => void
+
+  // HoverToExpandWhenCollapsed: Sidebar Context Type
+  hovering: Ref<boolean>
+  expandedByHovering: Ref<boolean>
+  retainsStateOnHoveringOut: Ref<boolean>
+  // HoverToExpandWhenCollapsed: Sidebar Context Type
 }>("Sidebar")

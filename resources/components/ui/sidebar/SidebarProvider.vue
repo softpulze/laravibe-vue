@@ -22,6 +22,12 @@ const emits = defineEmits<{
 const isMobile = useMediaQuery("(max-width: 768px)")
 const openMobile = ref(false)
 
+// HoverToExpandWhenCollapsed: States
+const hovering = ref(false);
+const expandedByHovering = ref(false);
+const retainsStateOnHoveringOut = ref(false);
+// HoverToExpandWhenCollapsed: States
+
 const open = useVModel(props, "open", emits, {
   defaultValue: props.defaultOpen ?? false,
   passive: (props.open === undefined) as false,
@@ -40,6 +46,12 @@ function setOpenMobile(value: boolean) {
 
 // Helper to toggle the sidebar.
 function toggleSidebar() {
+  // HoverToExpandWhenCollapsed: OnToggle
+  if (expandedByHovering.value) {
+    retainsStateOnHoveringOut.value = true;
+    return;
+  }
+  // HoverToExpandWhenCollapsed: OnToggle
   return isMobile.value ? setOpenMobile(!openMobile.value) : setOpen(!open.value)
 }
 
@@ -62,6 +74,12 @@ provideSidebarContext({
   openMobile,
   setOpenMobile,
   toggleSidebar,
+
+  // HoverToExpandWhenCollapsed: Sidebar Context
+  hovering,
+  expandedByHovering,
+  retainsStateOnHoveringOut,
+  // HoverToExpandWhenCollapsed: Sidebar Context
 })
 </script>
 

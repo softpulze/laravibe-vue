@@ -6,6 +6,7 @@ import SheetDescription from '@/components/ui/sheet/SheetDescription.vue'
 import SheetHeader from '@/components/ui/sheet/SheetHeader.vue'
 import SheetTitle from '@/components/ui/sheet/SheetTitle.vue'
 import { SIDEBAR_WIDTH_MOBILE, useSidebar } from "./utils"
+import { computed } from "vue"
 
 defineOptions({
   inheritAttrs: false,
@@ -17,7 +18,34 @@ const props = withDefaults(defineProps<SidebarProps>(), {
   collapsible: "offcanvas",
 })
 
-const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+const { isMobile, state, openMobile, setOpenMobile,
+  // HoverToExpandWhenCollapsed: Extract States
+  setOpen, hovering, expandedByHovering, retainsStateOnHoveringOut
+  // HoverToExpandWhenCollapsed: Extract States
+ } = useSidebar()
+
+ // HoverToExpandWhenCollapsed: Business and effectiveState
+const effectiveState = computed(() => {
+	if (props.collapsible !== 'icon') return state.value;
+
+	const isCollapsed = state.value === 'collapsed';
+	const isExpanded = state.value === 'expanded';
+
+	if (hovering.value && isCollapsed) {
+		expandedByHovering.value = true;
+		setOpen(true);
+	} else if (!hovering.value && isExpanded && expandedByHovering.value) {
+		expandedByHovering.value = false;
+		if (retainsStateOnHoveringOut.value) {
+		  retainsStateOnHoveringOut.value = false;
+		} else {
+		  setOpen(false);
+		}
+	}
+
+	return state.value;
+});
+// HoverToExpandWhenCollapsed: Business and effectiveState
 </script>
 
 <template>
@@ -55,10 +83,12 @@ const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
     v-else
     class="group peer text-sidebar-foreground hidden md:block"
     data-slot="sidebar"
-    :data-state="state"
-    :data-collapsible="state === 'collapsed' ? collapsible : ''"
+    :data-state="effectiveState"
+    :data-collapsible="effectiveState === 'collapsed' ? collapsible : ''"
     :data-variant="variant"
     :data-side="side"
+    @mouseenter="hovering = true"
+    @mouseleave="hovering = false"
   >
     <!-- This is what handles the sidebar gap on desktop  -->
     <div
