@@ -3,7 +3,7 @@ import UserInfo from '@/components/UserInfo.vue';
 import { DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import type { User } from '@/types/models';
 import { Link, router } from '@inertiajs/vue3';
-import { LayoutGrid, LogOut, User as UserIcon } from 'lucide-vue-next';
+import { CircleGauge, LogOut, User as UserIcon } from 'lucide-vue-next';
 
 interface Props {
     user: User;
@@ -26,7 +26,7 @@ defineProps<Props>();
     <DropdownMenuGroup>
         <DropdownMenuItem as-child>
             <Link v-if="!route().current('administration*')" class="block w-full" :href="route('administration.dashboard')" prefetch as="button">
-                <LayoutGrid class="mr-2 h-4 w-4" />
+                <CircleGauge class="mr-2 h-4 w-4" />
                 Administration
             </Link>
         </DropdownMenuItem>

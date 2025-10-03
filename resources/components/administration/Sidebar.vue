@@ -14,7 +14,7 @@ import {
 import { cn } from '@/lib/utils';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { FolderGit, LayoutGrid } from 'lucide-vue-next';
+import { CircleGauge, FolderGit } from 'lucide-vue-next';
 import NavFooter from './NavFooter.vue';
 import NavMain from './NavMain.vue';
 import NavUser from './NavUser.vue';
@@ -23,7 +23,7 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: '/administration/dashboard',
-        icon: LayoutGrid,
+        icon: CircleGauge,
     },
 ];
 
