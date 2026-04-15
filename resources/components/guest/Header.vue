@@ -15,13 +15,14 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import UserMenuContent from '@/components/UserMenuContent.vue';
 import { useAuth } from '@/composables/useAuth';
 import { getInitials } from '@/composables/useInitials';
+import { home, login, register } from '@/js/routes';
 import { isCallable } from '@/lib/helpers';
 import { cn } from '@/lib/utils';
 import type { NavItem } from '@/types';
 import type { Breadcrumb } from '@/types/data';
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 import { Menu } from 'lucide-vue-next';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 interface Props {
     breadcrumbs?: Breadcrumb[];
@@ -32,12 +33,14 @@ withDefaults(defineProps<Props>(), {
 });
 
 const { authUser } = useAuth();
+const page = usePage();
+const currentPath = computed(() => new URL(page.url, 'http://localhost').pathname);
 
 const navigationItems = ref<NavItem[]>([
     {
         title: 'Home',
-        href: route('home'),
-        isActive: () => route().current('home'),
+        href: home.url(),
+        isActive: () => currentPath.value === home.url(),
     },
 ]);
 
@@ -48,7 +51,7 @@ const isItemActive = (item: NavItem): boolean => {
 
 <template>
     <div class="z-50">
-        <div class="border-sidebar-border/80 border-b">
+        <div class="border-b border-sidebar-border/80">
             <div class="mx-auto flex h-16 items-center px-4 md:max-w-7xl">
                 <!-- Mobile Menu -->
                 <div class="lg:hidden">
@@ -58,7 +61,7 @@ const isItemActive = (item: NavItem): boolean => {
                                 <Menu class="h-5 w-5" />
                             </Button>
                         </SheetTrigger>
-                        <SheetContent side="left" class="w-[300px] p-6">
+                        <SheetContent side="left" class="w-75 p-6">
                             <SheetTitle class="sr-only">Navigation Menu</SheetTitle>
                             <SheetHeader class="flex justify-start text-left">
                                 <Logo class="h-6" />
@@ -69,7 +72,7 @@ const isItemActive = (item: NavItem): boolean => {
                                         v-for="item in navigationItems"
                                         :key="item.title"
                                         :href="item.href"
-                                        class="hover:bg-accent flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium"
+                                        class="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
                                         :class="isItemActive(item) ? 'bg-accent text-accent-foreground' : ''"
                                     >
                                         <component v-if="item.icon" :is="item.icon" class="h-5 w-5" />
@@ -79,10 +82,10 @@ const isItemActive = (item: NavItem): boolean => {
                                 <div class="flex flex-col space-y-4">
                                     <div class="grid grid-cols-2 gap-2 lg:hidden" v-if="!authUser">
                                         <Button variant="outline" size="sm" class="h-9" asChild>
-                                            <Link :href="route('login')"> Log In </Link>
+                                            <Link :href="login.url()"> Log In </Link>
                                         </Button>
                                         <Button size="sm" class="h-9" asChild>
-                                            <Link :href="route('register')"> Sign Up </Link>
+                                            <Link :href="register.url()"> Sign Up </Link>
                                         </Button>
                                     </div>
                                 </div>
@@ -92,7 +95,7 @@ const isItemActive = (item: NavItem): boolean => {
                 </div>
 
                 <!-- Logo -->
-                <Link :href="route('home')" class="flex items-center gap-x-2">
+                <Link :href="home.url()" class="flex items-center gap-x-2">
                     <Logo className="h-7" />
                 </Link>
 
@@ -125,7 +128,7 @@ const isItemActive = (item: NavItem): boolean => {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                class="focus-within:ring-primary relative size-10 w-auto rounded-full p-1 focus-within:ring-2"
+                                class="relative size-10 w-auto rounded-full p-1 focus-within:ring-2 focus-within:ring-primary"
                             >
                                 <Avatar class="size-8 overflow-hidden rounded-full">
                                     <AvatarImage v-if="authUser.avatar" :src="authUser.avatar" :alt="authUser.name" />
@@ -144,10 +147,10 @@ const isItemActive = (item: NavItem): boolean => {
                     <template v-else>
                         <div class="hidden grid-cols-2 gap-2 lg:inline-grid">
                             <Button size="sm" class="h-9" asChild>
-                                <Link :href="route('login')"> Log In </Link>
+                                <Link :href="login.url()"> Log In </Link>
                             </Button>
                             <Button variant="outline" size="sm" class="h-9" asChild>
-                                <Link :href="route('register')"> Sign Up </Link>
+                                <Link :href="register.url()"> Sign Up </Link>
                             </Button>
                         </div>
                     </template>
@@ -156,7 +159,7 @@ const isItemActive = (item: NavItem): boolean => {
         </div>
 
         <!-- Breadcrumbs -->
-        <div v-if="breadcrumbs.length > 1" class="border-sidebar-border/70 flex w-full border-b">
+        <div v-if="breadcrumbs.length > 1" class="flex w-full border-b border-sidebar-border/70">
             <div class="mx-auto flex h-12 w-full items-center justify-start px-4 text-neutral-500 md:max-w-7xl">
                 <Breadcrumbs :breadcrumbs="breadcrumbs" />
             </div>

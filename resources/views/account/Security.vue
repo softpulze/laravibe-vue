@@ -10,6 +10,7 @@ import CardFooter from '@/components/ui/card/CardFooter.vue';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/composables/useAuth';
+import { password } from '@/js/routes/account/security';
 import { Info, LockKeyhole } from 'lucide-vue-next';
 
 const passwordInput = ref<HTMLInputElement | null>(null);
@@ -22,7 +23,7 @@ const { authUser } = useAuth();
     <SettingsLayout>
         <Form
             method="put"
-            :action="route('account.security.password')"
+            :action="password.url()"
             :options="{
                 preserveScroll: true,
             }"
@@ -87,7 +88,7 @@ const { authUser } = useAuth();
 
                     <div class="rounded-md bg-blue-50 p-3 dark:bg-blue-950/50">
                         <div class="flex">
-                            <div class="flex-shrink-0">
+                            <div class="shrink-0">
                                 <Info class="size-4 text-blue-500" />
                             </div>
                             <div class="ml-3">

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Logo from '@/components/Logo.vue';
+import { home } from '@/js/routes';
 import { Link } from '@inertiajs/vue3';
 
 defineProps<{
@@ -13,7 +14,7 @@ defineProps<{
         <div class="w-full max-w-sm">
             <div class="flex flex-col gap-8">
                 <div class="flex flex-col items-center gap-4">
-                    <Link :href="route('home')" class="flex flex-col items-center gap-2 font-medium">
+                    <Link :href="home.url()" class="flex flex-col items-center gap-2 font-medium">
                         <div class="mb-1 flex h-10 items-center justify-center rounded-md">
                             <Logo class="h-full" />
                         </div>

@@ -8,6 +8,8 @@ import CardFooter from '@/components/ui/card/CardFooter.vue';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/composables/useAuth';
+import account from '@/js/routes/account';
+import { send } from '@/js/routes/verification';
 import SettingsLayout from '@/layouts/AccountLayout.vue';
 import { Info, TriangleAlert, User } from 'lucide-vue-next';
 import DeleteUser from './partial/DeleteUser.vue';
@@ -24,7 +26,7 @@ const { authUser } = useAuth();
 <template>
     <SettingsLayout>
         <div class="space-y-6">
-            <Form method="patch" :action="route('account.update')" class="space-y-4" v-slot="{ errors, processing }">
+            <Form method="patch" :action="account.update.url()" class="space-y-4" v-slot="{ errors, processing }">
                 <Card>
                     <CardHeader class="pb-4">
                         <CardTitle class="flex items-center gap-2 text-lg font-medium">
@@ -71,7 +73,7 @@ const { authUser } = useAuth();
                             class="rounded-md border border-amber-200 bg-amber-50 p-3 dark:border-amber-800 dark:bg-amber-950/50"
                         >
                             <div class="flex">
-                                <div class="flex-shrink-0">
+                                <div class="shrink-0">
                                     <TriangleAlert class="size-4 text-amber-500" />
                                 </div>
                                 <div class="ml-3">
@@ -80,7 +82,7 @@ const { authUser } = useAuth();
                                         <p>
                                             Your email address is unverified.
                                             <Link
-                                                :href="route('verification.send')"
+                                                :href="send.url()"
                                                 method="post"
                                                 as="button"
                                                 class="font-medium underline decoration-amber-400 underline-offset-4 transition-colors duration-200 hover:decoration-amber-600 dark:decoration-amber-300 dark:hover:decoration-amber-100"
@@ -96,7 +98,7 @@ const { authUser } = useAuth();
                         <!-- Profile Tips -->
                         <div class="rounded-md bg-blue-50 p-3 dark:bg-blue-950/50">
                             <div class="flex">
-                                <div class="flex-shrink-0">
+                                <div class="shrink-0">
                                     <Info class="size-4 text-blue-500" />
                                 </div>
                                 <div class="ml-3">

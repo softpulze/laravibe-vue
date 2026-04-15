@@ -12,6 +12,7 @@ import {
     SidebarRail,
     useSidebar,
 } from '@/components/ui/sidebar';
+import { dashboard as administrationDashboard } from '@/js/routes/administration';
 import { cn } from '@/lib/utils';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
@@ -23,7 +24,7 @@ import NavUser from './NavUser.vue';
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: '/administration/dashboard',
+        href: administrationDashboard.url(),
         icon: CircleGauge,
     },
 ];
@@ -49,7 +50,7 @@ const { open } = useSidebar();
                         as-child
                         :class="cn('items-center justify-center [&>svg]:w-auto', open ? '[&>svg]:h-7' : '[&>svg]:h-5')"
                     >
-                        <Link :href="route('administration.dashboard')">
+                        <Link :href="administrationDashboard.url()">
                             <Logo v-if="open" />
                             <LogoIcon v-else />
                         </Link>

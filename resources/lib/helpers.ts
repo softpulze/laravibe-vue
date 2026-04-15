@@ -5,7 +5,7 @@ import type { Callable, VoidCallable } from '@/types';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import type { DefineComponent } from 'vue';
 
-const resolveLayout = (name: string) => {
+export const resolveLayout = (name: string) => {
     if (name.startsWith('administration')) return AdministrationLayout;
     if (name.startsWith('auth')) return AuthLayout;
     return GuestLayout;
@@ -13,7 +13,10 @@ const resolveLayout = (name: string) => {
 
 export const resolveView = (name: string) => {
     const pageComponent = resolvePageComponent(`../views/${name}.vue`, import.meta.glob<DefineComponent>('../views/**/*.vue'));
-    pageComponent.then((pc) => (pc.default.layout = pc.default.layout || resolveLayout(name)));
+    pageComponent.then((component) => {
+        component.default.layout = component.default.layout || resolveLayout(name);
+    });
+
     return pageComponent;
 };
 

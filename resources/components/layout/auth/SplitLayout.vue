@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Logo from '@/components/Logo.vue';
+import { home } from '@/js/routes';
 import { Link, usePage } from '@inertiajs/vue3';
 
 const page = usePage();
@@ -15,7 +16,7 @@ defineProps<{
     <div class="relative grid h-dvh flex-col items-center justify-center px-8 sm:px-0 lg:max-w-none lg:grid-cols-2 lg:px-0">
         <div class="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
             <div class="absolute inset-0 bg-zinc-900" />
-            <Link :href="route('home')" class="relative z-20 flex items-center text-lg font-medium">
+            <Link :href="home.url()" class="relative z-20 flex items-center text-lg font-medium">
                 <Logo class="mr-2 h-8" />
             </Link>
             <div v-if="quote" class="relative z-20 mt-auto">
@@ -26,7 +27,7 @@ defineProps<{
             </div>
         </div>
         <div class="lg:p-8">
-            <div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+            <div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-87.5">
                 <div v-if="heading || subheading" class="flex flex-col space-y-2 text-center">
                     <h1 class="text-xl font-medium tracking-tight" v-if="heading">{{ heading }}</h1>
                     <p class="text-sm text-muted-foreground" v-if="subheading">{{ subheading }}</p>

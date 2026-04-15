@@ -4,6 +4,8 @@ import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { login } from '@/js/routes';
+import { email } from '@/js/routes/password';
 import { Form } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
 
@@ -18,7 +20,7 @@ defineProps<{
     </div>
 
     <div class="space-y-6">
-        <Form method="post" :action="route('password.email')" v-slot="{ errors, processing }">
+        <Form method="post" :action="email.url()" v-slot="{ errors, processing }">
             <div class="grid gap-2">
                 <Label for="email">Email address</Label>
                 <Input id="email" type="email" name="email" autocomplete="off" autofocus placeholder="email@example.com" />
@@ -35,7 +37,7 @@ defineProps<{
 
         <div class="space-x-1 text-center text-sm text-muted-foreground">
             <span>Or, return to</span>
-            <TextLink :href="route('login')">log in</TextLink>
+            <TextLink :href="login.url()">log in</TextLink>
         </div>
     </div>
 </template>

@@ -4,15 +4,20 @@ import { Button } from '@/components/ui/button';
 import Card from '@/components/ui/card/Card.vue';
 import CardContent from '@/components/ui/card/CardContent.vue';
 import { Separator } from '@/components/ui/separator';
+import { account as accountRoute } from '@/js/routes';
+import account from '@/js/routes/account';
 import { isCallable } from '@/lib/helpers';
 import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
+import { computed, ref } from 'vue';
+
+const page = usePage();
+const currentPath = computed(() => new URL(page.url, 'http://localhost').pathname);
 
 const sidebarNavItems = ref<NavItem[]>([
-    { title: 'General', href: route('account'), isActive: () => route().current('account') },
-    { title: 'Security', href: route('account.security'), isActive: () => route().current('account.security') },
-    { title: 'Appearance', href: route('account.appearance'), isActive: () => route().current('account.appearance') },
+    { title: 'General', href: accountRoute.url(), isActive: () => currentPath.value === accountRoute.url() },
+    { title: 'Security', href: account.security.url(), isActive: () => currentPath.value === account.security.url() },
+    { title: 'Appearance', href: account.appearance.url(), isActive: () => currentPath.value === account.appearance.url() },
 ]);
 </script>
 

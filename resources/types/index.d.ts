@@ -1,7 +1,6 @@
 import type { ToastPayload } from '@/components/toast';
 import type { PageMeta } from '@/types/data';
 import type { LucideIcon } from 'lucide-vue-next';
-import type { Config } from 'ziggy-js';
 import type { User } from './models';
 
 // Utility Types
@@ -31,7 +30,6 @@ export type AppPageProps<T extends Record<string, unknown> = Record<string, unkn
     name: string;
     quote: { message: string; author: string };
     auth: Auth;
-    ziggy: Config & { location: string };
     sidebarOpen: boolean;
     meta?: PageMeta;
     toasts: ToastPayload[];

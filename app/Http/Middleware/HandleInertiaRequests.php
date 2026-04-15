@@ -7,7 +7,6 @@ namespace App\Http\Middleware;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
-use Tighten\Ziggy\Ziggy;
 
 final class HandleInertiaRequests extends Middleware
 {
@@ -50,7 +49,6 @@ final class HandleInertiaRequests extends Middleware
             'auth' => [
                 ...($request->user() ? ['user' => $request->user()->toResource()] : []),
             ],
-            'ziggy' => [...(new Ziggy())->toArray(), 'location' => $request->url()],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'toasts' => alwaysProp(fn (): array => toast()->pull()),
         ];
