@@ -48,7 +48,7 @@ const isItemActive = (item: NavItem): boolean => {
 
 <template>
     <div class="z-50">
-        <div class="border-b border-sidebar-border/80">
+        <div class="border-sidebar-border/80 border-b">
             <div class="mx-auto flex h-16 items-center px-4 md:max-w-7xl">
                 <!-- Mobile Menu -->
                 <div class="lg:hidden">
@@ -69,7 +69,7 @@ const isItemActive = (item: NavItem): boolean => {
                                         v-for="item in navigationItems"
                                         :key="item.title"
                                         :href="item.href"
-                                        class="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
+                                        class="hover:bg-accent flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium"
                                         :class="isItemActive(item) ? 'bg-accent text-accent-foreground' : ''"
                                     >
                                         <component v-if="item.icon" :is="item.icon" class="h-5 w-5" />
@@ -77,18 +77,6 @@ const isItemActive = (item: NavItem): boolean => {
                                     </Link>
                                 </nav>
                                 <div class="flex flex-col space-y-4">
-                                    <a
-                                        v-for="item in secondaryNavItems"
-                                        :key="item.title"
-                                        :href="item.href"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="flex items-center space-x-2 text-sm font-medium"
-                                    >
-                                        <component :is="item.icon || ExternalLinkIcon" class="h-5 w-5" />
-                                        <span>{{ item.title }}</span>
-                                    </a>
-
                                     <div class="grid grid-cols-2 gap-2 lg:hidden" v-if="!authUser">
                                         <Button variant="outline" size="sm" class="h-9" asChild>
                                             <Link :href="route('login')"> Log In </Link>
@@ -131,37 +119,13 @@ const isItemActive = (item: NavItem): boolean => {
 
                 <!-- Right Side Actions -->
                 <div class="ml-auto flex items-center space-x-2">
-                    <div class="relative flex items-center space-x-1">
-                        <div class="hidden space-x-1 lg:flex">
-                            <template v-for="item in secondaryNavItems" :key="item.title">
-                                <TooltipProvider :delay-duration="0">
-                                    <Tooltip>
-                                        <TooltipTrigger>
-                                            <Button variant="ghost" size="icon" as-child class="group h-9 w-9 cursor-pointer">
-                                                <a :href="item.href" target="_blank" rel="noopener noreferrer">
-                                                    <span class="sr-only">{{ item.title }}</span>
-                                                    <component
-                                                        :is="item.icon || ExternalLinkIcon"
-                                                        class="size-5 opacity-80 group-hover:opacity-100"
-                                                    />
-                                                </a>
-                                            </Button>
-                                        </TooltipTrigger>
-                                        <TooltipContent>
-                                            <p>{{ item.title }}</p>
-                                        </TooltipContent>
-                                    </Tooltip>
-                                </TooltipProvider>
-                            </template>
-                        </div>
-                    </div>
-
+                    <!-- User Menu -->
                     <DropdownMenu v-if="authUser">
                         <DropdownMenuTrigger :as-child="true">
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                class="relative size-10 w-auto rounded-full p-1 focus-within:ring-2 focus-within:ring-primary"
+                                class="focus-within:ring-primary relative size-10 w-auto rounded-full p-1 focus-within:ring-2"
                             >
                                 <Avatar class="size-8 overflow-hidden rounded-full">
                                     <AvatarImage v-if="authUser.avatar" :src="authUser.avatar" :alt="authUser.name" />
@@ -192,7 +156,7 @@ const isItemActive = (item: NavItem): boolean => {
         </div>
 
         <!-- Breadcrumbs -->
-        <div v-if="breadcrumbs.length > 1" class="flex w-full border-b border-sidebar-border/70">
+        <div v-if="breadcrumbs.length > 1" class="border-sidebar-border/70 flex w-full border-b">
             <div class="mx-auto flex h-12 w-full items-center justify-start px-4 text-neutral-500 md:max-w-7xl">
                 <Breadcrumbs :breadcrumbs="breadcrumbs" />
             </div>
