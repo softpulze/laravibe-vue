@@ -2,7 +2,9 @@
 import UserInfo from '@/components/UserInfo.vue';
 import { DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import type { User } from '@/types/models';
-import { Link, router } from '@inertiajs/vue3';
+import { account, logout } from '@/wayfinder/routes';
+import { dashboard as administrationDashboard } from '@/wayfinder/routes/administration';
+import { Link, router, usePage } from '@inertiajs/vue3';
 import { CircleGauge, LogOut, User as UserIcon } from 'lucide-vue-next';
 
 interface Props {
@@ -12,6 +14,8 @@ interface Props {
 const handleLogout = () => {
     router.flushAll();
 };
+
+const isInAdministration = () => usePage().url.startsWith('/administration');
 
 defineProps<Props>();
 </script>
@@ -25,13 +29,13 @@ defineProps<Props>();
     <DropdownMenuSeparator />
     <DropdownMenuGroup>
         <DropdownMenuItem as-child>
-            <Link v-if="!route().current('administration*')" class="block w-full" :href="route('administration.dashboard')" prefetch as="button">
+            <Link v-if="!isInAdministration()" class="block w-full" :href="administrationDashboard.url()" prefetch as="button">
                 <CircleGauge class="mr-2 h-4 w-4" />
                 Administration
             </Link>
         </DropdownMenuItem>
         <DropdownMenuItem as-child>
-            <Link class="block w-full" :href="route('account')" prefetch as="button">
+            <Link class="block w-full" :href="account.url()" prefetch as="button">
                 <UserIcon class="mr-2 h-4 w-4" />
                 Account
             </Link>
@@ -39,7 +43,7 @@ defineProps<Props>();
     </DropdownMenuGroup>
     <DropdownMenuSeparator />
     <DropdownMenuItem as-child>
-        <Link class="block w-full" method="post" :href="route('logout')" @click="handleLogout" as="button">
+        <Link class="block w-full" method="post" :href="logout.url()" @click="handleLogout" as="button">
             <LogOut class="mr-2 h-4 w-4" />
             Log out
         </Link>

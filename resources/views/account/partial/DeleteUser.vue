@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/composables/useAuth';
 import { Nullable } from '@/types';
+import account from '@/wayfinder/routes/account';
 import { Trash2, TriangleAlert } from 'lucide-vue-next';
 
 const confirmingUserDeletion = ref(false);
@@ -41,7 +42,7 @@ const { authUser } = useAuth();
             <!-- Warning Section -->
             <div class="rounded-md border border-amber-200 bg-amber-50/50 p-3 dark:border-amber-700/50 dark:bg-amber-950/20">
                 <div class="flex">
-                    <div class="flex-shrink-0">
+                    <div class="shrink-0">
                         <TriangleAlert class="size-4 text-amber-500" />
                     </div>
                     <div class="ml-3">
@@ -73,7 +74,7 @@ const { authUser } = useAuth();
 
                     <Form
                         method="delete"
-                        :action="route('account.destroy')"
+                        :action="account.destroy.url()"
                         :options="{ preserveScroll: true }"
                         @success="closeModal"
                         v-slot="{ errors, processing }"

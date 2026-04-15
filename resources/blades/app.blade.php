@@ -30,7 +30,7 @@
             }
         </style>
 
-        <title inertia>{{ config('app.name', 'LaraVibe-Vue') }}</title>
+        <title data-inertia>{{ config('app.name', 'LaraVibe-Vue') }}</title>
 
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -39,7 +39,6 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
-        @routes
         @vite(['resources/app.ts', "resources/views/{$page['component']}.vue"])
         @inertiaHead
     </head>

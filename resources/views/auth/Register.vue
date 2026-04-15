@@ -4,6 +4,7 @@ import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { login, register } from '@/wayfinder/routes';
 import { Form } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
 </script>
@@ -11,7 +12,7 @@ import { LoaderCircle } from 'lucide-vue-next';
 <template>
     <Form
         method="post"
-        :action="route('register')"
+        :action="register.url()"
         :reset-on-success="['password', 'password_confirmation']"
         v-slot="{ errors, processing }"
         class="flex flex-col gap-6"
@@ -57,7 +58,7 @@ import { LoaderCircle } from 'lucide-vue-next';
 
         <div class="text-center text-sm text-muted-foreground">
             Already have an account?
-            <TextLink :href="route('login')" class="underline underline-offset-4" :tabindex="6">Log in</TextLink>
+            <TextLink :href="login.url()" class="underline underline-offset-4" :tabindex="6">Log in</TextLink>
         </div>
     </Form>
 </template>

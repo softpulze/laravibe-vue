@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
 import { type NavItem } from '@/types';
+import { dashboard as administrationDashboard } from '@/wayfinder/routes/administration';
 import { Link } from '@inertiajs/vue3';
 import { CircleGauge, FolderGit } from 'lucide-vue-next';
 import NavFooter from './NavFooter.vue';
@@ -23,7 +24,7 @@ import NavUser from './NavUser.vue';
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: '/administration/dashboard',
+        href: administrationDashboard.url(),
         icon: CircleGauge,
     },
 ];
@@ -49,7 +50,7 @@ const { open } = useSidebar();
                         as-child
                         :class="cn('items-center justify-center [&>svg]:w-auto', open ? '[&>svg]:h-7' : '[&>svg]:h-5')"
                     >
-                        <Link :href="route('administration.dashboard')">
+                        <Link :href="administrationDashboard.url()">
                             <Logo v-if="open" />
                             <LogoIcon v-else />
                         </Link>
