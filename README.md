@@ -26,51 +26,57 @@ Out of the box you get authentication, account management, an administration are
 ## Tech Stack
 
 ### Backend
-| Package | Version | Purpose |
-|---|---|---|
-| [Laravel](https://laravel.com) | 13 | Application framework |
-| [Inertia Laravel](https://github.com/inertiajs/inertia-laravel) | 3 | Server-side Inertia adapter |
-| [Laravel Wayfinder](https://github.com/laravel/wayfinder) | 0.x | Type-safe route & action generation |
-| [Pest](https://pestphp.com) | 4 | Testing framework |
-| [Larastan](https://github.com/larastan/larastan) | 3 | Static analysis (PHPStan for Laravel) |
-| [Laravel Pint](https://laravel.com/docs/pint) | 1 | Opinionated PHP code formatter |
-| [Rector](https://getrector.com) | 2 | Automated PHP refactoring |
-| [Laravel Sail](https://laravel.com/docs/sail) | 1 | Docker development environment |
-| [Laravel Pail](https://github.com/laravel/pail) | 1 | Real-time log tailing |
+
+| Package                                                         | Version | Purpose                               |
+| --------------------------------------------------------------- | ------- | ------------------------------------- |
+| [Laravel](https://laravel.com)                                  | 13      | Application framework                 |
+| [Inertia Laravel](https://github.com/inertiajs/inertia-laravel) | 3       | Server-side Inertia adapter           |
+| [Laravel Wayfinder](https://github.com/laravel/wayfinder)       | 0.x     | Type-safe route & action generation   |
+| [Pest](https://pestphp.com)                                     | 4       | Testing framework                     |
+| [Larastan](https://github.com/larastan/larastan)                | 3       | Static analysis (PHPStan for Laravel) |
+| [Laravel Pint](https://laravel.com/docs/pint)                   | 1       | Opinionated PHP code formatter        |
+| [Rector](https://getrector.com)                                 | 2       | Automated PHP refactoring             |
+| [Laravel Sail](https://laravel.com/docs/sail)                   | 1       | Docker development environment        |
+| [Laravel Pail](https://github.com/laravel/pail)                 | 1       | Real-time log tailing                 |
 
 ### Frontend
-| Package | Version | Purpose |
-|---|---|---|
-| [Vue 3](https://vuejs.org) | 3 | UI framework (Composition API) |
-| [Inertia Vue](https://inertiajs.com) | 3 | Client-side Inertia adapter |
-| [Tailwind CSS](https://tailwindcss.com) | 4 | Utility-first CSS framework |
-| [Reka UI](https://reka-ui.com) | 2 | Headless UI components (shadcn-vue base) |
-| [VueUse](https://vueuse.org) | 12 | Vue composition utilities |
-| [Lucide Vue](https://lucide.dev) | latest | Icon library |
-| [vue-sonner](https://vue-sonner.vercel.app) | 2 | Toast notifications |
-| [Vite](https://vitejs.dev) | 8 | Frontend build tool |
-| [TypeScript](https://www.typescriptlang.org) | 5 | Type safety |
-| [ESLint](https://eslint.org) + [Prettier](https://prettier.io) | 9 / 3 | Linting & formatting |
+
+| Package                                                        | Version | Purpose                                  |
+| -------------------------------------------------------------- | ------- | ---------------------------------------- |
+| [Vue 3](https://vuejs.org)                                     | 3       | UI framework (Composition API)           |
+| [Inertia Vue](https://inertiajs.com)                           | 3       | Client-side Inertia adapter              |
+| [Tailwind CSS](https://tailwindcss.com)                        | 4       | Utility-first CSS framework              |
+| [Reka UI](https://reka-ui.com)                                 | 2       | Headless UI components (shadcn-vue base) |
+| [VueUse](https://vueuse.org)                                   | 12      | Vue composition utilities                |
+| [Lucide Vue](https://lucide.dev)                               | latest  | Icon library                             |
+| [vue-sonner](https://vue-sonner.vercel.app)                    | 2       | Toast notifications                      |
+| [Vite](https://vitejs.dev)                                     | 8       | Frontend build tool                      |
+| [TypeScript](https://www.typescriptlang.org)                   | 5       | Type safety                              |
+| [ESLint](https://eslint.org) + [Prettier](https://prettier.io) | 9 / 3   | Linting & formatting                     |
 
 ---
 
 ## Features
 
 ### Authentication
+
 - User registration and login
 - Password reset via email
 - Email verification
 - Confirmable password (sudo mode) for sensitive operations
 
 ### Account Management
+
 - **General** — update name and email address
 - **Security** — change password
 - **Appearance** — light/dark/system theme switcher
 
 ### Administration Area
+
 - Protected `/administration` prefix with a ready-to-extend Dashboard page
 
 ### Developer Experience
+
 - **Laravel Wayfinder** — auto-generated, fully-typed TypeScript functions for every controller action and named route. No more hardcoded URLs on the frontend.
 - **SSR out of the box** — server-side rendering powered by `@inertiajs/vite` with cluster mode.
 - **Toast notification system** — a first-class PHP `Toast` facade/helper flashes notifications that surface automatically in Vue via `vue-sonner`.
@@ -81,6 +87,7 @@ Out of the box you get authentication, account management, an administration are
 - **shadcn-vue component library** — pre-configured via `components.json` and `reka-ui`.
 
 ### Project Structure
+
 ```
 app/
 ├── Actions/            # Single-responsibility action classes
@@ -176,24 +183,24 @@ This starts the Laravel server, Vite dev server, and Pail log watcher concurrent
 
 ### PHP / Composer
 
-| Command | Description |
-|---|---|
-| `composer run dev` | Start Laravel + Vite + Pail together |
-| `php artisan test --compact` | Run the Pest test suite |
-| `vendor/bin/pint` | Format PHP code with Laravel Pint |
-| `vendor/bin/phpstan` | Run Larastan static analysis |
-| `vendor/bin/rector` | Run Rector refactoring |
+| Command                          | Description                           |
+| -------------------------------- | ------------------------------------- |
+| `composer run dev`               | Start Laravel + Vite + Pail together  |
+| `php artisan test --compact`     | Run the Pest test suite               |
+| `vendor/bin/pint`                | Format PHP code with Laravel Pint     |
+| `vendor/bin/phpstan`             | Run Larastan static analysis          |
+| `vendor/bin/rector`              | Run Rector refactoring                |
 | `php artisan wayfinder:generate` | Regenerate Wayfinder TypeScript files |
 
 ### Node / npm
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start the Vite development server |
-| `npm run build` | Build frontend assets for production |
-| `npm run build:ssr` | Build frontend + SSR bundle |
-| `npm run lint` | Lint with ESLint (auto-fix) |
-| `npm run format` | Format frontend files with Prettier |
+| Command                | Description                              |
+| ---------------------- | ---------------------------------------- |
+| `npm run dev`          | Start the Vite development server        |
+| `npm run build`        | Build frontend assets for production     |
+| `npm run build:ssr`    | Build frontend + SSR bundle              |
+| `npm run lint`         | Lint with ESLint (auto-fix)              |
+| `npm run format`       | Format frontend files with Prettier      |
 | `npm run format:check` | Check formatting without writing changes |
 
 ---
