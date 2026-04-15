@@ -21,7 +21,7 @@
     ],
     "require": {
         "php": "^8.4",
-        "inertiajs/inertia-laravel": "^2.0",
+        "inertiajs/inertia-laravel": "^3.0",
         "laravel/framework": "^13.0",
         "laravel/tinker": "^3.0",
         "tightenco/ziggy": "^2.4"
