@@ -4,10 +4,10 @@ import { Button } from '@/components/ui/button';
 import Card from '@/components/ui/card/Card.vue';
 import CardContent from '@/components/ui/card/CardContent.vue';
 import { Separator } from '@/components/ui/separator';
-import { account as accountRoute } from '@/js/routes';
-import account from '@/js/routes/account';
 import { isCallable } from '@/lib/helpers';
 import { type NavItem } from '@/types';
+import { account as accountRoute } from '@/wayfinder/routes';
+import account from '@/wayfinder/routes/account';
 import { Link, usePage } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 

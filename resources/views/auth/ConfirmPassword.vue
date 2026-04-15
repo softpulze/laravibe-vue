@@ -3,7 +3,7 @@ import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { confirm } from '@/js/routes/password';
+import { confirm } from '@/wayfinder/routes/password';
 import { Form } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
 </script>

@@ -8,7 +8,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
     plugins: [
-        wayfinder(),
+        wayfinder({ path: 'resources/wayfinder' }),
         laravel({
             input: ['resources/app.ts'],
             refresh: true,

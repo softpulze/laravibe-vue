@@ -15,11 +15,11 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import UserMenuContent from '@/components/UserMenuContent.vue';
 import { useAuth } from '@/composables/useAuth';
 import { getInitials } from '@/composables/useInitials';
-import { home, login, register } from '@/js/routes';
 import { isCallable } from '@/lib/helpers';
 import { cn } from '@/lib/utils';
 import type { NavItem } from '@/types';
 import type { Breadcrumb } from '@/types/data';
+import { home, login, register } from '@/wayfinder/routes';
 import { Link, usePage } from '@inertiajs/vue3';
 import { Menu } from 'lucide-vue-next';
 import { computed, ref } from 'vue';

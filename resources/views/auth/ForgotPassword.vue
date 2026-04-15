@@ -4,8 +4,8 @@ import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { login } from '@/js/routes';
-import { email } from '@/js/routes/password';
+import { login } from '@/wayfinder/routes';
+import { email } from '@/wayfinder/routes/password';
 import { Form } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
 

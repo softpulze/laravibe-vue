@@ -8,9 +8,9 @@ import CardFooter from '@/components/ui/card/CardFooter.vue';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/composables/useAuth';
-import account from '@/js/routes/account';
-import { send } from '@/js/routes/verification';
 import SettingsLayout from '@/layouts/AccountLayout.vue';
+import account from '@/wayfinder/routes/account';
+import { send } from '@/wayfinder/routes/verification';
 import { Info, TriangleAlert, User } from 'lucide-vue-next';
 import DeleteUser from './partial/DeleteUser.vue';
 

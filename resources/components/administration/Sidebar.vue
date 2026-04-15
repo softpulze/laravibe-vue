@@ -12,9 +12,9 @@ import {
     SidebarRail,
     useSidebar,
 } from '@/components/ui/sidebar';
-import { dashboard as administrationDashboard } from '@/js/routes/administration';
 import { cn } from '@/lib/utils';
 import { type NavItem } from '@/types';
+import { dashboard as administrationDashboard } from '@/wayfinder/routes/administration';
 import { Link } from '@inertiajs/vue3';
 import { CircleGauge, FolderGit } from 'lucide-vue-next';
 import NavFooter from './NavFooter.vue';

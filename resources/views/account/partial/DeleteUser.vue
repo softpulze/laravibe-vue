@@ -9,8 +9,8 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/composables/useAuth';
-import account from '@/js/routes/account';
 import { Nullable } from '@/types';
+import account from '@/wayfinder/routes/account';
 import { Trash2, TriangleAlert } from 'lucide-vue-next';
 
 const confirmingUserDeletion = ref(false);
