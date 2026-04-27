@@ -25,7 +25,7 @@ Always use constructor injection. Avoid `app()` or `resolve()` inside classes.
 
 Incorrect:
 ```php
-class OrderController
+class OrderController extends Controller
 {
     public function store(StoreOrderRequest $request)
     {
@@ -38,7 +38,7 @@ class OrderController
 
 Correct:
 ```php
-class OrderController
+class OrderController extends Controller
 {
     public function __construct(private OrderService $service) {}
 

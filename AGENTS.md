@@ -1,4 +1,88 @@
 <laravel-boost-guidelines>
+=== .ai/action-conventions rules ===
+
+# Action Conventions for AI Agents
+
+## Placement Rules
+
+- Place actions in app/Actions or app/Actions/{Domain}.
+- Use domain folders for feature grouping, for example app/Actions/Account.
+
+## Class Rules
+
+- Every action should be a final readonly class.
+- Keep one primary public method named handle unless the existing codebase uses a different convention.
+- Add strict types in generated action files.
+
+## Method Rules
+
+- Prefer explicit parameter and return types on handle.
+- Keep handle focused on a single business operation.
+- Use transactions when mutating multiple related records.
+
+## Dependency Rules
+
+- Inject dependencies through the constructor and keep them immutable.
+- Avoid resolving dependencies with app() inside handle when constructor injection is possible.
+
+## Design Rules
+
+- Keep validation in Form Requests, not in action classes.
+- Keep actions thin and compose other actions/services where needed.
+- Avoid unrelated side effects in the same action.
+
+## Example Prompt Templates
+
+- Create app/Actions/Account/UpdateProfileAction as final readonly with a typed handle method.
+- Refactor app/Actions/Billing/CreateInvoiceAction to use constructor injection and explicit return types.
+- Generate app/Actions/Payroll/SyncPayrollAction with transaction-safe updates and a single responsibility.
+
+=== .ai/auth-conventions rules ===
+
+# Auth Conventions for AI Agents
+
+## Shared Props Rules
+
+- `auth.user` must always be present in every Inertia response — use `null` for guests, never omit the key.
+- `auth.can` must always be present as a flat `Record<string, boolean>` ability map.
+- The default shared user payload is minimal: `id`, `name`, `email`, and optionally `email_verified_at`.
+- Never include `password`, `remember_token`, or internal timestamps in the shared auth payload.
+- Ability values are resolved server-side in `HandleInertiaRequests::resolveAbilities()`. Return booleans only.
+
+## Adding Abilities Rules
+
+- Add new ability keys to both the guest (`$user === null`) and authenticated branches of `resolveAbilities()`.
+- Resolve ability values using Laravel gates or policy checks — never duplicate authorization logic on the frontend.
+- Keep the ability map small and UI-focused. Backend-only authorization must stay backend-only.
+
+## TypeScript Type Rules
+
+- `Auth.user` must be typed as `User | null`, never `User | undefined` or `User?`.
+- `Auth.can` must be typed as `Record<string, boolean>`.
+- The `User` interface must exactly mirror the fields returned by `UserResource`. Do not add fields that are not serialized by the backend.
+- Optional fields on `User` (such as `avatar`, `email_verified_at`) must remain optional with explicit `Nullable<T>` or `string | null` types.
+
+## Composable Usage Rules
+
+- Always import auth state from `useAuth` — never read `usePage().props.auth` directly in a component.
+- Use `user` (nullable computed) on public pages where a visitor may or may not be authenticated.
+- Use `requireUser()` on pages that are always behind an `auth` middleware. It returns a non-null `User` and eliminates optional-chaining noise.
+- Use `can(ability)` for UI gating (show/hide elements). Never use it as a substitute for server-side authorization.
+- Do not use `isAuthenticated` as a guard for sensitive operations — always rely on backend middleware.
+
+## Security Rules
+
+- Do not expose sensitive model fields (`password`, `remember_token`, internal tokens) in any shared Inertia prop.
+- Ability values must be booleans. Never serialize raw policy objects, role strings, or permission arrays to the frontend.
+- Client-side `can()` checks are UI conveniences only. Every sensitive action must be authorized on the server.
+
+## Example Prompt Templates
+
+- Add a new `manageTeam` ability to `resolveAbilities()` that checks `$user->hasTeam()` for authenticated users and returns false for guests.
+- Update the `User` TypeScript interface to add an optional `phone?: string | null` field after adding it to `UserResource`.
+- Use `requireUser()` in a new protected Vue page to access the authenticated user without optional chaining.
+- Add `can('publishPost')` gating to hide a publish button for users who lack the ability.
+
 === .ai/dto-conventions rules ===
 
 # DTO Conventions for AI Agents
@@ -45,6 +129,165 @@
 - Create app/DTOs/Account/UpdateProfileDTO as final readonly using AsDTO with name, username, and nullable bio.
 - Generate a Billing/CreateInvoiceDTO with typed properties and a fromModel helper for draft invoices.
 - Refactor existing DTOs in app/DTOs to use AsDTO and replace manual toArray and toJson methods.
+
+=== .ai/enum-conventions rules ===
+
+# Enum Conventions for AI Agents
+
+## Placement Rules
+
+- Place enums in app/Enums.
+- Place shared enum concerns in app/Enums/Concerns.
+- Use App\Enums\Concerns\HasEnumMetadata for shared enum behavior.
+
+## Base Concern Contract
+
+The shared base concern must preserve exactly these 8 core methods:
+
+1. label(): string
+2. toOption(): array{name: string, value: int|string, label: string}
+3. options(): array<int, array{name: string, value: int|string, label: string}>
+4. values(): array<int, int|string>
+5. names(): array<int, string>
+6. isValidValue(int|string $value): bool
+7. isValidName(string $name): bool
+8. fromValueOrFail(int|string $value): self
+
+Only one optional base method is allowed:
+
+1. tryFromName(string $name): ?self
+
+## Design Rules
+
+- Keep shared enum concerns pure and deterministic.
+- Do not add database calls, HTTP calls, or heavy business logic inside enum concerns.
+- Put domain-specific behavior on individual enum classes.
+- Keep DTO enum serialization behavior in App\DTOs\Concerns\AsDTO unchanged.
+
+=== .ai/resource-conventions rules ===
+
+# HTTP Resources Conventions for AI Agents
+
+## Placement Rules
+
+- Place resources only in `app/Http/Resources`.
+- Use domain subfolders for feature grouping, for example `app/Http/Resources/Admin` or `app/Http/Resources/Account`.
+
+## Class Rules
+
+- Every resource must be a `final class`.
+- Single resources must extend `AppResource`, not `JsonResource`.
+- Collection resources must extend `AppResourceCollection`.
+- Implement `Illuminate\Http\Request` type-hinting in `toArray()`.
+
+## Naming Rules
+
+- Use singular names ending with `Resource` for single resources (e.g., `UserResource`, `PostResource`).
+- Use singular or collection names ending with `Collection` for collection resources (e.g., `UserCollection`, `PostCollection`).
+
+## Field Definition Rules
+
+- Use the `FlexibleJsonResource` trait helpers exclusively in `toArray()`.
+- Core helpers: `id()`, `attribute()`, `optionalAttribute()`, `relation()`.
+- Timestamp helpers: `createdAt()`, `updatedAt()`, `deletedAt()`, `timestamps()`, `softDeleteTimestamps()`.
+- Support field customization with `alias`, `prefix`, and `suffix` parameters.
+- Never directly access model attributes or relations—use the trait helpers.
+
+## Serialization Rules
+
+- Use `toArray()` for API responses.
+- Use `toInertia()` (from `AppResource` or `AppResourceCollection`) when passing to Vue components.
+- Use `toInertia()` to remove JSON wrappers and return plain arrays suitable for Inertia props.
+- Relations must use `relation()` to ensure they're only serialized if eager-loaded, preventing N+1 queries.
+
+## Generation Rules
+
+- Generate single resources with `php artisan make:resource ResourceName` (uses `stubs/resource.stub`).
+- Generate collection resources with `php artisan make:resource CollectionName --collection` (uses `stubs/resource-collection.stub`).
+- Generated classes follow strict types, declare(strict_types=1), and final class conventions.
+
+## Pagination Rules
+
+- Paginated resources are returned automatically via `AppResource::collection()` on paginated queries.
+- Pagination shape includes `data`, `links` (first/last/prev/next), and `meta` (current_page, from, last_page, path, per_page, to, total).
+
+## Design Rules
+
+- Keep resources focused on serialization only—no business logic, queries, or transformations.
+- Use Resources for data that will be shared between API and Inertia.
+- For simple, single-use transforms, inline the resolver within `attribute()` instead of creating a separate method.
+- Prefer eager-loading via query builder over lazy loading via `relation()`.
+
+## Example Prompt Templates
+
+- Create a `UserResource` that includes `id()`, `attribute('name')`, `attribute('email')`, and `timestamps()`.
+- Generate a `PostCollection` resource and refactor `PostResource` to use it with pagination.
+- Add a `relation()` helper for posts inside `UserResource` to prevent N+1 queries.
+- Create `app/Http/Resources/Admin/AdminUserResource` that extends `AppResource` with admin-specific fields.
+- Update `UserResource` to use `optionalAttribute()` for nullable fields like `email_verified_at`.
+
+=== .ai/toast-conventions rules ===
+
+# Toast Conventions for AI Agents
+
+## Scope Rules
+
+- Keep all toast-related backend code in app/Toast.
+- Keep toast enums in app/Enums.
+- Keep frontend toast contract and rendering in resources/components/toast.
+
+## Usage Rules
+
+- Prefer helper functions for common toast creation:
+    - toastSuccess
+    - toastError
+    - toastWarning
+    - toastInfo
+- Use toastActionCopy and toastActionRedirect for action payloads.
+- Avoid ad-hoc session writes to the toasts key.
+
+## DTO Rules
+
+- Use App\Toast\DTOs\ToastPayload and App\Toast\DTOs\ToastActionPayload.
+- Keep ToastPayload and ToastActionPayload strict and typed.
+- Preserve strict unknown-key behavior for DTO hydration.
+- Do not add business logic or database access inside toast DTOs.
+
+## Contract Rules
+
+- Allowed toast types must come from App\Enums\ToastType.
+- Allowed action types must come from App\Enums\ToastActionType.
+- Keep payload keys stable:
+    - ToastPayload: type, message, actions?, duration?, dismissible?
+    - ToastActionPayload: type, payload, label?
+- Any contract change requires updating frontend types and tests in the same change.
+
+## Backend Service Rules
+
+- Continue using App\Toast\Toast as the only session transport layer.
+- Preserve queue safeguards such as duplicate prevention and queue capping.
+- Do not bypass append and pull behavior.
+
+## Frontend Rules
+
+- Keep runtime validation in resources/components/toast/useToast.ts.
+- Keep toaster registration idempotent and cleaned up on HMR disposal.
+- Ensure Toast.vue supports all action types and remains type-safe.
+
+## Testing Rules
+
+- Update tests when changing toast behavior:
+    - tests/Feature/Toast/ToastTest.php
+    - tests/Feature/Toast/HelperTest.php
+- Add at least one integration-level assertion when controller behavior changes toast output.
+- Run focused tests first:
+    - php artisan test --compact tests/Feature/Toast/ToastTest.php tests/Feature/Toast/HelperTest.php
+
+## Prompt Templates
+
+- Add a new toast action type end-to-end using enum, DTO, Vue renderer, and tests.
+- Add toast metadata support while keeping backward compatibility and strict hydration.
+- Refactor toast helper ergonomics without changing session transport behavior.
 
 === foundation rules ===
 
