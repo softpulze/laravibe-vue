@@ -49,7 +49,7 @@ final class MakeActionCommand extends GeneratorCommand
     }
 
     /**
-     * Get the console command arguments.
+     * Get the console command options.
      *
      * @return array<array{string, string, int, string}>
      */

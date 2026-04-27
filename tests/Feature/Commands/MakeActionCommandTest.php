@@ -20,9 +20,10 @@ it('generates an action class in app/Actions with correct namespace and class na
 
         expect($this->filesystem->exists($path))->toBeTrue()
             ->and(rescue(fn () => $this->filesystem->get($path), fn () => ''))
+            ->toContain('declare(strict_types=1);')
+            ->toContain('final readonly class ' . $class)
             ->toContain('namespace App\\Actions;')
-            ->toContain('class ' . $class)
-            ->toContain('public function handle()');
+            ->toContain('public function handle(): void');
     } finally {
         removeAction($this->filesystem, $path);
     }
@@ -61,9 +62,10 @@ it('can overwrite an existing action with --force', function (): void {
             ->assertSuccessful();
 
         expect(rescue(fn () => $this->filesystem->get($path), fn () => ''))
+            ->toContain('declare(strict_types=1);')
             ->toContain('namespace App\\Actions;')
-            ->toContain('class ' . $class)
-            ->toContain('public function handle()')
+            ->toContain('final readonly class ' . $class)
+            ->toContain('public function handle(): void')
             ->not->toContain('old()');
     } finally {
         removeAction($this->filesystem, $path);

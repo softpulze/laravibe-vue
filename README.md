@@ -82,6 +82,7 @@ Out of the box you get authentication, account management, an administration are
 - **Toast notification system** — a first-class PHP `Toast` facade/helper flashes notifications that surface automatically in Vue via `vue-sonner`.
 - **LaraTweaks** — opinionated Laravel defaults applied at boot: strict Eloquent mode, `CarbonImmutable` dates, HTTPS-forced URLs, Vite asset prefetching, and destructive command protection in production.
 - **Global helper functions** — `vue()`, `optionalProp()`, `deferProp()`, `alwaysProp()`, `authUser()` to keep controllers clean and expressive.
+- **Action conventions and usage guide** — see `app/Actions/README.md`.
 - **PageMeta DTO** — pass page titles and meta from the server to Vue in a typed, consistent way.
 - **Breadcrumbs DTO** — a structured way to define breadcrumb trails server-side.
 - **DTO conventions and usage guide** — see `app/DTOs/README.md`.
