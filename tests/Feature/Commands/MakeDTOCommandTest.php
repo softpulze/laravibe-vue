@@ -20,11 +20,15 @@ it('generates an dto class in app/DTOs with correct namespace and class name', f
 
         expect($this->filesystem->exists($path))->toBeTrue()
             ->and(rescue(fn () => $this->filesystem->get($path), fn () => ''))
+            ->toContain('declare(strict_types=1);')
+            ->and(rescue(fn () => $this->filesystem->get($path), fn () => ''))
             ->toContain('namespace App\\DTOs;')
-            ->toContain('class ' . $class)
+            ->toContain('use App\\DTOs\\Concerns\\AsDTO;')
+            ->toContain('final readonly class ' . $class)
+            ->toContain('use AsDTO;')
             ->toContain('public function __construct(')
-            ->toContain('public function toArray(): array')
-            ->toContain('public function toJson($options = 0): string');
+            ->toContain('public string $name')
+            ->toContain('public ?string $description = null');
     } finally {
         removeDTO($this->filesystem, $path);
     }
@@ -67,10 +71,10 @@ it('can overwrite an existing dto with --force', function (): void {
 
         expect(rescue(fn () => $this->filesystem->get($path), fn () => ''))
             ->toContain('namespace App\\DTOs;')
-            ->toContain('class ' . $class)
+            ->toContain('final readonly class ' . $class)
             ->toContain('public function __construct(')
-            ->toContain('public function toArray(): array')
-            ->toContain('public function toJson($options = 0): string')
+            ->toContain('use App\\DTOs\\Concerns\\AsDTO;')
+            ->toContain('use AsDTO;')
             ->not->toContain('old()');
     } finally {
         removeDTO($this->filesystem, $path);

@@ -7,7 +7,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
 
-final class MakeDTOCommand extends GeneratorCommand
+final class MakeDtoCommand extends GeneratorCommand
 {
     /**
      * The console command name.
@@ -49,7 +49,7 @@ final class MakeDTOCommand extends GeneratorCommand
     }
 
     /**
-     * Get the console command arguments.
+     * Get the console command options.
      *
      * @return array<array{string, string, int, string}>
      */

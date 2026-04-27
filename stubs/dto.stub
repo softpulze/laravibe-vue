@@ -1,35 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace {{ namespace }};
 
+use App\DTOs\Concerns\AsDTO;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 
-class {{ class }} implements Arrayable, Jsonable
+/**
+ * @implements Arrayable<string, mixed>
+ */
+final readonly class {{ class }} implements Arrayable, Jsonable
 {
-    /**
-     * Create a new class instance.
-     */
+    use AsDTO;
+
     public function __construct(
-        // properties...
+        public string $name,
+        public ?string $description = null,
     ) {
         // ...
-    }
-
-    /**
-     * Get the instance as an array.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(): array
-    {
-        return [
-            // ...
-        ];
-    }
-
-    public function toJson($options = 0): string // @pest-ignore-type
-    {
-        return (string) json_encode($this->toArray(), $options);
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DTOs;
 
+use App\DTOs\Concerns\AsDTO;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Collection;
@@ -13,6 +14,8 @@ use Illuminate\Support\Collection;
  */
 final readonly class PageMeta implements Arrayable, Jsonable
 {
+    use AsDTO;
+
     /**
      * Create a new class instance.
      *
@@ -46,10 +49,5 @@ final readonly class PageMeta implements Arrayable, Jsonable
 
             'breadcrumbs' => $this->breadcrumbs?->toArray(),
         ]);
-    }
-
-    public function toJson($options = 0): string // @pest-ignore-type
-    {
-        return (string) json_encode($this->toArray(), $options);
     }
 }

@@ -14,7 +14,7 @@ it('serializes with only provided fields and filters nulls', function (): void {
         'title' => 'Users - Admin',
     ]);
 
-    $json = $meta->toJson(JSON_UNESCAPED_SLASHES);
+    $json = $meta->toJson();
     expect($json)->toBeJson()
         ->and(json_decode($json, true))->toBe([
             'heading' => 'Users',

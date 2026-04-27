@@ -30,7 +30,7 @@ it('serializes to array correctly', function (): void {
 it('serializes to json correctly and is valid json', function (): void {
     $dto = new BreadCrumb(label: 'Profile', href: '/profile');
 
-    $json = $dto->toJson(JSON_UNESCAPED_SLASHES);
+    $json = $dto->toJson();
 
     expect($json)->toBeJson()
         ->and(json_decode($json, true))
