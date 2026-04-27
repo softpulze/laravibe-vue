@@ -13,7 +13,9 @@ final class AppResourceCollection extends ResourceCollection
 {
     public function __construct(mixed $resource, ?string $collects = null)
     {
-        $this->collects = $collects;
+        if ($collects !== null) {
+            $this->collects = $collects;
+        }
 
         parent::__construct($resource);
     }
@@ -28,10 +30,16 @@ final class AppResourceCollection extends ResourceCollection
         $request ??= request();
 
         if ($this->resource instanceof AbstractPaginator || $this->resource instanceof AbstractCursorPaginator) {
-            return $this->response($request)->getData(true);
+            /** @var array<int|string, mixed> $paginated */
+            $paginated = $this->response($request)->getData(true);
+
+            return $paginated;
         }
 
-        return $this->resolve($request);
+        /** @var array<int|string, mixed> $resolved */
+        $resolved = $this->resolve($request);
+
+        return $resolved;
     }
 
     /**

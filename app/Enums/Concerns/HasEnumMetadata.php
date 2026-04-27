@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Enums\Concerns;
 
-use BackedEnum;
 use InvalidArgumentException;
 
 trait HasEnumMetadata
@@ -45,11 +44,8 @@ trait HasEnumMetadata
 
     public static function fromValueOrFail(int|string $value): self
     {
-        if (is_subclass_of(static::class, BackedEnum::class)) {
-            /** @var self|null $case */
-            $case = static::tryFrom($value);
-
-            if ($case !== null) {
+        foreach (self::cases() as $case) {
+            if (static::extractValue($case) === $value) {
                 return $case;
             }
         }
@@ -96,8 +92,11 @@ trait HasEnumMetadata
 
     private static function extractValue(self $case): int|string
     {
-        if ($case instanceof BackedEnum) {
-            return $case->value;
+        if (property_exists($case, 'value')) {
+            /** @var int|string $value */
+            $value = $case->value;
+
+            return $value;
         }
 
         return $case->name;

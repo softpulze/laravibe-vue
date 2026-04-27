@@ -8,7 +8,6 @@ use App\Support\CarbonImmutable;
 use Closure;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Resources\MergeValue;
 use Illuminate\Http\Resources\MissingValue;
 
@@ -27,7 +26,7 @@ trait FlexibleJsonResource
         string $prefix = '',
         string $suffix = ''
     ): MergeValue|MissingValue {
-        $attributePresent = array_key_exists($key, $this->getAttributes());
+        $attributePresent = array_key_exists($key, $this->resourceAttributes());
 
         /** @var MergeValue|MissingValue */
         return $this->mergeWhen(! $optional || $attributePresent, fn (): array => [
@@ -54,7 +53,7 @@ trait FlexibleJsonResource
         string $prefix = '',
         string $suffix = ''
     ): MergeValue|MissingValue {
-        $relationLoaded = method_exists($this->resource, 'relationLoaded') && $this->resource->relationLoaded($key);
+        $relationLoaded = $this->resourceRelationLoaded($key);
 
         /** @var MergeValue|MissingValue */
         return $this->mergeWhen($relationLoaded, fn (): array => [
@@ -87,7 +86,7 @@ trait FlexibleJsonResource
 
     protected function optionalDateTimeAttributes(string $key): MergeValue|MissingValue
     {
-        $attributePresent = array_key_exists($key, $this->getAttributes());
+        $attributePresent = array_key_exists($key, $this->resourceAttributes());
 
         /** @var MergeValue|MissingValue */
         return $this->mergeWhen($attributePresent, function () use ($key): array {
@@ -130,7 +129,7 @@ trait FlexibleJsonResource
 
     private function normalizeValue(mixed $value): mixed
     {
-        if ($value instanceof JsonResource || $value instanceof ResourceCollection) {
+        if ($value instanceof JsonResource) {
             return $value->resolve();
         }
 
@@ -139,5 +138,42 @@ trait FlexibleJsonResource
         }
 
         return $value;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function resourceAttributes(): array
+    {
+        $resource = $this->resourceObject();
+
+        if (! is_object($resource) || ! method_exists($resource, 'getAttributes')) {
+            return [];
+        }
+
+        $attributes = $resource->getAttributes();
+
+        if (! is_array($attributes)) {
+            return [];
+        }
+
+        /** @var array<string, mixed> $attributes */
+        return $attributes;
+    }
+
+    private function resourceRelationLoaded(string $key): bool
+    {
+        $resource = $this->resourceObject();
+
+        if (! is_object($resource) || ! method_exists($resource, 'relationLoaded')) {
+            return false;
+        }
+
+        return (bool) $resource->relationLoaded($key);
+    }
+
+    private function resourceObject(): ?object
+    {
+        return is_object($this->resource) ? $this->resource : null;
     }
 }

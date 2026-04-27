@@ -16,8 +16,25 @@ use ReflectionType;
 use ReflectionUnionType;
 use UnitEnum;
 
+/**
+ * @phpstan-type DTOParameterMetadata array{
+ *     name: string,
+ *     hasDefault: bool,
+ *     default: mixed,
+ *     allowsNull: bool,
+ *     builtinTypes: array<int, string>,
+ *     classTypes: array<int, class-string>
+ * }
+ * @phpstan-type DTOConstructorMetadata array{
+ *     parameters: array<int, DTOParameterMetadata>,
+ *     allowedKeys: array<string, true>
+ * }
+ */
 trait AsDTO
 {
+    /**
+     * @param  array<string, mixed>|Request  $data
+     */
     public static function from(array|Request $data): static
     {
         if ($data instanceof Request) {
@@ -27,6 +44,9 @@ trait AsDTO
         return static::fromArray($data);
     }
 
+    /**
+     * @param  array<string, mixed>  $data
+     */
     public static function fromArray(array $data): static
     {
         $metadata = static::constructorMetadata();
@@ -65,7 +85,10 @@ trait AsDTO
             $arguments[] = static::castValue($data[$name], $parameter);
         }
 
-        return new static(...$arguments);
+        /** @var static $dto */
+        $dto = new ReflectionClass(static::class)->newInstanceArgs($arguments);
+
+        return $dto;
     }
 
     public static function fromRequest(Request $request): static
@@ -75,6 +98,8 @@ trait AsDTO
         if (! is_array($payload)) {
             throw new InvalidArgumentException('Request payload must be an array for ' . static::class . '.');
         }
+
+        /** @var array<string, mixed> $payload */
 
         return static::fromArray($payload);
     }
@@ -87,7 +112,10 @@ trait AsDTO
         /** @var array<string, mixed> $values */
         $values = get_object_vars($this);
 
-        return static::normalizeValueForArray($values);
+        /** @var array<string, mixed> $normalized */
+        $normalized = static::normalizeValueForArray($values);
+
+        return $normalized;
     }
 
     public function toJson($options = 0): string // @pest-ignore-type
@@ -107,7 +135,10 @@ trait AsDTO
         /** @var array<string, mixed> $values */
         $values = get_object_vars($this);
 
-        return static::normalizeValueForEloquent($values);
+        /** @var array<string, mixed> $normalized */
+        $normalized = static::normalizeValueForEloquent($values);
+
+        return $normalized;
     }
 
     /**
@@ -135,9 +166,7 @@ trait AsDTO
         return false;
     }
 
-    /**
-     * @return array{parameters: array<int, array{name: string, hasDefault: bool, default: mixed, allowsNull: bool, builtinTypes: array<int, string>, classTypes: array<int, class-string>}>, allowedKeys: array<string, true>}
-     */
+    /** @return DTOConstructorMetadata */
     private static function constructorMetadata(): array
     {
         $metadataCache = &static::constructorMetadataStore();
@@ -186,10 +215,11 @@ trait AsDTO
     }
 
     /**
-     * @return array<class-string, array{parameters: array<int, array{name: string, hasDefault: bool, default: mixed, allowsNull: bool, builtinTypes: array<int, string>, classTypes: array<int, class-string>}>, allowedKeys: array<string, true>}>
+     * @return array<class-string, DTOConstructorMetadata>
      */
     private static function &constructorMetadataStore(): array
     {
+        /** @var array<class-string, DTOConstructorMetadata> $cache */
         static $cache = [];
 
         return $cache;
@@ -242,9 +272,7 @@ trait AsDTO
         ];
     }
 
-    /**
-     * @param  array{name: string, hasDefault: bool, default: mixed, allowsNull: bool, builtinTypes: array<int, string>, classTypes: array<int, class-string>}  $parameter
-     */
+    /** @param  DTOParameterMetadata  $parameter */
     private static function castValue(mixed $value, array $parameter): mixed
     {
         if ($value === null) {
@@ -277,7 +305,7 @@ trait AsDTO
     }
 
     /**
-     * @param  array{name: string, hasDefault: bool, default: mixed, allowsNull: bool, builtinTypes: array<int, string>, classTypes: array<int, class-string>}  $parameter
+     * @param  DTOParameterMetadata  $parameter
      * @return array{matched: bool, value: mixed}
      */
     private static function castBuiltinValue(mixed $value, array $parameter): array
@@ -343,7 +371,7 @@ trait AsDTO
     }
 
     /**
-     * @param  array{name: string, hasDefault: bool, default: mixed, allowsNull: bool, builtinTypes: array<int, string>, classTypes: array<int, class-string>}  $parameter
+     * @param  DTOParameterMetadata  $parameter
      * @return array{matched: bool, value: mixed}
      */
     private static function castClassValue(mixed $value, array $parameter): array
@@ -434,7 +462,10 @@ trait AsDTO
         }
 
         if (is_object($value) && method_exists($value, 'toArray')) {
-            return $value->toArray();
+            /** @var mixed $normalized */
+            $normalized = $value->toArray();
+
+            return $normalized;
         }
 
         if (is_array($value)) {
@@ -465,11 +496,17 @@ trait AsDTO
         }
 
         if (is_object($value) && method_exists($value, 'toEloquent')) {
-            return $value->toEloquent();
+            /** @var mixed $normalized */
+            $normalized = $value->toEloquent();
+
+            return $normalized;
         }
 
         if (is_object($value) && method_exists($value, 'toArray')) {
-            return $value->toArray();
+            /** @var mixed $normalized */
+            $normalized = $value->toArray();
+
+            return $normalized;
         }
 
         if (is_array($value)) {

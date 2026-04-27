@@ -109,6 +109,7 @@ final readonly class ToastPayload implements Arrayable, Jsonable
                     throw new InvalidArgumentException('Invalid action payload for [' . self::class . '].');
                 }
 
+                /** @var array<string, mixed> $action */
                 $hydratedActions[] = ToastActionPayload::fromArray($action);
             }
 
