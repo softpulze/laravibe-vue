@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Account;
 
 use App\DTOs\PageMeta;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Account\ProfileUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
@@ -13,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Response;
 
-final class AccountController extends Controller
+final class AccountController
 {
     public function edit(Request $request): Response
     {

@@ -135,7 +135,7 @@ dashboard.options = (options?: RouteQueryOptions): RouteDefinition<'options'> =>
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::account
-* @see app/Http/Controllers/Account/AccountController.php:18
+* @see app/Http/Controllers/Account/AccountController.php:17
 * @route '/account'
 */
 export const account = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -150,7 +150,7 @@ account.definition = {
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::account
-* @see app/Http/Controllers/Account/AccountController.php:18
+* @see app/Http/Controllers/Account/AccountController.php:17
 * @route '/account'
 */
 account.url = (options?: RouteQueryOptions) => {
@@ -159,7 +159,7 @@ account.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::account
-* @see app/Http/Controllers/Account/AccountController.php:18
+* @see app/Http/Controllers/Account/AccountController.php:17
 * @route '/account'
 */
 account.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -169,7 +169,7 @@ account.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::account
-* @see app/Http/Controllers/Account/AccountController.php:18
+* @see app/Http/Controllers/Account/AccountController.php:17
 * @route '/account'
 */
 account.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({

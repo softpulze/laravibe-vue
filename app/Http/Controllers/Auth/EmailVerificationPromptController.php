@@ -10,7 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
 
-final class EmailVerificationPromptController extends Controller
+final class EmailVerificationPromptController
 {
     /**
      * Show the email verification prompt page.

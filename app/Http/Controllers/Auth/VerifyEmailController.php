@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
 
-final class VerifyEmailController extends Controller
+final class VerifyEmailController
 {
     /**
      * Mark the authenticated user's email address as verified.

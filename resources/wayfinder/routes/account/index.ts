@@ -2,7 +2,7 @@ import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../
 import security176da1 from './security'
 /**
 * @see \App\Http\Controllers\Account\AccountController::update
-* @see app/Http/Controllers/Account/AccountController.php:32
+* @see app/Http/Controllers/Account/AccountController.php:31
 * @route '/account'
 */
 export const update = (options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -17,7 +17,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::update
-* @see app/Http/Controllers/Account/AccountController.php:32
+* @see app/Http/Controllers/Account/AccountController.php:31
 * @route '/account'
 */
 update.url = (options?: RouteQueryOptions) => {
@@ -26,7 +26,7 @@ update.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::update
-* @see app/Http/Controllers/Account/AccountController.php:32
+* @see app/Http/Controllers/Account/AccountController.php:31
 * @route '/account'
 */
 update.patch = (options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -36,7 +36,7 @@ update.patch = (options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::destroy
-* @see app/Http/Controllers/Account/AccountController.php:51
+* @see app/Http/Controllers/Account/AccountController.php:50
 * @route '/account'
 */
 export const destroy = (options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -51,7 +51,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::destroy
-* @see app/Http/Controllers/Account/AccountController.php:51
+* @see app/Http/Controllers/Account/AccountController.php:50
 * @route '/account'
 */
 destroy.url = (options?: RouteQueryOptions) => {
@@ -60,7 +60,7 @@ destroy.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::destroy
-* @see app/Http/Controllers/Account/AccountController.php:51
+* @see app/Http/Controllers/Account/AccountController.php:50
 * @route '/account'
 */
 destroy.delete = (options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -70,7 +70,7 @@ destroy.delete = (options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
 
 /**
 * @see \App\Http\Controllers\Account\SecurityController::security
-* @see app/Http/Controllers/Account/SecurityController.php:17
+* @see app/Http/Controllers/Account/SecurityController.php:16
 * @route '/account/security'
 */
 export const security = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -85,7 +85,7 @@ security.definition = {
 
 /**
 * @see \App\Http\Controllers\Account\SecurityController::security
-* @see app/Http/Controllers/Account/SecurityController.php:17
+* @see app/Http/Controllers/Account/SecurityController.php:16
 * @route '/account/security'
 */
 security.url = (options?: RouteQueryOptions) => {
@@ -94,7 +94,7 @@ security.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Account\SecurityController::security
-* @see app/Http/Controllers/Account/SecurityController.php:17
+* @see app/Http/Controllers/Account/SecurityController.php:16
 * @route '/account/security'
 */
 security.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -104,7 +104,7 @@ security.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Account\SecurityController::security
-* @see app/Http/Controllers/Account/SecurityController.php:17
+* @see app/Http/Controllers/Account/SecurityController.php:16
 * @route '/account/security'
 */
 security.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({

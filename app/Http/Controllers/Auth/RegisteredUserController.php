@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Response;
 
-final class RegisteredUserController extends Controller
+final class RegisteredUserController
 {
     /**
      * Show the registration page.

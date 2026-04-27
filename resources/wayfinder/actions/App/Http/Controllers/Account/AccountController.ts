@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Account\AccountController::edit
-* @see app/Http/Controllers/Account/AccountController.php:18
+* @see app/Http/Controllers/Account/AccountController.php:17
 * @route '/account'
 */
 export const edit = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ edit.definition = {
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::edit
-* @see app/Http/Controllers/Account/AccountController.php:18
+* @see app/Http/Controllers/Account/AccountController.php:17
 * @route '/account'
 */
 edit.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ edit.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::edit
-* @see app/Http/Controllers/Account/AccountController.php:18
+* @see app/Http/Controllers/Account/AccountController.php:17
 * @route '/account'
 */
 edit.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ edit.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::edit
-* @see app/Http/Controllers/Account/AccountController.php:18
+* @see app/Http/Controllers/Account/AccountController.php:17
 * @route '/account'
 */
 edit.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ edit.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::update
-* @see app/Http/Controllers/Account/AccountController.php:32
+* @see app/Http/Controllers/Account/AccountController.php:31
 * @route '/account'
 */
 export const update = (options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -60,7 +60,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::update
-* @see app/Http/Controllers/Account/AccountController.php:32
+* @see app/Http/Controllers/Account/AccountController.php:31
 * @route '/account'
 */
 update.url = (options?: RouteQueryOptions) => {
@@ -69,7 +69,7 @@ update.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::update
-* @see app/Http/Controllers/Account/AccountController.php:32
+* @see app/Http/Controllers/Account/AccountController.php:31
 * @route '/account'
 */
 update.patch = (options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -79,7 +79,7 @@ update.patch = (options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::destroy
-* @see app/Http/Controllers/Account/AccountController.php:51
+* @see app/Http/Controllers/Account/AccountController.php:50
 * @route '/account'
 */
 export const destroy = (options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -94,7 +94,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::destroy
-* @see app/Http/Controllers/Account/AccountController.php:51
+* @see app/Http/Controllers/Account/AccountController.php:50
 * @route '/account'
 */
 destroy.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ destroy.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Account\AccountController::destroy
-* @see app/Http/Controllers/Account/AccountController.php:51
+* @see app/Http/Controllers/Account/AccountController.php:50
 * @route '/account'
 */
 destroy.delete = (options?: RouteQueryOptions): RouteDefinition<'delete'> => ({

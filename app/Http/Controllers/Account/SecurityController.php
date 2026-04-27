@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Account;
 
 use App\DTOs\PageMeta;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Inertia\Response;
 
-final class SecurityController extends Controller
+final class SecurityController
 {
     public function edit(): Response
     {

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Inertia\Response;
 
-final class PasswordResetLinkController extends Controller
+final class PasswordResetLinkController
 {
     /**
      * Show the password reset link request page.
