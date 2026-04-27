@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use Illuminate\Http\Request;
+
+final class {{ class }} extends AppResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @return array<int|string, mixed>
+     */
+    public function toArray(Request $request): array
+    {
+        return [
+            $this->id(),
+            ...$this->timestamps(),
+        ];
+    }
+}

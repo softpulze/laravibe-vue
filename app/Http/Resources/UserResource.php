@@ -6,17 +6,13 @@ namespace App\Http\Resources;
 
 use App\Models\User;
 use App\Support\CarbonImmutable;
-use App\Traits\FlexibleJsonResource;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @mixin User
  */
-final class UserResource extends JsonResource
+final class UserResource extends AppResource
 {
-    use FlexibleJsonResource;
-
     /**
      * Transform the resource into an array.
      *
@@ -36,8 +32,7 @@ final class UserResource extends JsonResource
             ),
             $this->optionalAttribute('remember_token'),
 
-            $this->createdAt(),
-            $this->updatedAt(),
+            ...$this->timestamps(),
         ];
     }
 }

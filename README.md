@@ -86,6 +86,7 @@ Out of the box you get authentication, account management, an administration are
 - **PageMeta DTO** — pass page titles and meta from the server to Vue in a typed, consistent way.
 - **Breadcrumbs DTO** — a structured way to define breadcrumb trails server-side.
 - **DTO conventions and usage guide** — see `app/DTOs/README.md`.
+- **HTTP resource conventions and usage guide** — see `app/Http/Resources/README.md`.
 - **shadcn-vue component library** — pre-configured via `components.json` and `reka-ui`.
 
 ### Project Structure
@@ -99,11 +100,11 @@ app/
 │   ├── Controllers/    # Auth & Account controllers
 │   ├── Middleware/     # Custom middleware
 │   ├── Requests/       # Form request validation
-│   └── Resources/      # Eloquent API resources
+│   └── Resources/      # Eloquent API resources and shared concerns
 ├── Models/             # Eloquent models
 ├── Support/            # Helpers, LaraTweaks, CarbonImmutable
 ├── Toast/              # Self-contained toast notification system
-└── Traits/             # Reusable traits (ArrayableEnum, FlexibleJsonResource)
+└── Traits/             # Reusable traits (ArrayableEnum)
 
 resources/
 ├── components/         # Shared Vue components & shadcn-vue UI
