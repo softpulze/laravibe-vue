@@ -81,12 +81,12 @@ Out of the box you get authentication, account management, an administration are
 - **SSR out of the box** — server-side rendering powered by `@inertiajs/vite` with cluster mode.
 - **Toast notification system** — see [app/Toast/README.md](app/Toast/README.md) for architecture, usage, and conventions.
 - **Support layer conventions and usage guide** — see [app/Support/README.md](app/Support/README.md).
-- **Action conventions and usage guide** — see `app/Actions/README.md`.
+- **Action conventions and usage guide** — see [app/Actions/README.md](app/Actions/README.md).
 - **PageMeta DTO** — pass page titles and meta from the server to Vue in a typed, consistent way.
 - **Breadcrumbs DTO** — a structured way to define breadcrumb trails server-side.
-- **DTO conventions and usage guide** — see `app/DTOs/README.md`.
-- **Enum conventions and usage guide** — see `app/Enums/README.md`.
-- **HTTP resource conventions and usage guide** — see `app/Http/Resources/README.md`.
+- **DTO conventions and usage guide** — see [app/DTOs/README.md](app/DTOs/README.md).
+- **Enum conventions and usage guide** — see [app/Enums/README.md](app/Enums/README.md).
+- **HTTP resource conventions and usage guide** — see [app/Http/Resources/README.md](app/Http/Resources/README.md).
 - **shadcn-vue component library** — pre-configured via `components.json` and `reka-ui`.
 - **Auth composable** — typed `useAuth` with `user`, `isAuthenticated`, `can()`, and `requireUser()` helpers. See [resources/composables/README.md](resources/composables/README.md).
 
