@@ -2,23 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Enums\Concerns\HasEnumMetadata;
-
-enum BackedMetaEnum: string
-{
-    use HasEnumMetadata;
-
-    case PENDING = 'pending';
-    case IN_PROGRESS = 'in_progress';
-}
-
-enum UnitMetaEnum
-{
-    use HasEnumMetadata;
-
-    case LOW;
-    case HIGH_PRIORITY;
-}
+use Tests\Unit\Enum\BackedMetaEnum;
+use Tests\Unit\Enum\UnitMetaEnum;
 
 test('supports label and toOption metadata shape', function (): void {
     expect(BackedMetaEnum::IN_PROGRESS->label())->toBe('In Progress')

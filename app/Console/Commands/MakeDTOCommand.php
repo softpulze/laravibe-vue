@@ -8,7 +8,7 @@ use Illuminate\Console\GeneratorCommand;
 use Override;
 use Symfony\Component\Console\Input\InputOption;
 
-final class MakeDtoCommand extends GeneratorCommand
+final class MakeDTOCommand extends GeneratorCommand
 {
     /**
      * The console command name.
