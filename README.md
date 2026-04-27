@@ -190,23 +190,32 @@ If you are not using Herd, run `php artisan serve` in another terminal.
 
 ### PHP / Composer
 
-| Command                          | Description                           |
-| -------------------------------- | ------------------------------------- |
-| `composer dev`                   | Start Vite + queue + pail together    |
-| `composer test`                  | Run Pest with compact coverage output |
-| `composer pint`                  | Format PHP code with Laravel Pint     |
-| `composer pint:check`            | Check PHP formatting with Pint        |
-| `composer phpstan`               | Run Larastan static analysis          |
-| `composer rector`                | Run Rector refactoring                |
-| `composer lint`                  | Run Rector + ESLint                   |
-| `composer format`                | Run Pint + Prettier                   |
-| `composer format:check`          | Check Pint + Prettier                 |
-| `composer review`                | Run lint + format + test + phpstan    |
-| `composer build`                 | Build frontend assets                 |
-| `composer build:ssr`             | Build frontend + SSR bundle           |
-| `composer deps:update`           | Update Composer and npm dependencies  |
-| `composer logs:delete`           | Clear log files in storage/logs       |
-| `php artisan wayfinder:generate` | Regenerate Wayfinder TypeScript files |
+| Command                          | Description                                    |
+| -------------------------------- | ---------------------------------------------- |
+| `composer dev`                   | Start Vite + queue + pail together             |
+| `composer test`                  | Run tests with `php artisan test --compact`    |
+| `composer test:coverage`         | Run tests with coverage output                 |
+| `composer pest`                  | Run Pest with compact output                   |
+| `composer pest:coverage`         | Run Pest with coverage output                  |
+| `composer pint`                  | Format PHP code with Laravel Pint              |
+| `composer pint:check`            | Check PHP formatting with Pint                 |
+| `composer phpstan`               | Run Larastan static analysis                   |
+| `composer rector`                | Run Rector refactoring                         |
+| `composer rector:check`          | Check Rector changes without writing           |
+| `composer eslint`                | Run ESLint with auto-fix                       |
+| `composer eslint:check`          | Run ESLint checks without auto-fix             |
+| `composer lint`                  | Run Rector + ESLint with fixes                 |
+| `composer lint:check`            | Run Rector + ESLint checks only                |
+| `composer format`                | Run Pint + Prettier                            |
+| `composer format:check`          | Check Pint + Prettier                          |
+| `composer review`                | Run lint/check + format/check + test + phpstan |
+| `composer build`                 | Build frontend assets                          |
+| `composer build:ssr`             | Build frontend + SSR bundle                    |
+| `composer update:composer`       | Update Composer dependencies                   |
+| `composer update:npm`            | Update npm dependencies                        |
+| `composer deps:update`           | Update Composer and npm dependencies           |
+| `composer logs:delete`           | Clear log files in storage/logs                |
+| `php artisan wayfinder:generate` | Regenerate Wayfinder TypeScript files          |
 
 ### Node / npm
 
@@ -247,6 +256,19 @@ Tests are written with **Pest 4**. Run the full suite:
 
 ```bash
 php artisan test --compact
+```
+
+Run coverage when needed:
+
+```bash
+composer test:coverage
+```
+
+If you want to run Pest directly instead of the Artisan test runner:
+
+```bash
+composer pest
+composer pest:coverage
 ```
 
 Run a specific test file or filter by name:
