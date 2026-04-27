@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Auth\ConfirmablePasswordController::show
-* @see app/Http/Controllers/Auth/ConfirmablePasswordController.php:20
+* @see app/Http/Controllers/Auth/ConfirmablePasswordController.php:19
 * @route '/confirm-password'
 */
 export const show = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ show.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\ConfirmablePasswordController::show
-* @see app/Http/Controllers/Auth/ConfirmablePasswordController.php:20
+* @see app/Http/Controllers/Auth/ConfirmablePasswordController.php:19
 * @route '/confirm-password'
 */
 show.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ show.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\ConfirmablePasswordController::show
-* @see app/Http/Controllers/Auth/ConfirmablePasswordController.php:20
+* @see app/Http/Controllers/Auth/ConfirmablePasswordController.php:19
 * @route '/confirm-password'
 */
 show.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ show.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\ConfirmablePasswordController::show
-* @see app/Http/Controllers/Auth/ConfirmablePasswordController.php:20
+* @see app/Http/Controllers/Auth/ConfirmablePasswordController.php:19
 * @route '/confirm-password'
 */
 show.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ show.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\ConfirmablePasswordController::store
-* @see app/Http/Controllers/Auth/ConfirmablePasswordController.php:32
+* @see app/Http/Controllers/Auth/ConfirmablePasswordController.php:31
 * @route '/confirm-password'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -60,7 +60,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\ConfirmablePasswordController::store
-* @see app/Http/Controllers/Auth/ConfirmablePasswordController.php:32
+* @see app/Http/Controllers/Auth/ConfirmablePasswordController.php:31
 * @route '/confirm-password'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -69,7 +69,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\ConfirmablePasswordController::store
-* @see app/Http/Controllers/Auth/ConfirmablePasswordController.php:32
+* @see app/Http/Controllers/Auth/ConfirmablePasswordController.php:31
 * @route '/confirm-password'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({

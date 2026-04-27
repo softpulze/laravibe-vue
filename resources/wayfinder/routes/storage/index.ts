@@ -62,4 +62,11 @@ const storage = {
     local: Object.assign(local, localA91488),
 }
 
+export default storage   method: 'head',
+})
+
+const storage = {
+    local: Object.assign(local, localA91488),
+}
+
 export default storage
