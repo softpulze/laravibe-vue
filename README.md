@@ -96,6 +96,11 @@ A dedicated `/administration` section, guarded by middleware, with a dashboard p
 
 ### For Developers
 
+> **🤖 AI-Ready from Day One**  
+> LaraVibe-Vue is built with **Laravel Boost** integration, providing AI agents with full context of your codebase — schema inspection, database queries, error logs, and semantic documentation search. Pair it with GitHub Copilot or your favorite AI agent, and watch it understand your entire stack instantly. The structured conventions and documented architecture mean AI agents can read, understand, and contribute confidently.
+> **🤖 AI-Ready from Day One**  
+> LaraVibe-Vue ships with **default AI agent configuration for GitHub Copilot and OpenCode** — both pre-configured to understand your entire codebase instantly. Need to regenerate or customize? Use the **Laravel Boost command** to re-scaffold agent configurations with full context: schema inspection, database queries, error logs, semantic documentation search, and codebase-aware instructions. The structured conventions and documented architecture mean AI agents can read, understand, and contribute confidently.
+
 #### 🛠️ Developer Tooling — Full Power, Zero Configuration
 
 Most starter kits leave you to wire up your own code quality tools. LaraVibe-Vue ships with a **complete, pre-configured professional toolchain** — the same setup senior engineers spend days assembling on real projects, ready to go from your very first commit.
