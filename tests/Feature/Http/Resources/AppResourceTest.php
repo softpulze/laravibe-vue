@@ -23,14 +23,12 @@ it('resolves a resource to plain inertia props', function (): void {
             'id' => $user->id,
             'name' => 'Jane Doe',
             'email' => 'jane@example.com',
-            'remember_token' => $user->remember_token,
-            'created_at' => $user->created_at->toApiDatetime(),
-            'created_at_display' => $user->created_at->toStringDatetime(),
-            'updated_at' => $user->updated_at->toApiDatetime(),
-            'updated_at_display' => $user->updated_at->toStringDatetime(),
         ])
         ->toHaveKey('email_verified_at', $user->email_verified_at?->toApiDatetime())
-        ->toHaveKey('email_verified_at_display', $user->email_verified_at?->toStringDatetime());
+        ->toHaveKey('email_verified_at_display', $user->email_verified_at?->toStringDatetime())
+        ->not->toHaveKey('remember_token')
+        ->not->toHaveKey('created_at')
+        ->not->toHaveKey('updated_at');
 });
 
 it('supports alias prefix suffix transforms and timestamps', function (): void {
@@ -169,11 +167,11 @@ it('builds a typed collection for resources', function (): void {
             'email',
             'email_verified_at',
             'email_verified_at_display',
+        ])
+        ->each->not->toHaveKeys([
             'remember_token',
             'created_at',
-            'created_at_display',
             'updated_at',
-            'updated_at_display',
         ]);
 });
 

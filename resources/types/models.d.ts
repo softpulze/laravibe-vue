@@ -9,8 +9,5 @@ export interface User {
     avatar?: string;
 
     email_verified_at?: Nullable<string>;
-    remember_token?: string;
-
-    created_at?: string;
-    updated_at?: string;
+    email_verified_at_display?: Nullable<string>;
 }

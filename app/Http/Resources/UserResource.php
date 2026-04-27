@@ -19,7 +19,6 @@ final class UserResource extends AppResource
      */
     public function toArray(Request $request): array
     {
-
         return [
             $this->id(),
 
@@ -27,9 +26,6 @@ final class UserResource extends AppResource
             $this->attribute('email'),
 
             $this->optionalDateTimeAttributes('email_verified_at'),
-            $this->optionalAttribute('remember_token'),
-
-            ...$this->timestamps(),
         ];
     }
 }

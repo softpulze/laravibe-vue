@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -42,15 +43,41 @@ final class HandleInertiaRequests extends Middleware
         $quote = Inspiring::quotes()->random();
         [$message, $author] = str($quote)->explode('-');
 
+        $user = $request->user();
+
         return [
             ...parent::share($request),
             'name' => config('app.name'),
             'quote' => ['message' => mb_trim((string) $message), 'author' => mb_trim((string) $author)],
             'auth' => [
-                ...($request->user() ? ['user' => $request->user()->toResource()] : []),
+                'user' => $user?->toResource(),
+                'can' => $this->resolveAbilities($user),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'toasts' => alwaysProp(fn (): array => toast()->pull()),
+        ];
+    }
+
+    /**
+     * Resolve the UI-relevant abilities for the given user.
+     *
+     * Add ability keys here as the application grows. Each key maps directly
+     * to a `can()` call in Vue components (e.g. `can('updateProfile')`).
+     *
+     * @return array<string, bool>
+     */
+    private function resolveAbilities(?User $user): array
+    {
+        if ($user === null) {
+            return [
+                'updateProfile' => false,
+                'deleteAccount' => false,
+            ];
+        }
+
+        return [
+            'updateProfile' => true,
+            'deleteAccount' => true,
         ];
     }
 }

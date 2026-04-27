@@ -20,7 +20,8 @@ interface Props {
 
 defineProps<Props>();
 
-const { authUser } = useAuth();
+const { requireUser } = useAuth();
+const user = requireUser();
 </script>
 
 <template>
@@ -43,7 +44,7 @@ const { authUser } = useAuth();
                                     id="name"
                                     class="h-9"
                                     name="name"
-                                    :default-value="authUser?.name"
+                                    :default-value="user.name"
                                     required
                                     autocomplete="name"
                                     placeholder="Enter your full name"
@@ -58,7 +59,7 @@ const { authUser } = useAuth();
                                     type="email"
                                     class="h-9"
                                     name="email"
-                                    :default-value="authUser?.email"
+                                    :default-value="user.email"
                                     required
                                     autocomplete="username"
                                     placeholder="Enter your email address"
@@ -69,7 +70,7 @@ const { authUser } = useAuth();
 
                         <!-- Email Verification Notice -->
                         <div
-                            v-if="mustVerifyEmail && !authUser?.email_verified_at"
+                            v-if="mustVerifyEmail && !user.email_verified_at"
                             class="rounded-md border border-amber-200 bg-amber-50 p-3 dark:border-amber-800 dark:bg-amber-950/50"
                         >
                             <div class="flex">
