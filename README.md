@@ -86,6 +86,7 @@ Out of the box you get authentication, account management, an administration are
 - **PageMeta DTO** — pass page titles and meta from the server to Vue in a typed, consistent way.
 - **Breadcrumbs DTO** — a structured way to define breadcrumb trails server-side.
 - **DTO conventions and usage guide** — see `app/DTOs/README.md`.
+- **Enum conventions and usage guide** — see `app/Enums/README.md`.
 - **HTTP resource conventions and usage guide** — see `app/Http/Resources/README.md`.
 - **shadcn-vue component library** — pre-configured via `components.json` and `reka-ui`.
 
@@ -95,7 +96,7 @@ Out of the box you get authentication, account management, an administration are
 app/
 ├── Actions/            # Single-responsibility action classes
 ├── DTOs/               # Typed data transfer objects (PageMeta, BreadCrumb)
-├── Enums/              # Backed enums (ToastType, ToastActionType)
+├── Enums/              # Backed enums + shared enum concerns
 ├── Http/
 │   ├── Controllers/    # Auth & Account controllers
 │   ├── Middleware/     # Custom middleware
@@ -104,7 +105,7 @@ app/
 ├── Models/             # Eloquent models
 ├── Support/            # Helpers, LaraTweaks, CarbonImmutable
 ├── Toast/              # Self-contained toast notification system
-└── Traits/             # Reusable traits (ArrayableEnum)
+└── Traits/             # Reusable compatibility traits
 
 resources/
 ├── components/         # Shared Vue components & shadcn-vue UI

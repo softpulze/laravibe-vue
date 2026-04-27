@@ -13,8 +13,8 @@ parameters:
     ignoreErrors:
         -
             identifier: trait.unused
-            paths:
-                - app/Traits/ArrayableEnum.php
+#           paths:
+#               - ExampleFile
 
 #    excludePaths:
 #        - ./*/*/FileToBeExcluded.php
