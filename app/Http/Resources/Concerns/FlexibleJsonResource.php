@@ -72,17 +72,33 @@ trait FlexibleJsonResource
 
     protected function createdAt(): MergeValue|MissingValue
     {
-        return $this->attribute('created_at', true, fn (CarbonImmutable $deleted_at): string => $deleted_at->toStringDatetime());
+        return $this->optionalDateTimeAttributes('created_at');
     }
 
     protected function updatedAt(): MergeValue|MissingValue
     {
-        return $this->attribute('updated_at', true, fn (CarbonImmutable $deleted_at): string => $deleted_at->toStringDatetime());
+        return $this->optionalDateTimeAttributes('updated_at');
     }
 
     protected function deletedAt(): MergeValue|MissingValue
     {
-        return $this->attribute('deleted_at', true, fn (?CarbonImmutable $deleted_at): ?string => $deleted_at?->toStringDatetime());
+        return $this->optionalDateTimeAttributes('deleted_at');
+    }
+
+    protected function optionalDateTimeAttributes(string $key): MergeValue|MissingValue
+    {
+        $attributePresent = array_key_exists($key, $this->getAttributes());
+
+        /** @var MergeValue|MissingValue */
+        return $this->mergeWhen((bool) $attributePresent, function () use ($key): array {
+            /** @var CarbonImmutable|null $dateTime */
+            $dateTime = $this->{$key};
+
+            return [
+                $key => $dateTime?->toApiDatetime(),
+                "{$key}_display" => $dateTime?->toStringDatetime(),
+            ];
+        });
     }
 
     /**

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Resources;
 
 use App\Models\User;
-use App\Support\CarbonImmutable;
 use Illuminate\Http\Request;
 
 /**
@@ -27,9 +26,7 @@ final class UserResource extends AppResource
             $this->attribute('name'),
             $this->attribute('email'),
 
-            $this->optionalAttribute('email_verified_at',
-                fn (?CarbonImmutable $deleted_at): ?string => $deleted_at?->toStringDatetime()
-            ),
+            $this->optionalDateTimeAttributes('email_verified_at'),
             $this->optionalAttribute('remember_token'),
 
             ...$this->timestamps(),

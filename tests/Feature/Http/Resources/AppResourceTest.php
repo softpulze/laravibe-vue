@@ -24,13 +24,19 @@ it('resolves a resource to plain inertia props', function (): void {
             'name' => 'Jane Doe',
             'email' => 'jane@example.com',
             'remember_token' => $user->remember_token,
-            'created_at' => $user->created_at->toStringDatetime(),
-            'updated_at' => $user->updated_at->toStringDatetime(),
+            'created_at' => $user->created_at->toApiDatetime(),
+            'created_at_display' => $user->created_at->toStringDatetime(),
+            'updated_at' => $user->updated_at->toApiDatetime(),
+            'updated_at_display' => $user->updated_at->toStringDatetime(),
         ])
-        ->toHaveKey('email_verified_at', $user->email_verified_at?->toStringDatetime());
+        ->toHaveKey('email_verified_at', $user->email_verified_at?->toApiDatetime())
+        ->toHaveKey('email_verified_at_display', $user->email_verified_at?->toStringDatetime());
 });
 
 it('supports alias prefix suffix transforms and timestamps', function (): void {
+    $createdAt = CarbonImmutable::parse('2026-04-27 13:45:00');
+    $updatedAt = CarbonImmutable::parse('2026-04-27 13:50:00');
+
     $resource = new class(new class() implements Arrayable
     {
         public int $id = 7;
@@ -85,8 +91,10 @@ it('supports alias prefix suffix transforms and timestamps', function (): void {
     expect($resource->toInertia())->toBe([
         'id' => 7,
         'profile_value_label' => 'ALPHA',
-        'created_at' => '2026-04-27 01:45 PM',
-        'updated_at' => '2026-04-27 01:50 PM',
+        'created_at' => $createdAt->toApiDatetime(),
+        'created_at_display' => $createdAt->toStringDatetime(),
+        'updated_at' => $updatedAt->toApiDatetime(),
+        'updated_at_display' => $updatedAt->toStringDatetime(),
     ]);
 });
 
@@ -155,7 +163,18 @@ it('builds a typed collection for resources', function (): void {
         ->toBeInstanceOf(AppResourceCollection::class)
         ->and($collection->toInertia())
         ->toHaveCount(2)
-        ->each->toHaveKeys(['id', 'name', 'email', 'email_verified_at', 'remember_token', 'created_at', 'updated_at']);
+        ->each->toHaveKeys([
+            'id',
+            'name',
+            'email',
+            'email_verified_at',
+            'email_verified_at_display',
+            'remember_token',
+            'created_at',
+            'created_at_display',
+            'updated_at',
+            'updated_at_display',
+        ]);
 });
 
 it('resolves paginated collections for inertia with meta and links', function (): void {

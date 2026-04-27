@@ -80,8 +80,7 @@ Out of the box you get authentication, account management, an administration are
 - **Laravel Wayfinder** — auto-generated, fully-typed TypeScript functions for every controller action and named route. No more hardcoded URLs on the frontend.
 - **SSR out of the box** — server-side rendering powered by `@inertiajs/vite` with cluster mode.
 - **Toast notification system** — see [app/Toast/README.md](app/Toast/README.md) for architecture, usage, and conventions.
-- **LaraTweaks** — opinionated Laravel defaults applied at boot: strict Eloquent mode, `CarbonImmutable` dates, HTTPS-forced URLs, Vite asset prefetching, and destructive command protection in production.
-- **Global helper functions** — `vue()`, `optionalProp()`, `deferProp()`, `alwaysProp()`, `authUser()` to keep controllers clean and expressive.
+- **Support layer conventions and usage guide** — see [app/Support/README.md](app/Support/README.md).
 - **Action conventions and usage guide** — see `app/Actions/README.md`.
 - **PageMeta DTO** — pass page titles and meta from the server to Vue in a typed, consistent way.
 - **Breadcrumbs DTO** — a structured way to define breadcrumb trails server-side.
@@ -103,7 +102,7 @@ app/
 │   ├── Requests/       # Form request validation
 │   └── Resources/      # Eloquent API resources and shared concerns
 ├── Models/             # Eloquent models
-├── Support/            # Helpers, LaraTweaks, CarbonImmutable
+├── Support/            # Framework support utilities
 ├── Toast/              # Self-contained toast notification system
 └── Traits/             # Reusable compatibility traits
 
