@@ -106,7 +106,7 @@ verify.head = (args: { id: string | number, hash: string | number } | [id: strin
 
 /**
 * @see \App\Http\Controllers\Auth\EmailVerificationNotificationController::send
-* @see app/Http/Controllers/Auth/EmailVerificationNotificationController.php:16
+* @see app/Http/Controllers/Auth/EmailVerificationNotificationController.php:14
 * @route '/email/verification-notification'
 */
 export const send = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -121,7 +121,7 @@ send.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\EmailVerificationNotificationController::send
-* @see app/Http/Controllers/Auth/EmailVerificationNotificationController.php:16
+* @see app/Http/Controllers/Auth/EmailVerificationNotificationController.php:14
 * @route '/email/verification-notification'
 */
 send.url = (options?: RouteQueryOptions) => {
@@ -130,7 +130,7 @@ send.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\EmailVerificationNotificationController::send
-* @see app/Http/Controllers/Auth/EmailVerificationNotificationController.php:16
+* @see app/Http/Controllers/Auth/EmailVerificationNotificationController.php:14
 * @route '/email/verification-notification'
 */
 send.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({

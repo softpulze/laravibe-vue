@@ -22,7 +22,7 @@ trait HasEnumMetadata
      */
     public static function values(): array
     {
-        return array_map(static fn (self $case): int|string => static::extractValue($case), self::cases());
+        return array_map(static::extractValue(...), self::cases());
     }
 
     /**
@@ -66,7 +66,7 @@ trait HasEnumMetadata
     public static function tryFromName(string $name): ?self
     {
         foreach (self::cases() as $case) {
-            if (strcasecmp($case->name, $name) === 0) {
+            if (strcasecmp((string) $case->name, $name) === 0) {
                 return $case;
             }
         }

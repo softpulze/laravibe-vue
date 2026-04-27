@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
+use Override;
 use Symfony\Component\Console\Input\InputOption;
 
 final class MakeActionCommand extends GeneratorCommand
@@ -43,6 +44,7 @@ final class MakeActionCommand extends GeneratorCommand
      *
      * @param  string  $rootNamespace
      */
+    #[Override]
     protected function getDefaultNamespace($rootNamespace): string
     {
         return $rootNamespace . '\\Actions';
@@ -53,6 +55,7 @@ final class MakeActionCommand extends GeneratorCommand
      *
      * @return array<array{string, string, int, string}>
      */
+    #[Override]
     protected function getOptions(): array
     {
         return [

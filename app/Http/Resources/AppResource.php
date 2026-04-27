@@ -6,6 +6,7 @@ namespace App\Http\Resources;
 
 use App\Http\Resources\Concerns\FlexibleJsonResource;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Override;
 
 abstract class AppResource extends JsonResource
 {
@@ -24,6 +25,7 @@ abstract class AppResource extends JsonResource
     /**
      * Create a new resource collection instance.
      */
+    #[Override]
     protected static function newCollection($resource): AppResourceCollection
     {
         return new AppResourceCollection($resource, static::class);

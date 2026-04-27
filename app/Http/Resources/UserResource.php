@@ -6,6 +6,7 @@ namespace App\Http\Resources;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Override;
 
 /**
  * @mixin User
@@ -17,6 +18,7 @@ final class UserResource extends AppResource
      *
      * @return array<int|string, mixed>
      */
+    #[Override]
     public function toArray(Request $request): array
     {
         return [

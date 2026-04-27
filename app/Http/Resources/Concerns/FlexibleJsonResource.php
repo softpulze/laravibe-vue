@@ -90,7 +90,7 @@ trait FlexibleJsonResource
         $attributePresent = array_key_exists($key, $this->getAttributes());
 
         /** @var MergeValue|MissingValue */
-        return $this->mergeWhen((bool) $attributePresent, function () use ($key): array {
+        return $this->mergeWhen($attributePresent, function () use ($key): array {
             /** @var CarbonImmutable|null $dateTime */
             $dateTime = $this->{$key};
 
@@ -125,7 +125,7 @@ trait FlexibleJsonResource
 
     private function formatKey(string $key, ?string $alias, string $prefix, string $suffix): string
     {
-        return $prefix . ($alias !== null && $alias !== '' && $alias !== '0' ? $alias : $key) . $suffix;
+        return $prefix . (in_array($alias, [null, '', '0'], true) ? $key : $alias) . $suffix;
     }
 
     private function normalizeValue(mixed $value): mixed

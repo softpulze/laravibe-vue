@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Override;
 
 final class HandleInertiaRequests extends Middleware
 {
@@ -25,6 +26,7 @@ final class HandleInertiaRequests extends Middleware
      *
      * @see https://inertiajs.com/asset-versioning
      */
+    #[Override]
     public function version(Request $request): ?string
     {
         return parent::version($request);
@@ -37,6 +39,7 @@ final class HandleInertiaRequests extends Middleware
      *
      * @return array<string, mixed>
      */
+    #[Override]
     public function share(Request $request): array
     {
         /** @var string $quote */
@@ -68,7 +71,7 @@ final class HandleInertiaRequests extends Middleware
      */
     private function resolveAbilities(?User $user): array
     {
-        if ($user === null) {
+        if (! $user instanceof User) {
             return [
                 'updateProfile' => false,
                 'deleteAccount' => false,

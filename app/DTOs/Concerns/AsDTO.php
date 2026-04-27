@@ -200,7 +200,7 @@ trait AsDTO
      */
     private static function resolveTypeInfo(?ReflectionType $type): array
     {
-        if ($type === null) {
+        if (! $type instanceof ReflectionType) {
             return [
                 'builtinTypes' => [],
                 'classTypes' => [],
@@ -370,7 +370,7 @@ trait AsDTO
             if (is_subclass_of($classType, BackedEnum::class) && (is_string($value) || is_int($value))) {
                 $enum = $classType::tryFrom($value);
 
-                if ($enum !== null) {
+                if ($enum instanceof BackedEnum) {
                     return ['matched' => true, 'value' => $enum];
                 }
             }

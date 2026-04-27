@@ -6,12 +6,14 @@ namespace App\Providers;
 
 use App\Support\LaraTweaks;
 use Illuminate\Support\ServiceProvider;
+use Override;
 
 final class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
      */
+    #[Override]
     public function register(): void
     {
         //

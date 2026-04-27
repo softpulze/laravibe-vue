@@ -8,9 +8,9 @@ use App\Toast\DTOs\ToastPayload;
 
 final class Toast
 {
-    public const KEY = 'toasts';
+    public const string KEY = 'toasts';
 
-    private const MAX_QUEUE_ITEMS = 5;
+    private const int MAX_QUEUE_ITEMS = 5;
 
     /**
      * @return array<int, array<string, mixed>>
