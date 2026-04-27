@@ -88,6 +88,7 @@ Out of the box you get authentication, account management, an administration are
 - **Enum conventions and usage guide** — see `app/Enums/README.md`.
 - **HTTP resource conventions and usage guide** — see `app/Http/Resources/README.md`.
 - **shadcn-vue component library** — pre-configured via `components.json` and `reka-ui`.
+- **Auth composable** — typed `useAuth` with `user`, `isAuthenticated`, `can()`, and `requireUser()` helpers. See [resources/composables/README.md](resources/composables/README.md).
 
 ### Project Structure
 
