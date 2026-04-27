@@ -6,27 +6,40 @@ namespace App\Toast;
 
 use App\Toast\DTOs\ToastPayload;
 
-/**
- * @phpstan-import-type ToastItemsShape from ToastPayload
- */
 final class Toast
 {
     public const KEY = 'toasts';
 
+    private const MAX_QUEUE_ITEMS = 5;
+
     /**
-     * @return ToastItemsShape
+     * @return array<int, array<string, mixed>>
      */
     public function pull(): array
     {
-        /** @var ToastItemsShape */
+        /** @var array<int, array<string, mixed>> */
         return session()->pull(self::KEY, []);
     }
 
     public function append(ToastPayload $newToast): void
     {
-        /** @var ToastItemsShape $toast */
+        /** @var array<int, array<string, mixed>> $toast */
         $toast = session()->get(self::KEY, []);
-        $toast[] = $newToast->toArray();
+
+        $serializedToast = $newToast->toArray();
+        $latestToast = $toast[count($toast) - 1] ?? null;
+
+        if (is_array($latestToast) && $latestToast === $serializedToast) {
+            return;
+        }
+
+        $toast[] = $serializedToast;
+
+        if (count($toast) > self::MAX_QUEUE_ITEMS) {
+            /** @var array<int, array<string, mixed>> $toast */
+            $toast = array_slice($toast, -self::MAX_QUEUE_ITEMS);
+        }
+
         session()->flash(self::KEY, $toast);
     }
 }

@@ -19,7 +19,7 @@
 
 LaraVibe-Vue is an open-source starter kit that combines the backend power of **Laravel 13** with a fully typed **Vue 3** frontend via **Inertia.js v3** — giving you a modern SPA feel without sacrificing the simplicity of classic server-side routing and controllers.
 
-Out of the box you get authentication, account management, an administration area, SSR support, a toast notification system, type-safe route helpers, and a curated set of developer tooling — all wired together and ready to go.
+Out of the box you get authentication, account management, an administration area, SSR support, type-safe route helpers, and a curated set of developer tooling — all wired together and ready to go.
 
 ---
 
@@ -79,7 +79,7 @@ Out of the box you get authentication, account management, an administration are
 
 - **Laravel Wayfinder** — auto-generated, fully-typed TypeScript functions for every controller action and named route. No more hardcoded URLs on the frontend.
 - **SSR out of the box** — server-side rendering powered by `@inertiajs/vite` with cluster mode.
-- **Toast notification system** — a first-class PHP `Toast` facade/helper flashes notifications that surface automatically in Vue via `vue-sonner`.
+- **Toast notification system** — see [app/Toast/README.md](app/Toast/README.md) for architecture, usage, and conventions.
 - **LaraTweaks** — opinionated Laravel defaults applied at boot: strict Eloquent mode, `CarbonImmutable` dates, HTTPS-forced URLs, Vite asset prefetching, and destructive command protection in production.
 - **Global helper functions** — `vue()`, `optionalProp()`, `deferProp()`, `alwaysProp()`, `authUser()` to keep controllers clean and expressive.
 - **Action conventions and usage guide** — see `app/Actions/README.md`.
@@ -238,22 +238,6 @@ import { route } from '@/routes/web'
 // In a template
 <Link :href="AccountController.edit().url()">Account</Link>
 ```
-
----
-
-## Toast Notifications
-
-Flash a toast from any controller or action using the global `toast()` helper:
-
-```php
-use App\Toast\Toast;
-
-toast()->success('Profile updated.');
-toast()->error('Something went wrong.');
-toast()->warning('Check your input.');
-```
-
-Toasts are automatically forwarded to the Vue frontend via Inertia shared data and rendered by `vue-sonner`.
 
 ---
 

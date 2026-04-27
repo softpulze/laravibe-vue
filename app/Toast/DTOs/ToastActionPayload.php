@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Toast\DTOs;
 
+use App\DTOs\Concerns\AsDTO;
 use App\Enums\ToastActionType;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
@@ -13,6 +14,8 @@ use Illuminate\Contracts\Support\Jsonable;
  */
 final readonly class ToastActionPayload implements Arrayable, Jsonable
 {
+    use AsDTO;
+
     /**
      * Create a new class instance.
      */
@@ -34,22 +37,8 @@ final readonly class ToastActionPayload implements Arrayable, Jsonable
         return new self(ToastActionType::REDIRECT, $redirectURL, $label);
     }
 
-    /**
-     * Get the instance as an array.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(): array
+    protected static function shouldThrowOnUnknownKeys(): bool
     {
-        return [
-            'type' => $this->type->value,
-            'payload' => $this->payload,
-            'label' => $this->label,
-        ];
-    }
-
-    public function toJson($options = 0): string // @pest-ignore-type
-    {
-        return (string) json_encode($this->toArray(), $options);
+        return true;
     }
 }

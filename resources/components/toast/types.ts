@@ -12,4 +12,6 @@ export interface ToastPayload {
     type: ToastType;
     message: string;
     actions?: ToastActionPayload[];
+    duration?: number;
+    dismissible?: boolean;
 }
