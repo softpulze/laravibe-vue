@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { store } from '@/wayfinder/routes/password';
-import { Form } from '@inertiajs/vue3';
-import { LoaderCircle } from 'lucide-vue-next';
-import { ref } from 'vue';
+import InputError from '@/components/InputError.vue'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { store } from '@/wayfinder/routes/password'
+import { Form } from '@inertiajs/vue3'
+import { LoaderCircle } from 'lucide-vue-next'
+import { ref } from 'vue'
 
 const props = defineProps<{
-    token: string;
-    email: string;
-}>();
+    token: string
+    email: string
+}>()
 
-const inputEmail = ref(props.email);
+const inputEmail = ref(props.email)
 </script>
 
 <template>

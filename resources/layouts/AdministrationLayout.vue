@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import Header from '@/components/administration/Header.vue';
-import Sidebar from '@/components/administration/Sidebar.vue';
-import { SidebarLayout as Layout } from '@/components/layout';
-import { ToastProvider } from '@/components/toast';
-import { usePageMeta } from '@/composables/usePageMeta';
-import type { BreadcrumbItemType } from '@/types';
-import { Head, usePage } from '@inertiajs/vue3';
+import Header from '@/components/administration/Header.vue'
+import Sidebar from '@/components/administration/Sidebar.vue'
+import { SidebarLayout as Layout } from '@/components/layout'
+import { ToastProvider } from '@/components/toast'
+import { usePageMeta } from '@/composables/usePageMeta'
+import type { BreadcrumbItemType } from '@/types'
+import { Head, usePage } from '@inertiajs/vue3'
 
 interface Props {
-    breadcrumbs?: BreadcrumbItemType[];
+    breadcrumbs?: BreadcrumbItemType[]
 }
 
 withDefaults(defineProps<Props>(), {
     breadcrumbs: () => [],
-});
+})
 
-const meta = usePageMeta();
+const meta = usePageMeta()
 </script>
 
 <template>

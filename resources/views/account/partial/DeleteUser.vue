@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import { Form } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { Form } from '@inertiajs/vue3'
+import { ref } from 'vue'
 
-import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useAuth } from '@/composables/useAuth';
-import { Nullable } from '@/types';
-import account from '@/wayfinder/routes/account';
-import { Trash2, TriangleAlert } from 'lucide-vue-next';
+import InputError from '@/components/InputError.vue'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { useAuth } from '@/composables/useAuth'
+import { Nullable } from '@/types'
+import account from '@/wayfinder/routes/account'
+import { Trash2, TriangleAlert } from 'lucide-vue-next'
 
-const confirmingUserDeletion = ref(false);
-const passwordInput = ref<Nullable<HTMLInputElement>>(null);
+const confirmingUserDeletion = ref(false)
+const passwordInput = ref<Nullable<HTMLInputElement>>(null)
 
 const confirmUserDeletion = () => {
-    confirmingUserDeletion.value = true;
-};
+    confirmingUserDeletion.value = true
+}
 
 const closeModal = () => {
-    confirmingUserDeletion.value = false;
-};
+    confirmingUserDeletion.value = false
+}
 
-const { authUser } = useAuth();
+const { authUser } = useAuth()
 </script>
 
 <template>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { AuthCardLayout as Layout } from '@/components/layout';
-import { ToastProvider } from '@/components/toast';
-import { usePageMeta } from '@/composables/usePageMeta';
-import { Head } from '@inertiajs/vue3';
+import { AuthCardLayout as Layout } from '@/components/layout'
+import { ToastProvider } from '@/components/toast'
+import { usePageMeta } from '@/composables/usePageMeta'
+import { Head } from '@inertiajs/vue3'
 
-const meta = usePageMeta();
+const meta = usePageMeta()
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Logo from '@/components/Logo.vue';
-import LogoIcon from '@/components/LogoIcon.vue';
+import Logo from '@/components/Logo.vue'
+import LogoIcon from '@/components/LogoIcon.vue'
 import {
     Sidebar,
     SidebarContent,
@@ -11,15 +11,15 @@ import {
     SidebarMenuItem,
     SidebarRail,
     useSidebar,
-} from '@/components/ui/sidebar';
-import { cn } from '@/lib/utils';
-import { type NavItem } from '@/types';
-import { dashboard as administrationDashboard } from '@/wayfinder/routes/administration';
-import { Link } from '@inertiajs/vue3';
-import { CircleGauge, FolderGit } from 'lucide-vue-next';
-import NavFooter from './NavFooter.vue';
-import NavMain from './NavMain.vue';
-import NavUser from './NavUser.vue';
+} from '@/components/ui/sidebar'
+import { cn } from '@/lib/utils'
+import { type NavItem } from '@/types'
+import { dashboard as administrationDashboard } from '@/wayfinder/routes/administration'
+import { Link } from '@inertiajs/vue3'
+import { CircleGauge, FolderGit } from 'lucide-vue-next'
+import NavFooter from './NavFooter.vue'
+import NavMain from './NavMain.vue'
+import NavUser from './NavUser.vue'
 
 const mainNavItems: NavItem[] = [
     {
@@ -27,7 +27,7 @@ const mainNavItems: NavItem[] = [
         href: administrationDashboard.url(),
         icon: CircleGauge,
     },
-];
+]
 
 const footerNavItems: NavItem[] = [
     {
@@ -35,9 +35,9 @@ const footerNavItems: NavItem[] = [
         href: 'https://github.com/softpulze/laravibe-vue',
         icon: FolderGit,
     },
-];
+]
 
-const { open } = useSidebar();
+const { open } = useSidebar()
 </script>
 
 <template>

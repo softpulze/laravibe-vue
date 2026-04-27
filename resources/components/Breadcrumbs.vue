@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
-import { Breadcrumb as BreadcrumbT } from '@/types/data';
-import { Link } from '@inertiajs/vue3';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
+import { Breadcrumb as BreadcrumbT } from '@/types/data'
+import { Link } from '@inertiajs/vue3'
 
 defineProps<{
-    breadcrumbs: BreadcrumbT[];
-}>();
+    breadcrumbs: BreadcrumbT[]
+}>()
 </script>
 
 <template>

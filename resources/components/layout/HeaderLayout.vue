@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LayoutContent, LayoutShell } from './';
+import { LayoutContent, LayoutShell } from './'
 </script>
 
 <template>

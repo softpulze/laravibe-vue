@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { cn } from '@/lib/utils';
-import { HTMLAttributes } from 'vue';
+import { cn } from '@/lib/utils'
+import { HTMLAttributes } from 'vue'
 
 interface Props {
-    title: string;
-    description?: string;
-    classNames?: HTMLAttributes['class'];
+    title: string
+    description?: string
+    classNames?: HTMLAttributes['class']
 }
 
-defineProps<Props>();
+defineProps<Props>()
 </script>
 
 <template>

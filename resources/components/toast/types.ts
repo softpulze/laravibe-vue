@@ -1,17 +1,17 @@
-export type ToastActionType = 'copy' | 'redirect';
+export type ToastActionType = 'copy' | 'redirect'
 
-export type ToastType = 'error' | 'success' | 'warning' | 'info';
+export type ToastType = 'error' | 'success' | 'warning' | 'info'
 
 export interface ToastActionPayload {
-    type: ToastActionType;
-    payload: string;
-    label?: string | null;
+    type: ToastActionType
+    payload: string
+    label?: string | null
 }
 
 export interface ToastPayload {
-    type: ToastType;
-    message: string;
-    actions?: ToastActionPayload[];
-    duration?: number;
-    dismissible?: boolean;
+    type: ToastType
+    message: string
+    actions?: ToastActionPayload[]
+    duration?: number
+    dismissible?: boolean
 }

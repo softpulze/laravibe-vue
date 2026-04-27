@@ -1,15 +1,15 @@
-import { Nullable } from '.';
+import { Nullable } from '.'
 
 export interface Breadcrumb {
-    label: string;
-    href: Nullable<string>;
+    label: string
+    href: Nullable<string>
 }
 
 export interface PageMeta {
-    heading?: string;
-    subheading?: string;
+    heading?: string
+    subheading?: string
 
-    title?: string;
+    title?: string
 
-    breadcrumbs?: Breadcrumb[];
+    breadcrumbs?: Breadcrumb[]
 }

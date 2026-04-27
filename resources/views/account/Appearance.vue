@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import AppearanceTabs from './partial/AppearanceTabs.vue';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import AppearanceTabs from './partial/AppearanceTabs.vue'
 
-import SettingsLayout from '@/layouts/AccountLayout.vue';
-import { SwatchBook } from 'lucide-vue-next';
+import SettingsLayout from '@/layouts/AccountLayout.vue'
+import { SwatchBook } from 'lucide-vue-next'
 </script>
 
 <template>

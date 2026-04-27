@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useAppearance } from '@/composables/useAppearance';
-import { BadgeAlert, BadgeCheck, BadgeInfo, BadgeX } from 'lucide-vue-next';
-import { Toaster } from 'vue-sonner';
-import 'vue-sonner/style.css';
+import { useAppearance } from '@/composables/useAppearance'
+import { BadgeAlert, BadgeCheck, BadgeInfo, BadgeX } from 'lucide-vue-next'
+import { Toaster } from 'vue-sonner'
+import 'vue-sonner/style.css'
 
-const { appearance } = useAppearance();
+const { appearance } = useAppearance()
 </script>
 
 <template>

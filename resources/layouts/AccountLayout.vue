@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import Heading from '@/components/Heading.vue';
-import { Button } from '@/components/ui/button';
-import Card from '@/components/ui/card/Card.vue';
-import CardContent from '@/components/ui/card/CardContent.vue';
-import { Separator } from '@/components/ui/separator';
-import { isCallable } from '@/lib/helpers';
-import { type NavItem } from '@/types';
-import { account as accountRoute } from '@/wayfinder/routes';
-import account from '@/wayfinder/routes/account';
-import { Link, usePage } from '@inertiajs/vue3';
-import { computed, ref } from 'vue';
+import Heading from '@/components/Heading.vue'
+import { Button } from '@/components/ui/button'
+import Card from '@/components/ui/card/Card.vue'
+import CardContent from '@/components/ui/card/CardContent.vue'
+import { Separator } from '@/components/ui/separator'
+import { isCallable } from '@/lib/helpers'
+import { type NavItem } from '@/types'
+import { account as accountRoute } from '@/wayfinder/routes'
+import account from '@/wayfinder/routes/account'
+import { Link, usePage } from '@inertiajs/vue3'
+import { computed, ref } from 'vue'
 
-const page = usePage();
-const currentPath = computed(() => new URL(page.url, 'http://localhost').pathname);
+const page = usePage()
+const currentPath = computed(() => new URL(page.url, 'http://localhost').pathname)
 
 const sidebarNavItems = ref<NavItem[]>([
     { title: 'General', href: accountRoute.url(), isActive: () => currentPath.value === accountRoute.url() },
     { title: 'Security', href: account.security.url(), isActive: () => currentPath.value === account.security.url() },
     { title: 'Appearance', href: account.appearance.url(), isActive: () => currentPath.value === account.appearance.url() },
-]);
+])
 </script>
 
 <template>

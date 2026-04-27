@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import TextLink from '@/components/TextLink.vue';
-import { Button } from '@/components/ui/button';
-import { logout } from '@/wayfinder/routes';
-import { send } from '@/wayfinder/routes/verification';
-import { Form } from '@inertiajs/vue3';
-import { LoaderCircle } from 'lucide-vue-next';
+import TextLink from '@/components/TextLink.vue'
+import { Button } from '@/components/ui/button'
+import { logout } from '@/wayfinder/routes'
+import { send } from '@/wayfinder/routes/verification'
+import { Form } from '@inertiajs/vue3'
+import { LoaderCircle } from 'lucide-vue-next'
 </script>
 
 <template>

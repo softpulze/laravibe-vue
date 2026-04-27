@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import { Form, Link } from '@inertiajs/vue3';
+import { Form, Link } from '@inertiajs/vue3'
 
-import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import CardFooter from '@/components/ui/card/CardFooter.vue';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useAuth } from '@/composables/useAuth';
-import SettingsLayout from '@/layouts/AccountLayout.vue';
-import account from '@/wayfinder/routes/account';
-import { send } from '@/wayfinder/routes/verification';
-import { Info, TriangleAlert, User } from 'lucide-vue-next';
-import DeleteUser from './partial/DeleteUser.vue';
+import InputError from '@/components/InputError.vue'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import CardFooter from '@/components/ui/card/CardFooter.vue'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { useAuth } from '@/composables/useAuth'
+import SettingsLayout from '@/layouts/AccountLayout.vue'
+import account from '@/wayfinder/routes/account'
+import { send } from '@/wayfinder/routes/verification'
+import { Info, TriangleAlert, User } from 'lucide-vue-next'
+import DeleteUser from './partial/DeleteUser.vue'
 
 interface Props {
-    mustVerifyEmail: boolean;
+    mustVerifyEmail: boolean
 }
 
-defineProps<Props>();
+defineProps<Props>()
 
-const { requireUser } = useAuth();
-const user = requireUser();
+const { requireUser } = useAuth()
+const user = requireUser()
 </script>
 
 <template>

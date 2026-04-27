@@ -1,13 +1,13 @@
 <script setup lang="ts">
 defineOptions({
     inheritAttrs: false,
-});
+})
 
 interface Props {
-    className?: string;
+    className?: string
 }
 
-defineProps<Props>();
+defineProps<Props>()
 </script>
 
 <template>

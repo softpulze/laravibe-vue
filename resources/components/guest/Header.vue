@@ -1,40 +1,40 @@
 <script setup lang="ts">
-import Breadcrumbs from '@/components/Breadcrumbs.vue';
-import Logo from '@/components/Logo.vue';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import Breadcrumbs from '@/components/Breadcrumbs.vue'
+import Logo from '@/components/Logo.vue'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import {
     NavigationMenu,
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
     navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import UserMenuContent from '@/components/UserMenuContent.vue';
-import { useAuth } from '@/composables/useAuth';
-import { getInitials } from '@/composables/useInitials';
-import { isCallable } from '@/lib/helpers';
-import { cn } from '@/lib/utils';
-import type { NavItem } from '@/types';
-import type { Breadcrumb } from '@/types/data';
-import { home, login, register } from '@/wayfinder/routes';
-import { Link, usePage } from '@inertiajs/vue3';
-import { Menu } from 'lucide-vue-next';
-import { computed, ref } from 'vue';
+} from '@/components/ui/navigation-menu'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import UserMenuContent from '@/components/UserMenuContent.vue'
+import { useAuth } from '@/composables/useAuth'
+import { getInitials } from '@/composables/useInitials'
+import { isCallable } from '@/lib/helpers'
+import { cn } from '@/lib/utils'
+import type { NavItem } from '@/types'
+import type { Breadcrumb } from '@/types/data'
+import { home, login, register } from '@/wayfinder/routes'
+import { Link, usePage } from '@inertiajs/vue3'
+import { Menu } from 'lucide-vue-next'
+import { computed, ref } from 'vue'
 
 interface Props {
-    breadcrumbs?: Breadcrumb[];
+    breadcrumbs?: Breadcrumb[]
 }
 
 withDefaults(defineProps<Props>(), {
     breadcrumbs: () => [],
-});
+})
 
-const { authUser } = useAuth();
-const page = usePage();
-const currentPath = computed(() => new URL(page.url, 'http://localhost').pathname);
+const { authUser } = useAuth()
+const page = usePage()
+const currentPath = computed(() => new URL(page.url, 'http://localhost').pathname)
 
 const navigationItems = ref<NavItem[]>([
     {
@@ -42,11 +42,11 @@ const navigationItems = ref<NavItem[]>([
         href: home.url(),
         isActive: () => currentPath.value === home.url(),
     },
-]);
+])
 
 const isItemActive = (item: NavItem): boolean => {
-    return isCallable(item.isActive) ? item.isActive() : !!item.isActive;
-};
+    return isCallable(item.isActive) ? item.isActive() : !!item.isActive
+}
 </script>
 
 <template>

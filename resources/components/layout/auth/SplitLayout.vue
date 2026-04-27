@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import Logo from '@/components/Logo.vue';
-import { home } from '@/wayfinder/routes';
-import { Link, usePage } from '@inertiajs/vue3';
+import Logo from '@/components/Logo.vue'
+import { home } from '@/wayfinder/routes'
+import { Link, usePage } from '@inertiajs/vue3'
 
-const page = usePage();
-const quote = page.props.quote;
+const page = usePage()
+const quote = page.props.quote
 
 defineProps<{
-    heading?: string;
-    subheading?: string;
-}>();
+    heading?: string
+    subheading?: string
+}>()
 </script>
 
 <template>

@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
-import SettingsLayout from '@/layouts/AccountLayout.vue';
-import { Form } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import InputError from '@/components/InputError.vue'
+import SettingsLayout from '@/layouts/AccountLayout.vue'
+import { Form } from '@inertiajs/vue3'
+import { ref } from 'vue'
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import CardFooter from '@/components/ui/card/CardFooter.vue';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useAuth } from '@/composables/useAuth';
-import { password } from '@/wayfinder/routes/account/security';
-import { Info, LockKeyhole } from 'lucide-vue-next';
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import CardFooter from '@/components/ui/card/CardFooter.vue'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { useAuth } from '@/composables/useAuth'
+import { password } from '@/wayfinder/routes/account/security'
+import { Info, LockKeyhole } from 'lucide-vue-next'
 
-const passwordInput = ref<HTMLInputElement | null>(null);
-const currentPasswordInput = ref<HTMLInputElement | null>(null);
+const passwordInput = ref<HTMLInputElement | null>(null)
+const currentPasswordInput = ref<HTMLInputElement | null>(null)
 
-const { authUser } = useAuth();
+const { authUser } = useAuth()
 </script>
 
 <template>

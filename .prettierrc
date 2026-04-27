@@ -1,11 +1,18 @@
 {
-    "semi": true,
+    "semi": false,
     "singleQuote": true,
     "singleAttributePerLine": false,
     "htmlWhitespaceSensitivity": "css",
     "printWidth": 150,
-    "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
-    "tailwindFunctions": ["clsx", "cn", "cva"],
+    "plugins": [
+        "prettier-plugin-organize-imports",
+        "prettier-plugin-tailwindcss"
+    ],
+    "tailwindFunctions": [
+        "clsx",
+        "cn",
+        "cva"
+    ],
     "tailwindStylesheet": "resources/css/app.css",
     "tabWidth": 4,
     "overrides": [

@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { cn } from '@/lib/utils';
-import type { HTMLAttributes } from 'vue';
+import { cn } from '@/lib/utils'
+import type { HTMLAttributes } from 'vue'
 
 defineOptions({
     inheritAttrs: false,
-});
+})
 
 interface Props {
-    className?: HTMLAttributes['class'];
-    bgLess?: boolean;
+    className?: HTMLAttributes['class']
+    bgLess?: boolean
 }
 
 withDefaults(defineProps<Props>(), {
     bgLess: false,
-});
+})
 </script>
 
 <template>

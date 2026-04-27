@@ -1,5 +1,5 @@
 export interface Enum {
-    name: string;
-    value: int | string;
-    label: string;
+    name: string
+    value: int | string
+    label: string
 }

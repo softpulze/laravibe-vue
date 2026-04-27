@@ -1,23 +1,23 @@
-import AdministrationLayout from '@/layouts/AdministrationLayout.vue';
-import AuthLayout from '@/layouts/AuthLayout.vue';
-import GuestLayout from '@/layouts/GuestLayout.vue';
-import type { Callable, VoidCallable } from '@/types';
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import type { DefineComponent } from 'vue';
+import AdministrationLayout from '@/layouts/AdministrationLayout.vue'
+import AuthLayout from '@/layouts/AuthLayout.vue'
+import GuestLayout from '@/layouts/GuestLayout.vue'
+import type { Callable, VoidCallable } from '@/types'
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
+import type { DefineComponent } from 'vue'
 
 export const resolveLayout = (name: string) => {
-    if (name.startsWith('administration')) return AdministrationLayout;
-    if (name.startsWith('auth')) return AuthLayout;
-    return GuestLayout;
-};
+    if (name.startsWith('administration')) return AdministrationLayout
+    if (name.startsWith('auth')) return AuthLayout
+    return GuestLayout
+}
 
 export const resolveView = (name: string) => {
-    const pageComponent = resolvePageComponent(`../views/${name}.vue`, import.meta.glob<DefineComponent>('../views/**/*.vue'));
+    const pageComponent = resolvePageComponent(`../views/${name}.vue`, import.meta.glob<DefineComponent>('../views/**/*.vue'))
     pageComponent.then((component) => {
-        component.default.layout = component.default.layout || resolveLayout(name);
-    });
+        component.default.layout = component.default.layout || resolveLayout(name)
+    })
 
-    return pageComponent;
-};
+    return pageComponent
+}
 
-export const isCallable = (value: unknown): value is Callable | VoidCallable => typeof value === 'function';
+export const isCallable = (value: unknown): value is Callable | VoidCallable => typeof value === 'function'

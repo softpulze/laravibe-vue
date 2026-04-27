@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { LayoutContent, LayoutShell } from './';
+import { LayoutContent, LayoutShell } from './'
 
 interface Props {
-    initiallyIsSidebarOpen?: boolean;
+    initiallyIsSidebarOpen?: boolean
 }
 
-withDefaults(defineProps<Props>(), { initiallyIsSidebarOpen: true });
+withDefaults(defineProps<Props>(), { initiallyIsSidebarOpen: true })
 </script>
 
 <template>

@@ -26,9 +26,9 @@ Provides typed access to the authenticated user and UI ability checks. Backed en
 
 ```vue
 <script setup lang="ts">
-import { useAuth } from '@/composables/useAuth';
+import { useAuth } from '@/composables/useAuth'
 
-const { user, isAuthenticated } = useAuth();
+const { user, isAuthenticated } = useAuth()
 </script>
 
 <template>
@@ -45,10 +45,10 @@ Use `requireUser()` to get a non-null `User` directly — no `?.` optional chain
 
 ```vue
 <script setup lang="ts">
-import { useAuth } from '@/composables/useAuth';
+import { useAuth } from '@/composables/useAuth'
 
-const { requireUser } = useAuth();
-const user = requireUser(); // User (not User | null)
+const { requireUser } = useAuth()
+const user = requireUser() // User (not User | null)
 </script>
 
 <template>
@@ -61,9 +61,9 @@ const user = requireUser(); // User (not User | null)
 
 ```vue
 <script setup lang="ts">
-import { useAuth } from '@/composables/useAuth';
+import { useAuth } from '@/composables/useAuth'
 
-const { can } = useAuth();
+const { can } = useAuth()
 </script>
 
 <template>
@@ -78,8 +78,8 @@ The composable reads from `page.props.auth`, which is always present in every In
 
 ```ts
 interface Auth {
-    user: User | null; // null for guests, User object when authenticated
-    can: Record<string, boolean>; // UI ability map resolved server-side
+    user: User | null // null for guests, User object when authenticated
+    can: Record<string, boolean> // UI ability map resolved server-side
 }
 ```
 
@@ -119,12 +119,12 @@ Defined in `resources/types/models.d.ts` and mirrors the `UserResource` backend 
 
 ```ts
 interface User {
-    id: number;
-    name: string;
-    email: string;
-    avatar?: string;
-    email_verified_at?: string | null;
-    email_verified_at_display?: string | null;
+    id: number
+    name: string
+    email: string
+    avatar?: string
+    email_verified_at?: string | null
+    email_verified_at_display?: string | null
 }
 ```
 
@@ -137,7 +137,7 @@ interface User {
 Returns the current page's `PageMeta` props (title, breadcrumbs, etc.) as a computed ref. See [app/DTOs/README.md](../../app/DTOs/README.md) for the full `PageMeta` DTO shape.
 
 ```ts
-const meta = usePageMeta();
+const meta = usePageMeta()
 // meta.value.title
 ```
 

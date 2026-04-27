@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { SidebarInset } from '@/components/ui/sidebar';
-import { cn } from '@/lib/utils';
+import { SidebarInset } from '@/components/ui/sidebar'
+import { cn } from '@/lib/utils'
 
 interface Props {
-    variant?: 'header' | 'sidebar';
-    className?: string;
+    variant?: 'header' | 'sidebar'
+    className?: string
 }
 
 withDefaults(defineProps<Props>(), {
     variant: 'sidebar',
-});
+})
 </script>
 
 <template>
