@@ -172,10 +172,13 @@ npm install
 ### 5. Start the development server
 
 ```bash
-composer run dev
+composer dev
 ```
 
-This starts the Laravel server, Vite dev server, and Pail log watcher concurrently. Visit `http://localhost:8000` in your browser.
+This starts Vite, queue listener, and Pail log watcher concurrently.
+
+If you are using Laravel Herd, open your local Herd URL (for example: `https://my-app.test`).
+If you are not using Herd, run `php artisan serve` in another terminal.
 
 ---
 
@@ -185,11 +188,20 @@ This starts the Laravel server, Vite dev server, and Pail log watcher concurrent
 
 | Command                          | Description                           |
 | -------------------------------- | ------------------------------------- |
-| `composer run dev`               | Start Laravel + Vite + Pail together  |
-| `php artisan test --compact`     | Run the Pest test suite               |
-| `vendor/bin/pint`                | Format PHP code with Laravel Pint     |
-| `vendor/bin/phpstan`             | Run Larastan static analysis          |
-| `vendor/bin/rector`              | Run Rector refactoring                |
+| `composer dev`                   | Start Vite + queue + pail together    |
+| `composer test`                  | Run Pest with compact coverage output |
+| `composer pint`                  | Format PHP code with Laravel Pint     |
+| `composer pint:check`            | Check PHP formatting with Pint        |
+| `composer phpstan`               | Run Larastan static analysis          |
+| `composer rector`                | Run Rector refactoring                |
+| `composer lint`                  | Run Rector + ESLint                   |
+| `composer format`                | Run Pint + Prettier                   |
+| `composer format:check`          | Check Pint + Prettier                 |
+| `composer review`                | Run lint + format + test + phpstan    |
+| `composer build`                 | Build frontend assets                 |
+| `composer build:ssr`             | Build frontend + SSR bundle           |
+| `composer deps:update`           | Update Composer and npm dependencies  |
+| `composer logs:delete`           | Clear log files in storage/logs       |
 | `php artisan wayfinder:generate` | Regenerate Wayfinder TypeScript files |
 
 ### Node / npm

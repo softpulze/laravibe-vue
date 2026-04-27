@@ -76,7 +76,50 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
-        ]
+        ],
+        "queue": "@php artisan queue:listen --tries=1 --timeout=0 --queue=default",
+        "logs": "@php artisan pail -v --timeout=0",
+        "vite": "npm run dev",
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#fdba74,#c4b5fd,#fb7185\" \"npm run dev\" \"php artisan queue:listen --tries=1 --timeout=0 --queue=default\" \"php artisan pail -v --timeout=0\""
+        ],
+        "phpstan": "./vendor/bin/phpstan analyze --memory-limit=512M",
+        "pest": "./vendor/bin/pest --coverage --compact",
+        "test": "@pest",
+        "pint:check": "./vendor/bin/pint --test",
+        "pint": "./vendor/bin/pint",
+        "prettier:check": "npm run format:check",
+        "prettier": "npm run format",
+        "format:check": [
+            "@pint:check",
+            "@prettier:check"
+        ],
+        "format": [
+            "@pint",
+            "@prettier"
+        ],
+        "eslint": "npm run lint",
+        "rector": "./vendor/bin/rector",
+        "lint": [
+            "@rector",
+            "@eslint"
+        ],
+        "review": [
+            "@lint",
+            "@format",
+            "@pest",
+            "@phpstan"
+        ],
+        "build": "npm run build",
+        "build:ssr": "npm run build:ssr",
+        "update:composer": "composer update",
+        "update:npm": "npm update",
+        "deps:update": [
+            "@update:composer",
+            "@update:npm"
+        ],
+        "logs:delete": "find storage/logs -name \"*.log\" -delete"
     },
     "extra": {
         "laravel": {
