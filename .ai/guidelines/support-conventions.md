@@ -1,0 +1,37 @@
+# Support Conventions for AI Agents
+
+## Scope
+
+Use this guide when creating or modifying files under `app/Support`.
+
+## Responsibilities
+
+- Keep `app/Support` for cross-cutting framework support only.
+- Do not move business/domain logic into this layer.
+- Keep helpers small and composable.
+
+## Date Rules
+
+- Keep `App\\Support\\CarbonImmutable` as the default Date class via `Date::use()`.
+- Use explicit formatter methods by intent:
+    - Transport/API values: `toApiDate()`, `toApiTime()`, `toApiDatetime()`.
+    - Human display values: `toStringDate()`, `toStringTime()`, `toStringDatetime()`.
+- Avoid ad-hoc inline date format strings in resources if existing helper methods already cover the need.
+
+## LaraTweaks Rules
+
+- Register framework tweaks in `App\\Support\\LaraTweaks` and call from `AppServiceProvider::boot()`.
+- Keep tweak methods side-effect focused and narrowly scoped.
+- Preserve strict model mode and resource no-wrapping unless explicitly requested to change.
+
+## Helper Function Rules
+
+- Add helpers only when reused in multiple places.
+- Use strict return types and clear names.
+- Throw framework exceptions for invalid auth/context states instead of returning ambiguous null values.
+
+## Editing Rules
+
+- Follow existing file structure and naming.
+- Preserve immutable date behavior.
+- Update related tests whenever Support behavior changes.
