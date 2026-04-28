@@ -7599,12 +7599,12 @@
             "version": "v1.0.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nunomaduro/pao.git",
+                "url": "https://github.com/laravel/pao.git",
                 "reference": "4e2865b711ce4b220ff13612f991c486f5b0c8ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/pao/zipball/4e2865b711ce4b220ff13612f991c486f5b0c8ec",
+                "url": "https://api.github.com/repos/laravel/pao/zipball/4e2865b711ce4b220ff13612f991c486f5b0c8ec",
                 "reference": "4e2865b711ce4b220ff13612f991c486f5b0c8ec",
                 "shasum": ""
             },
@@ -7673,23 +7673,9 @@
                 "testing"
             ],
             "support": {
-                "issues": "https://github.com/nunomaduro/pao/issues",
-                "source": "https://github.com/nunomaduro/pao/tree/v1.0.5"
+                "issues": "https://github.com/laravel/pao/issues",
+                "source": "https://github.com/laravel/pao/tree/v1.0.5"
             },
-            "funding": [
-                {
-                    "url": "https://www.paypal.com/paypalme/enunomaduro",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/nunomaduro",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/nunomaduro",
-                    "type": "patreon"
-                }
-            ],
             "time": "2026-04-27T09:30:41+00:00"
         },
         {
