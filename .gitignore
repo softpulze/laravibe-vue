@@ -1,29 +1,47 @@
-/.phpunit.cache
-/bootstrap/ssr
+# ── Dependencies ─────────────────────────────────────────────────────────────
+/vendor
 /node_modules
+
+# ── Secrets and environment files ────────────────────────────────────────────
+.env
+.env.backup
+.env.production
+/auth.json
+
+# ── Build output ─────────────────────────────────────────────────────────────
 /public/build
+/bootstrap/ssr
+
+# ── Runtime-generated files ───────────────────────────────────────────────────
 /public/hot
 /public/storage
 /storage/*.key
 /storage/pail
-/vendor
-.env
-.env.backup
-.env.production
-.phpactor.json
+
+# ── Test cache ───────────────────────────────────────────────────────────────
+/.phpunit.cache
 .phpunit.result.cache
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
-/auth.json
+
+# ── IDE and editor tooling ────────────────────────────────────────────────────
 /.fleet
 /.idea
 /.nova
 /.vscode
 /.zed
+.phpactor.json
+.phpstorm.meta.php
 
-# IDE Helper generated files
+# ── IDE Helper generated files ────────────────────────────────────────────────
 _ide_helper.php
 _ide_helper_models.php
-.phpstorm.meta.php
+
+# ── Vagrant (legacy) ─────────────────────────────────────────────────────────
+Homestead.json
+Homestead.yaml
+
+# ── Debug logs ───────────────────────────────────────────────────────────────
+npm-debug.log
+yarn-error.log
+
+# ── Wayfinder generated output ───────────────────────────────────────────────
+/resources/wayfinder
