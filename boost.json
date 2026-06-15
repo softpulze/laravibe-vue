@@ -1,17 +1,18 @@
 {
     "agents": [
         "opencode",
-        "copilot"
+        "copilot",
+        "claude_code"
     ],
+    "cloud": false,
     "guidelines": true,
     "mcp": true,
-    "nightwatch_mcp": false,
+    "nightwatch": false,
     "sail": false,
     "skills": [
         "laravel-best-practices",
         "wayfinder-development",
         "pest-testing",
-        "inertia-vue-development",
         "tailwindcss-development"
     ]
 }
